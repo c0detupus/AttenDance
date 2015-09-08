@@ -1,5 +1,6 @@
 *.class
 
+
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 
@@ -12,3 +13,7 @@
 hs_err_pid*
 /AttenDanceList-ejb/target/
 /AttenDanceList-ear/target/
+/AttenDanceList-web/target/
+
+#Maven build directory
+#target/*
