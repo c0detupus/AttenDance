@@ -12,27 +12,50 @@
         <h:form>
 
             <h:outputLabel id = "fName" value="First name: "></h:outputLabel>
+            <h:inputText></h:inputText>
+
             <br></br>
             <h:outputLabel id ="lName" value="Last name: "></h:outputLabel>
+            <h:inputText></h:inputText>
             <br></br>
             <h:outputLabel id ="socialSecurityNumber" value="Social security number: "></h:outputLabel>
-            <br></br>
-            <h:outputLabel id ="cellNumber" value="Cellphone nr: "></h:outputLabel>
-            <br></br>
-             <h:outputLabel id ="homeNumber" value="Phone number"></h:outputLabel>
-            <br></br>
-            <h:outputLabel id ="sex" value="Sex: "></h:outputLabel>
-            <br></br>
-            <h:outputLabel id ="address" value="Address: "></h:outputLabel>
-            <br></br>
-            <h:outputLabel id ="city" value="City: "></h:outputLabel>
-            <br></br>
-            <h:outputLabel id ="postalNr" value= "Zip code" ></h:outputLabel>
+            <h:inputText></h:inputText>
             <br></br>
             <h:outputLabel id ="email" value="Email: "></h:outputLabel>
+            <h:inputText></h:inputText>
+            <br></br>
+            <h:outputLabel id ="cellNumber" value="Cellphone nr: "></h:outputLabel>
+            <h:inputText></h:inputText>
+            <br></br>
+            <h:outputLabel id ="homeNumber" value="Phone number"></h:outputLabel>
+            <h:inputText></h:inputText>
+            <br></br>
+            <h:outputLabel id ="sex" value="Sex: "></h:outputLabel>
+
+            <h:selectOneRadio value="123">
+                <f:selectItem itemValue="male" itemLabel="Male" />
+                <f:selectItem itemValue="female" itemLabel="Female" />
+            </h:selectOneRadio>
+
+            <br></br>
+            <h:outputLabel id ="address" value="Address: "></h:outputLabel>
+            <h:inputText></h:inputText>
+            <br></br>
+            <h:outputLabel id ="city" value="City: "></h:outputLabel>
+            <h:inputText></h:inputText>
+            <br></br>
+            <h:outputLabel id ="zipCode" value= "Zip code" ></h:outputLabel>
+            <h:inputText></h:inputText>
             <br></br>
 
+            <h:commandButton value="submit" action="#{studentBean.createStudent}"></h:commandButton>
+
+
         </h:form>
+
+        <h:outputLabel id ="asda" value= "#{studentBean.output}" ></h:outputLabel>
+        <h:inputText></h:inputText>
+        <br></br>
 
 
     </h:body>
