@@ -8,13 +8,24 @@
     </h:head>
     <h:body>
         <h:form>
-        <h:outputText value="Courses: "></h:outputText>
-        <h:selectOneListbox id="selectListBox">
-           <f:selectItem itemValue="Java SE" itemLabel="Java SE" />
-           <f:selectItem itemValue="Java EE" itemLabel="Java EE" />
-           <f:selectItem itemValue="Javascript" itemLabel="Javascript" />
-           <f:selectItem itemValue="CSS" itemLabel="CSS" />
-        </h:selectOneListbox>
+            <h:outputText value="Courses: "></h:outputText>
+            <h:selectOneMenu id="selectCourseStats">
+                <f:selectItems value="#{statsBean.coursesList}" var="courses" />
+                <!-- render in panelGroup when one course is selected -->
+                <f:ajax event="change" execute="@this" render="selectCourseStats" />
+            </h:selectOneMenu>
+            <h:panelGroup>
+                <h:selectOneMenu id="selectMonthStats">
+                    <f:selectItem itemValue="Jan" itemLabel="January" />
+                    <f:selectItem itemValue="Feb" itemLabel="February" />
+                    <f:selectItem itemValue="Mar" itemLabel="Mars" />
+                </h:selectOneMenu>
+                <h:selectOneMenu id="selectDayStats">
+                    <f:selectItem itemLabel="1" itemValue="1" />
+                    <f:selectItem itemLabel="2" itemValue="2" />
+                    <f:selectItem itemLabel="3" itemValue="3" />
+                </h:selectOneMenu>
+            </h:panelGroup>
         </h:form>
     </h:body>
 </html>
