@@ -5,9 +5,13 @@
  */
 package model;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.event.ActionEvent;
+import javax.faces.component.UIComponent;
+import javax.faces.context.FacesContext;
+import javax.faces.validator.ValidatorException;
+import org.hibernate.validator.constraints.Email;
 
 /**
  *
@@ -18,18 +22,19 @@ import javax.faces.event.ActionEvent;
 public class Student
 {
 
-    private String firstName;
-    private String lastName;
+    private String firstName,
+            lastName;
     private int socialSecurityNumber;
-    private String eMail;
+
+    @Email
+    private String email;
     private int cellPhone;
     private int phoneNumber;
     private String sex;
-    private String address;
-    private String city;
-    private int zipCode;
 
-    private String output = "asdasd";
+    private String address,
+            city;
+    private int zipCode;
 
     //******* SETTERS--->
     public void setFirstName(String firstName) {
@@ -44,8 +49,8 @@ public class Student
         this.socialSecurityNumber = socialSecurityNumber;
     }
 
-    public void seteMail(String eMail) {
-        this.eMail = eMail;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public void setCellPhone(int cellPhone) {
@@ -86,8 +91,8 @@ public class Student
         return socialSecurityNumber;
     }
 
-    public String geteMail() {
-        return eMail;
+    public String getEmail() {
+        return email;
     }
 
     public int getCellPhone() {
@@ -115,18 +120,16 @@ public class Student
     }
     //<---GETTERS******
 
-    public void createStudent() {
+    public void validateEmailvalidateEmail(FacesContext context,
+                                           UIComponent toValidate, Object value) {
 
-        output = "it's ok";
-        if(firstName.contains("123")) {
-            output = "you have a nr";
+        String email = this.email;
+
+        if(!email.contains("@")) {
+            FacesMessage message = new FacesMessage("Invalid emailaddress");
+            throw new ValidatorException(message);
         }
 
     }
 
-    public String output() {
-
-        return output;
-
-    }
 }
