@@ -13,6 +13,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
+import javax.faces.event.AjaxBehaviorEvent;
 import javax.faces.event.ValueChangeEvent;
 
 /**
@@ -89,9 +90,7 @@ public class StatsBean {
         populateDayMap();
     }
 
-    public void onMonthSelect(ValueChangeEvent e) {
-//        String temp = e.getNewValue().toString();
-//        currentMonth = Integer.parseInt(temp);
+    public void onMonthSelect(AjaxBehaviorEvent e) {
         populateDayMap();
     }
 

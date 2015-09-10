@@ -23,6 +23,7 @@
                     <f:selectItems value="#{statsBean.monthMap}" />
                     <f:ajax event="change" execute="@this" render="selectDayStats" listener="#{statsBean.onMonthSelect}"/>
                 </h:selectOneMenu>
+                
                 <h:outputText value="Day: "></h:outputText>
                 <h:selectOneMenu id="selectDayStats" value="#{statsBean.currentDay}" 
                                  >
