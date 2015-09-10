@@ -13,6 +13,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.event.AjaxBehaviorEvent;
 import javax.faces.event.ValueChangeEvent;
 
@@ -30,35 +31,12 @@ public class StatsBean {
     private int currentMonth;
     private String currentDay;
     private int currentYear;
-
-    public int getCurrentYear() {
-        return currentYear;
-    }
-
-    public void setCurrentYear(int currentYear) {
-        this.currentYear = currentYear;
-    }
+    private boolean currentOneRadioValue;
 
     private Map<String, Integer> yearMap;
     private Map<String, String> coursesMap;
     private Map<String, Integer> monthMap;
     private Map<String, String> dayMap;
-
-    public String getCurrentDay() {
-        return currentDay;
-    }
-
-    public void setCurrentDay(String currentDay) {
-        this.currentDay = currentDay;
-    }
-
-    public int getCurrentMonth() {
-        return currentMonth;
-    }
-
-    public void setCurrentMonth(int currentMonth) {
-        this.currentMonth = currentMonth;
-    }
 
     @PostConstruct
     public void init() {
@@ -79,19 +57,27 @@ public class StatsBean {
         yearMap.put("2014", 2014);
         yearMap.put("2015", 2015);
         yearMap.put("2016", 2016);
+        
+        currentOneRadioValue = false;
+                
         populateDayMap();
+
 //        coursesList = new ArrayList<>();
 //        this.coursesList.add(new Courses("Java EE", 100));
 //        this.coursesList.add(new Courses("JavaScript", 50));
 //        this.coursesList.add(new Courses("CSS", 50));
     }
 
-    public void submit() {
-        populateDayMap();
-    }
-
     public void onMonthSelect(AjaxBehaviorEvent e) {
         populateDayMap();
+    }
+    public void onRadioToggle(AjaxBehaviorEvent e){
+        if (!currentOneRadioValue == true) {
+            currentOneRadioValue = false;
+        } else {
+            currentOneRadioValue = true;
+        }
+        System.out.println("onRadioToggle: " + currentOneRadioValue);
     }
 
     //will populate dayMap depending on which month is selected.
@@ -101,11 +87,11 @@ public class StatsBean {
 
         Calendar cal = new GregorianCalendar(currentYear, currentMonth, iDay);
         int daysInMonth = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
-
         dayMap = new LinkedHashMap<>();
+
         for (int i = 1; i <= daysInMonth; i++) {
-            String temp = Integer.toString(i);
-            dayMap.put(temp, temp);
+            String day = Integer.toString(i);
+            dayMap.put(day, day);
         }
     }
 
@@ -131,5 +117,37 @@ public class StatsBean {
 
     public void setCurrentCourse(String currentCourse) {
         this.currentCourse = currentCourse;
+    }
+
+    public String getCurrentDay() {
+        return currentDay;
+    }
+
+    public void setCurrentDay(String currentDay) {
+        this.currentDay = currentDay;
+    }
+
+    public int getCurrentMonth() {
+        return currentMonth;
+    }
+
+    public void setCurrentMonth(int currentMonth) {
+        this.currentMonth = currentMonth;
+    }
+
+    public int getCurrentYear() {
+        return currentYear;
+    }
+
+    public void setCurrentYear(int currentYear) {
+        this.currentYear = currentYear;
+    }
+
+    public boolean getCurrentOneRadioValue() {
+        return currentOneRadioValue;
+    }
+
+    public void setCurrentOneRadioValue(boolean currentOneRadioValue) {
+        this.currentOneRadioValue = currentOneRadioValue;
     }
 }
