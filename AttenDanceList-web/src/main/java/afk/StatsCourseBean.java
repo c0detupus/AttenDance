@@ -5,22 +5,20 @@
  */
 package afk;
 
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-import java.util.LinkedHashMap;
+import helper.Populator;
 import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.event.AjaxBehaviorEvent;
 
 /**
  *
  * @author c0detupus
  */
-@ManagedBean(name = "statsBean")
-@RequestScoped
-public class StatsBean {
+@ManagedBean(name = "statsCourseBean")
+@SessionScoped
+public class StatsCourseBean {
 
 //    private Courses courses;
 //    private List<Courses> coursesList;
@@ -36,90 +34,52 @@ public class StatsBean {
     private int toMonth;
     private String toDay;
 
-    private Map<String, String> coursesMap;
+    private Map<String, String> courseMap;
     private Map<String, Integer> yearMap;
     private Map<String, Integer> monthMap;
-    private Map<String, Integer> toYearMap;
-    private Map<String, Integer> toMonthMap;
+    
+//    private Map<String, Integer> toYearMap;
+//    private Map<String, Integer> toMonthMap;
 
     private Map<String, String> dayMap;
     private Map<String, String> toDayMap;
+
+    private Populator pop;
 
     @PostConstruct
     public void init() {
         //will populate the map depending on database
         //hardcoded for now
+        pop = new Populator();
 
-        coursesMap = new LinkedHashMap<>();
-        coursesMap.put("Java EE", "Java EE"); //label, value
-        coursesMap.put("JavaScript", "JavaScript");
-        coursesMap.put("CSS", "CSS");
-
-        monthMap = new LinkedHashMap<>();
-        monthMap.put("January", 0);
-        monthMap.put("February", 1);
-        monthMap.put("Mars", 2);
-
-        yearMap = new LinkedHashMap<>();
-        yearMap.put("2014", 2014);
-        yearMap.put("2015", 2015);
-        yearMap.put("2016", 2016);
+        courseMap = pop.populateCoursesMap();
+        yearMap = pop.populateYearMap();
+        monthMap = pop.populateMonthMap();
+        dayMap = pop.populateDayMap(currentMonth, currentYear);
 
         currentOneRadioValue = false;
-
-        populateDayMap();
-
 //        coursesList = new ArrayList<>();
 //        this.coursesList.add(new Courses("Java EE", 100));
 //        this.coursesList.add(new Courses("JavaScript", 50));
 //        this.coursesList.add(new Courses("CSS", 50));
     }
 
-    public void onMonthSelect(AjaxBehaviorEvent e) {
-        System.out.println("Called: onMonthSelect");
-        populateDayMap();
+    public void onMonthOrYearSelect(AjaxBehaviorEvent e) {
+        dayMap = pop.populateDayMap(currentMonth, currentYear);
         if (currentOneRadioValue == true) {
-            toMonthMap = monthMap;
-            toYearMap = yearMap;
-            populateDayMap2();
+//            toMonthMap = monthMap;
+//            toYearMap = yearMap;
+            toDayMap = pop.populateDayMap(toMonth, toYear);
         }
     }
 
     public void onRadioToggle(AjaxBehaviorEvent e) {
         currentOneRadioValue = !currentOneRadioValue != true;
-        populateDayMap2();
+        toDayMap = pop.populateDayMap(toMonth, toYear);
+
     }
     
-    //will populate dayMap depending on which month is selected.
-    //
-    private void populateDayMap() {
-        int iDay = 1;
-
-        Calendar cal = new GregorianCalendar(currentYear, currentMonth, iDay);
-        int daysInMonth = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
-        dayMap = new LinkedHashMap<>();
-
-        for (int i = 1; i <= daysInMonth; i++) {
-            String day = Integer.toString(i);
-            dayMap.put(day, day);
-        }
-    }
-
-    private void populateDayMap2() {
-        System.out.println("Called: populateDayMap2 ");
-        int iDay = 1;
-
-        Calendar cal = new GregorianCalendar(toYear, toMonth, iDay);
-        int daysInMonth = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
-        toDayMap = new LinkedHashMap<>();
-
-        for (int i = 1; i <= daysInMonth; i++) {
-            String day = Integer.toString(i);
-            toDayMap.put(day, day);
-        }
-
-    }
-
+    // GETTERS AND SETTERS
     public Map<String, Integer> getYearMap() {
         return yearMap;
     }
@@ -133,7 +93,7 @@ public class StatsBean {
     }
 
     public Map<String, String> getCoursesMap() {
-        return coursesMap;
+        return courseMap;
     }
 
     public String getCurrentCourse() {
@@ -202,13 +162,5 @@ public class StatsBean {
 
     public Map<String, String> getToDayMap() {
         return toDayMap;
-    }
-
-    public Map<String, Integer> getToYearMap() {
-        return toYearMap;
-    }
-
-    public Map<String, Integer> getToMonthMap() {
-        return toMonthMap;
     }
 }

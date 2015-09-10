@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <h:outputText value="Course: "></h:outputText>
+            <h:selectOneMenu id="selectCourseStats" value="#{statsCourseBean.currentCourse}" >
+                <f:selectItems value="#{statsCourseBean.coursesMap}"/>
+            </h:selectOneMenu>
+
+            <h:outputText value="Select in timespan: "></h:outputText>
+            <h:selectOneRadio id="oneRadio" value="#{statsCourseBean.currentOneRadioValue}">
+                <f:selectItem itemValue="true" itemLabel="Yes" />
+                <f:selectItem itemValue="false" itemLabel="No" />
+                <!-- will return true or false -->
+                <f:ajax event="click" execute="oneRadio" 
+                        render="fromWrapper toWrapper" listener="#{statsCourseBean.onRadioToggle}"></f:ajax>
+            </h:selectOneRadio>
+            <p/>
+            <!-- will render depending on selectOneRadio
+            wrapped in a panelgroup for ajax to render -->
+            <h:panelGroup id="fromWrapper">
+                <h:panelGroup id="from" rendered="#{statsCourseBean.currentOneRadioValue}">
+                    <h:outputText value="From: " ></h:outputText>
+                </h:panelGroup>
+            </h:panelGroup>
+            <br/>
+
+            <h:outputText value="Year: "></h:outputText>
+            <h:selectOneMenu id="selectYearStats" value="#{statsCourseBean.currentYear}">
+                <f:selectItems value="#{statsCourseBean.yearMap}" />
+                <f:ajax event="change" execute="@this" render="selectDayStats" listener="#{statsCourseBean.onMonthOrYearSelect}"/>
+            </h:selectOneMenu>
+
+            <h:outputText value="Month: "></h:outputText>
+            <h:selectOneMenu id="selectMonthStats" value="#{statsCourseBean.currentMonth}">
+                <f:selectItems value="#{statsCourseBean.monthMap}" />
+                <f:ajax event="change" execute="@this" render="selectDayStats" listener="#{statsCourseBean.onMonthOrYearSelect}"/>
+            </h:selectOneMenu>
+
+            <h:outputText value="Day: "></h:outputText>
+            <h:selectOneMenu id="selectDayStats" value="#{statsCourseBean.currentDay}">
+                <f:selectItems value="#{statsCourseBean.dayMap}" />
+            </h:selectOneMenu>
+            <p/>
+
+            <!--will render depending on selectOneRadio 
+            wrapped in a panelgroup for ajax to render -->
+            <h:panelGroup id="toWrapper">
+                <h:panelGroup id="to" rendered="#{statsCourseBean.currentOneRadioValue}">
+                    <h:outputText value="To: "></h:outputText>   
+                    <br/>
+                    <h:outputText value="Year: "></h:outputText>
+                    <h:selectOneMenu id="toYearStats" value="#{statsCourseBean.toYear}">
+                        <f:selectItems value="#{statsCourseBean.yearMap}" />
+                        <f:ajax event="change" execute="@this" render="selectDayStats" listener="#{statsCourseBean.onMonthOrYearSelect}"/>
+                    </h:selectOneMenu>
+                    <h:outputText value="Month: "></h:outputText>
+                    <h:selectOneMenu id="totMonthStats" value="#{statsCourseBean.toMonth}">
+                        <f:selectItems value="#{statsCourseBean.monthMap}" />
+                        <f:ajax event="change" execute="@this" render="toDayStats" listener="#{statsCourseBean.onMonthOrYearSelect}"/>
+                    </h:selectOneMenu>
+                    <h:outputText value="Day: "></h:outputText>
+                    <h:selectOneMenu id="toDayStats" value="#{statsCourseBean.toDay}">
+                        <f:selectItems value="#{statsCourseBean.toDayMap}" />
+                    </h:selectOneMenu>
+                </h:panelGroup>
+            </h:panelGroup>
+        </h:form>
+    </h:body>
+</html>
+
