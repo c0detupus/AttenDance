@@ -89,7 +89,7 @@ public class StatsBean {
         currentOneRadioValue = !currentOneRadioValue != true;
         populateDayMap2();
     }
-
+    
     //will populate dayMap depending on which month is selected.
     //
     private void populateDayMap() {
