@@ -55,17 +55,17 @@
                     <h:outputText value="To: "></h:outputText>   
                     <br/>
                     <h:outputText value="Year: "></h:outputText>
-                    <h:selectOneMenu id="toYearStats" value="#{statsBean.currentYear}">
+                    <h:selectOneMenu id="toYearStats" value="#{statsBean.toYear}">
                         <f:selectItems value="#{statsBean.yearMap}" />
                     </h:selectOneMenu>
                     <h:outputText value="Month: "></h:outputText>
-                    <h:selectOneMenu id="totMonthStats" value="#{statsBean.currentMonth}">
+                    <h:selectOneMenu id="totMonthStats" value="#{statsBean.toMonth}">
                         <f:selectItems value="#{statsBean.monthMap}" />
-                        <f:ajax event="change" execute="@this" render="selectDayStats" listener="#{statsBean.onMonthSelect}"/>
+                        <f:ajax event="change" execute="@this" render="toDayStats" listener="#{statsBean.onMonthSelect}"/>
                     </h:selectOneMenu>
                     <h:outputText value="Day: "></h:outputText>
-                    <h:selectOneMenu id="toDayStats" value="#{statsBean.currentDay}">
-                        <f:selectItems value="#{statsBean.dayMap}" />
+                    <h:selectOneMenu id="toDayStats" value="#{statsBean.toDay}">
+                        <f:selectItems value="#{statsBean.toDayMap}" />
                     </h:selectOneMenu>
                 </h:panelGroup>
             </h:panelGroup>
