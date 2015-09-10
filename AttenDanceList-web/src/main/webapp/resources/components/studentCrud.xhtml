@@ -22,9 +22,13 @@
             <h:inputText></h:inputText>
             <br></br>
             <h:outputLabel id ="email" value="Email: "></h:outputLabel>
-            <h:inputText id = "emailInput"value="#{studentBean.email}" >
-                <f:ajax event="change" execute="@this" render="emailInput"></f:ajax>
-            </h:inputText>
+            <h:panelGroup>
+                <h:inputText id = "emailInput" value="#{studentBean.email}" >
+                    <f:ajax event="keydown"  render="emailError"></f:ajax>
+                </h:inputText>
+
+                <h:outputLabel id ="emailError" value="#{studentBean.email}"></h:outputLabel>
+            </h:panelGroup>
             <br></br>
             <h:outputLabel id ="cellNumber" value="Cellphone nr: "></h:outputLabel>
             <h:inputText></h:inputText>

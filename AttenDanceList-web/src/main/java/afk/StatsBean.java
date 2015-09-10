@@ -72,11 +72,7 @@ public class StatsBean {
         populateDayMap();
     }
     public void onRadioToggle(AjaxBehaviorEvent e){
-        if (!currentOneRadioValue == true) {
-            currentOneRadioValue = false;
-        } else {
-            currentOneRadioValue = true;
-        }
+        currentOneRadioValue = !currentOneRadioValue != true;
         System.out.println("onRadioToggle: " + currentOneRadioValue);
     }
 
