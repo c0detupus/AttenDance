@@ -8,64 +8,61 @@
     </h:head>
     <h:body>
         <h:form>
-            <h:outputText value="Course: "></h:outputText>
-            <h:selectOneMenu id="selectCourseStats" value="#{statsBean.currentCourse}" >
-                <f:selectItems value="#{statsBean.coursesMap}"/>
-            </h:selectOneMenu>
-            
             <h:outputText value="Select in timespan: "></h:outputText>
-            <h:selectOneRadio id="oneRadio" value="#{statsBean.currentOneRadioValue}">
+            <h:selectOneRadio id="oneRadio" value="#{statsStudentBean.currentOneRadioValue}">
                 <f:selectItem itemValue="true" itemLabel="Yes" />
                 <f:selectItem itemValue="false" itemLabel="No" />
                 <!-- will return true or false -->
                 <f:ajax event="click" execute="oneRadio" 
-                        render="fromWrapper toWrapper" listener="#{statsBean.onRadioToggle}"></f:ajax>
+                        render="fromWrapper toWrapper" listener="#{statsStudentBean.onRadioToggle}"></f:ajax>
             </h:selectOneRadio>
             <p/>
             <!-- will render depending on selectOneRadio
             wrapped in a panelgroup for ajax to render -->
             <h:panelGroup id="fromWrapper">
-                <h:panelGroup id="from" rendered="#{statsBean.currentOneRadioValue}">
+                <h:panelGroup id="from" rendered="#{statsStudentBean.currentOneRadioValue}">
                     <h:outputText value="From: " ></h:outputText>
                 </h:panelGroup>
             </h:panelGroup>
             <br/>
-            
+
             <h:outputText value="Year: "></h:outputText>
-            <h:selectOneMenu id="selectYearStats" value="#{statsBean.currentYear}">
-                <f:selectItems value="#{statsBean.yearMap}" />
+            <h:selectOneMenu id="selectYearStats" value="#{statsStudentBean.currentYear}">
+                <f:selectItems value="#{statsStudentBean.yearMap}" />
+                <f:ajax event="change" execute="@this" render="selectDayStats" listener="#{statsStudentBean.onMonthOrYearSelect}"/>
             </h:selectOneMenu>
 
             <h:outputText value="Month: "></h:outputText>
-            <h:selectOneMenu id="selectMonthStats" value="#{statsBean.currentMonth}">
-                <f:selectItems value="#{statsBean.monthMap}" />
-                <f:ajax event="change" execute="@this" render="selectDayStats" listener="#{statsBean.onMonthSelect}"/>
+            <h:selectOneMenu id="selectMonthStats" value="#{statsStudentBean.currentMonth}">
+                <f:selectItems value="#{statsStudentBean.monthMap}" />
+                <f:ajax event="change" execute="@this" render="selectDayStats" listener="#{statsStudentBean.onMonthOrYearSelect}"/>
             </h:selectOneMenu>
 
             <h:outputText value="Day: "></h:outputText>
-            <h:selectOneMenu id="selectDayStats" value="#{statsBean.currentDay}">
-                <f:selectItems value="#{statsBean.dayMap}" />
+            <h:selectOneMenu id="selectDayStats" value="#{statsStudentBean.currentDay}">
+                <f:selectItems value="#{statsStudentBean.dayMap}" />
             </h:selectOneMenu>
             <p/>
-            
+
             <!--will render depending on selectOneRadio 
             wrapped in a panelgroup for ajax to render -->
             <h:panelGroup id="toWrapper">
-                <h:panelGroup id="to" rendered="#{statsBean.currentOneRadioValue}">
+                <h:panelGroup id="to" rendered="#{statsStudentBean.currentOneRadioValue}">
                     <h:outputText value="To: "></h:outputText>   
                     <br/>
                     <h:outputText value="Year: "></h:outputText>
-                    <h:selectOneMenu id="toYearStats" value="#{statsBean.currentYear}">
-                        <f:selectItems value="#{statsBean.yearMap}" />
+                    <h:selectOneMenu id="toYearStats" value="#{statsStudentBean.toYear}">
+                        <f:selectItems value="#{statsStudentBean.yearMap}" />
+                        <f:ajax event="change" execute="@this" render="toDayStats" listener="#{statsStudentBean.onMonthOrYearSelect}"/>
                     </h:selectOneMenu>
                     <h:outputText value="Month: "></h:outputText>
-                    <h:selectOneMenu id="totMonthStats" value="#{statsBean.currentMonth}">
-                        <f:selectItems value="#{statsBean.monthMap}" />
-                        <f:ajax event="change" execute="@this" render="selectDayStats" listener="#{statsBean.onMonthSelect}"/>
+                    <h:selectOneMenu id="totMonthStats" value="#{statsStudentBean.toMonth}">
+                        <f:selectItems value="#{statsStudentBean.monthMap}" />
+                        <f:ajax event="change" execute="@this" render="toDayStats" listener="#{statsStudentBean.onMonthOrYearSelect}"/>
                     </h:selectOneMenu>
                     <h:outputText value="Day: "></h:outputText>
-                    <h:selectOneMenu id="toDayStats" value="#{statsBean.currentDay}">
-                        <f:selectItems value="#{statsBean.dayMap}" />
+                    <h:selectOneMenu id="toDayStats" value="#{statsStudentBean.toDay}">
+                        <f:selectItems value="#{statsStudentBean.toDayMap}" />
                     </h:selectOneMenu>
                 </h:panelGroup>
             </h:panelGroup>
