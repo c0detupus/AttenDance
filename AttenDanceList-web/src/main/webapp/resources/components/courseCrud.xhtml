@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+
+        <h:form>
+
+            <h:outputText id="cName" value="Course name: "></h:outputText>
+            <h:inputText id="iName" value="#{courseBean.name}"></h:inputText>
+            <br></br>
+            
+            <h:outputText id="cCode" value="Course code: "></h:outputText>
+            <h:inputText id="iCode" value="#{courseBean.code}"></h:inputText>
+            <br></br>
+            
+            <h:outputLabel id="cPoints" value="Course points: "></h:outputLabel>
+            
+            <h:selectOneMenu id="selectCoursePoints" value="#{courseBean.currentPoints}" >
+                <f:selectItems value="#{courseBean.coursePointsMap}"/>
+            </h:selectOneMenu>
+
+            <h:commandButton value="Submit" action="courseAdded" ></h:commandButton>
+
+        </h:form>
+        
+    </h:body>
+</html>
+

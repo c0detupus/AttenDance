@@ -22,6 +22,8 @@ public class Populator {
     private Map<String, Integer> monthMap;
 
     private Map<String, String> dayMap;
+    
+    private Map<Integer, Integer> coursePointsMap;
 
     //will populate the map depending on database
     //hardcoded for now
@@ -79,5 +81,12 @@ public class Populator {
             dayMap.put(day, day);
         }
         return dayMap;
+    }
+    
+    public Map populateCoursePointsMap(){
+        coursePointsMap = new LinkedHashMap<>();
+        coursePointsMap.put(50, 50);
+        coursePointsMap.put(100, 100);
+        return coursePointsMap;
     }
 }
