@@ -11,46 +11,46 @@
 
         <h:form>
 
-            <h:outputLabel id = "fName" value="First name: "></h:outputLabel>
-            <h:inputText></h:inputText>
+            <h:outputLabel value="First name: "/>
+            <h:inputText value = "#{studentBean.firstName}"/>
+            <br></br>
 
-            <br></br>
-            <h:outputLabel id ="lName" value="Last name: "></h:outputLabel>
+            <h:outputLabel value="Last name: "></h:outputLabel>
             <h:inputText></h:inputText>
             <br></br>
-            <h:outputLabel id ="socialSecurityNumber" value="Social security number: "></h:outputLabel>
-            <h:inputText></h:inputText>
-            <br></br>
-            <h:outputLabel id ="email" value="Email: "></h:outputLabel>
-            <h:panelGroup>
-                <h:inputText id = "emailInput" value="#{studentBean.email}" >
-                    <f:ajax event="keydown"  render="emailError"></f:ajax>
-                </h:inputText>
 
-                <h:outputLabel id ="emailError" value="#{studentBean.email}"></h:outputLabel>
-            </h:panelGroup>
-            <br></br>
-            <h:outputLabel id ="cellNumber" value="Cellphone nr: "></h:outputLabel>
+            <h:outputLabel value="Social security number: "></h:outputLabel>
             <h:inputText></h:inputText>
             <br></br>
-            <h:outputLabel id ="homeNumber" value="Phone number"></h:outputLabel>
+
+            <h:outputLabel value="Email: "></h:outputLabel>
+            <h:inputText value="#{studentBean.email}" ></h:inputText>
+            <br></br>
+
+            <h:outputLabel value="Cellphone nr: "></h:outputLabel>
             <h:inputText></h:inputText>
             <br></br>
+
+            <h:outputLabel value="Phone number"></h:outputLabel>
+            <h:inputText></h:inputText>
+            <br></br>
+
             <h:outputLabel id ="sex" value="Sex: "></h:outputLabel>
-
             <h:selectOneRadio value="123">
                 <f:selectItem itemValue="male" itemLabel="Male" />
                 <f:selectItem itemValue="female" itemLabel="Female" />
             </h:selectOneRadio>
+            <br></br>
 
-            <br></br>
-            <h:outputLabel id ="address" value="Address: "></h:outputLabel>
+            <h:outputLabel value="Address: "></h:outputLabel>
             <h:inputText></h:inputText>
             <br></br>
-            <h:outputLabel id ="city" value="City: "></h:outputLabel>
+
+            <h:outputLabel  value="City: "></h:outputLabel>
             <h:inputText></h:inputText>
             <br></br>
-            <h:outputLabel id ="zipCode" value= "Zip code" ></h:outputLabel>
+
+            <h:outputLabel  value= "Zip code" ></h:outputLabel>
             <h:inputText></h:inputText>
             <br></br>
 
@@ -59,9 +59,7 @@
 
         </h:form>
 
-        <h:outputLabel id ="asda"></h:outputLabel>
-        <h:inputText></h:inputText>
-        <br></br>
+
 
 
     </h:body>

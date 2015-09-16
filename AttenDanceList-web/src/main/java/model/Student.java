@@ -5,12 +5,11 @@
  */
 package model;
 
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.component.UIComponent;
-import javax.faces.context.FacesContext;
-import javax.faces.validator.ValidatorException;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import org.hibernate.validator.constraints.Email;
 
 /**
@@ -22,18 +21,26 @@ import org.hibernate.validator.constraints.Email;
 public class Student
 {
 
+    @NotNull
+    @Pattern(regexp = "/^[A-z]+$/")
     private String firstName,
-            lastName;
+            lastName,
+            address,
+            city,
+            sex;
+    @NotNull
+    @Digits(integer = 10, fraction = 0)
     private int socialSecurityNumber;
 
     @Email
+    @NotNull
     private String email;
-    private int cellPhone;
-    private int phoneNumber;
-    private String sex;
+    @NotNull
+    @Digits(integer = 16, fraction = 0)
+    private int cellPhone, phoneNumber;
 
-    private String address,
-            city;
+    @NotNull
+    @Digits(integer = 10, fraction = 0)
     private int zipCode;
 
     //******* SETTERS--->
@@ -119,17 +126,5 @@ public class Student
         return zipCode;
     }
     //<---GETTERS******
-
-    public void validateEmailvalidateEmail(FacesContext context,
-                                           UIComponent toValidate, Object value) {
-
-        String email = this.email;
-
-        if(!email.contains("@")) {
-            FacesMessage message = new FacesMessage("Invalid emailaddress");
-            throw new ValidatorException(message);
-        }
-
-    }
 
 }
