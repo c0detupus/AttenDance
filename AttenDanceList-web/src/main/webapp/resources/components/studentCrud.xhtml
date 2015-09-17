@@ -12,54 +12,83 @@
         <h:form>
 
             <h:outputLabel value="First name: "/>
-            <h:inputText value = "#{studentBean.firstName}"/>
+            <h:inputText id ="fName" 
+                         value = "#{studentBean.firstName}"
+                         required="true"/>
+            <h:message for="fName" />
             <br></br>
 
             <h:outputLabel value="Last name: "></h:outputLabel>
-            <h:inputText></h:inputText>
+            <h:inputText id ="lName" 
+                         value = "#{studentBean.lastName}"
+                         required="true"/>
+            <h:message
+                style="color: red"
+                for="lName" />            
             <br></br>
 
             <h:outputLabel value="Social security number: "></h:outputLabel>
-            <h:inputText></h:inputText>
+            <h:inputText id ="socialSecurityNumber" 
+                         value = "#{studentBean.socialSecurityNumber}"
+                         required="true"
+                         validatorMessage="Enter a valid social security number format YYMMDD"/>
+            <h:message for="socialSecurityNumber" />
             <br></br>
 
             <h:outputLabel value="Email: "></h:outputLabel>
-            <h:inputText value="#{studentBean.email}" ></h:inputText>
+            <h:inputText id ="eMail" 
+                         value = "#{studentBean.email}"
+                         validator="#{studentBean.validateEmail}"
+                         required="true"/>
+            <h:message for="eMail" />
             <br></br>
 
             <h:outputLabel value="Cellphone nr: "></h:outputLabel>
-            <h:inputText></h:inputText>
+            <h:inputText id ="cellPhone" 
+                         value = "#{studentBean.cellPhone}"
+                         required="true"/>
+            <h:message for="cellPhone" />
             <br></br>
 
             <h:outputLabel value="Phone number"></h:outputLabel>
-            <h:inputText></h:inputText>
+            <h:inputText id ="phone" 
+                         value = "#{studentBean.phoneNumber}"
+                         required="true"/>
+            <h:message for="phone" />
             <br></br>
 
             <h:outputLabel id ="sex" value="Sex: "></h:outputLabel>
-            <h:selectOneRadio value="123">
+            <h:selectOneRadio value="#{studentBean.sex}">
                 <f:selectItem itemValue="male" itemLabel="Male" />
                 <f:selectItem itemValue="female" itemLabel="Female" />
             </h:selectOneRadio>
             <br></br>
 
             <h:outputLabel value="Address: "></h:outputLabel>
-            <h:inputText></h:inputText>
+            <h:inputText id ="address" 
+                         value = "#{studentBean.address}"
+                         required="true"/>
+            <h:message for="address" />
             <br></br>
 
             <h:outputLabel  value="City: "></h:outputLabel>
-            <h:inputText></h:inputText>
+            <h:inputText id ="city" 
+                         value = "#{studentBean.city}"
+                         required="true"/>
+            <h:message for="city" />
             <br></br>
 
             <h:outputLabel  value= "Zip code" ></h:outputLabel>
-            <h:inputText></h:inputText>
+            <h:inputText id ="zipCode" 
+                         value = "#{studentBean.zipCode}"
+                         required="true"/>
+            <h:message for="zipCode" />
             <br></br>
 
             <h:commandButton value="submit" ></h:commandButton>
 
 
         </h:form>
-
-
 
 
     </h:body>

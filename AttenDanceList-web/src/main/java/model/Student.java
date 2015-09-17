@@ -5,8 +5,12 @@
  */
 package model;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.component.UIComponent;
+import javax.faces.context.FacesContext;
+import javax.faces.validator.ValidatorException;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -22,7 +26,7 @@ public class Student
 {
 
     @NotNull
-    @Pattern(regexp = "/^[A-z]+$/")
+    @Pattern(regexp = "^[A-z]+$")
     private String firstName,
             lastName,
             address,
@@ -126,5 +130,15 @@ public class Student
         return zipCode;
     }
     //<---GETTERS******
+
+    public void validateEmail(FacesContext context,
+                              UIComponent toValidate,
+                              Object value) throws ValidatorException {
+        String emailStr = (String) value;
+        if(-1 == emailStr.indexOf("@")) {
+            FacesMessage message = new FacesMessage("Invalid email address");
+            throw new ValidatorException(message);
+        }
+    }
 
 }
