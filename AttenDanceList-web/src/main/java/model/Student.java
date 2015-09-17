@@ -154,16 +154,18 @@ public class Student
 
         FacesMessage message = new FacesMessage();
 
-        //Removes '-' from str
-        if(!onlyNumbers(str.replaceAll("[-]*", ""))) {
-            message.setSummary("Can't contain letters");
+        //Replaces first ocurrence of '-' not all occurences cause 
+        //ssn can be erroneously bli written with more than one '-'
+        String cleaned = str.replaceFirst("[-]", "");
+
+        if(!onlyNumbers(cleaned)) {
+            throw new ValidatorException(
+                    new FacesMessage("Only numbers preffered format YYMMDDXXXX or YYMMDD-XXXX"));
         }
 
-        //Makes 192202202344 ---> 2202202344
-        if(str.length() == 12) {
-            str.substring(2);
-        }else if(str.length() < 10 && str.length() > 12){
-            message.setSummary("Use format YYYYMMDDXXXX or YYMMDDXXXX");
+        if(cleaned.length() != 10) {
+
+            throw new ValidatorException(new FacesMessage("Use format YYMMDDXXXX or YYMMDD-XXXX"));
         }
 
         throw new ValidatorException(message);
