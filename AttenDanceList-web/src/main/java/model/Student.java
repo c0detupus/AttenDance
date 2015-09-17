@@ -47,6 +47,9 @@ public class Student
     @Digits(integer = 10, fraction = 0)
     private int zipCode;
     
+    public Student(){
+        
+    }
     public Student(String fn, String ln){
         this.firstName = fn;
         this.lastName = ln;
