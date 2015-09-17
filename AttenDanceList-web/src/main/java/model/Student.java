@@ -11,10 +11,6 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
-import javax.validation.constraints.Digits;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-import org.hibernate.validator.constraints.Email;
 
 /**
  *
@@ -25,35 +21,26 @@ import org.hibernate.validator.constraints.Email;
 public class Student
 {
 
-    @NotNull
-    @Pattern(regexp = "^[A-z]+$")
     private String firstName,
             lastName,
+            socialSecurityNumber,
+            email,
+            cellPhone,
+            phoneNumber,
+            sex,
             address,
             city,
-            sex;
-    @NotNull
-    @Digits(integer = 10, fraction = 0)
-    private int socialSecurityNumber;
+            zipCode;
 
-    @Email
-    @NotNull
-    private String email;
-    @NotNull
-    @Digits(integer = 16, fraction = 0)
-    private int cellPhone, phoneNumber;
+    public Student() {
 
-    @NotNull
-    @Digits(integer = 10, fraction = 0)
-    private int zipCode;
-    
-    public Student(){
-        
     }
-    public Student(String fn, String ln){
+
+    public Student(String fn, String ln) {
         this.firstName = fn;
         this.lastName = ln;
     }
+
     //******* SETTERS--->
     public void setFirstName(String firstName) {
         this.firstName = firstName;
@@ -63,7 +50,7 @@ public class Student
         this.lastName = lastName;
     }
 
-    public void setSocialSecurityNumber(int socialSecurityNumber) {
+    public void setSocialSecurityNumber(String socialSecurityNumber) {
         this.socialSecurityNumber = socialSecurityNumber;
     }
 
@@ -71,11 +58,11 @@ public class Student
         this.email = email;
     }
 
-    public void setCellPhone(int cellPhone) {
+    public void setCellPhone(String cellPhone) {
         this.cellPhone = cellPhone;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
@@ -91,7 +78,7 @@ public class Student
         this.city = city;
     }
 
-    public void setZipCode(int zipCode) {
+    public void setZipCode(String zipCode) {
         this.zipCode = zipCode;
     }
     //<---SETTERS ******
@@ -105,7 +92,7 @@ public class Student
         return lastName;
     }
 
-    public int getSocialSecurityNumber() {
+    public String getSocialSecurityNumber() {
         return socialSecurityNumber;
     }
 
@@ -113,11 +100,11 @@ public class Student
         return email;
     }
 
-    public int getCellPhone() {
+    public String getCellPhone() {
         return cellPhone;
     }
 
-    public int getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
@@ -133,19 +120,74 @@ public class Student
         return city;
     }
 
-    public int getZipCode() {
+    public String getZipCode() {
         return zipCode;
     }
     //<---GETTERS******
 
+    //******VALIDATORS--->
+    public void validateLetters(FacesContext context,
+                                UIComponent toValidate,
+                                Object value) throws ValidatorException {
+
+        String str = (String) value;
+
+        if(!onlyLettersSC(str)) {
+            throw new ValidatorException(new FacesMessage("Can only have letters"));
+        }
+    }
+
     public void validateEmail(FacesContext context,
                               UIComponent toValidate,
                               Object value) throws ValidatorException {
-        String emailStr = (String) value;
-        if(-1 == emailStr.indexOf("@")) {
+        String str = (String) value;
+        if(-1 == value.toString().indexOf("@") && !onlyLetters(str)) {
             FacesMessage message = new FacesMessage("Invalid email address");
             throw new ValidatorException(message);
         }
     }
+
+    public void validateSSN(FacesContext context,
+                            UIComponent toValidate,
+                            Object value) throws ValidatorException {
+        String str = (String) value;
+
+        FacesMessage message = new FacesMessage();
+
+        //Removes '-' from str
+        if(!onlyNumbers(str.replaceAll("[-]*", ""))) {
+            message.setSummary("Can't contain letters");
+        }
+
+        //Makes 192202202344 ---> 2202202344
+        if(str.length() == 12) {
+            str.substring(2);
+        }else if(str.length() < 10 && str.length() > 12){
+            message.setSummary("Use format YYYYMMDDXXXX or YYMMDDXXXX");
+        }
+
+        throw new ValidatorException(message);
+
+    }
+    //<---VALIDATORS*****
+
+    //*****PRIVATE METHODS--->
+    private boolean onlyLetters(String str) {
+
+        return str.matches("[a-zA-Z]+");
+
+    }
+
+    //Handles regex for letters only but with special characters included
+    private boolean onlyLettersSC(String str) {
+
+        return str.matches("[a-zA-ZåäöÅÄÖ]+");
+
+    }
+
+    private boolean onlyNumbers(String str) {
+        return str.matches("[0-9]+");
+    }
+    //<---PRIVATE METHODS*****
 
 }

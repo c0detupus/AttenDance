@@ -14,14 +14,21 @@
             <h:outputLabel value="First name: "/>
             <h:inputText id ="fName" 
                          value = "#{studentBean.firstName}"
-                         required="true"/>
-            <h:message for="fName" />
+                         validator ="#{studentBean.validateLetters}"
+                         required="true"
+                         requiredMessage="Field can't be empty"/>
+            <h:message 
+                style="color: red"
+                for="fName" />
             <br></br>
 
             <h:outputLabel value="Last name: "></h:outputLabel>
             <h:inputText id ="lName" 
                          value = "#{studentBean.lastName}"
-                         required="true"/>
+                         validator ="#{studentBean.validateLetters}"
+                         required="true"
+                         requiredMessage="Field can't be empty"
+                         />
             <h:message
                 style="color: red"
                 for="lName" />            
@@ -30,59 +37,89 @@
             <h:outputLabel value="Social security number: "></h:outputLabel>
             <h:inputText id ="socialSecurityNumber" 
                          value = "#{studentBean.socialSecurityNumber}"
+                         validator="#{studentBean.validateSSN}"
                          required="true"
-                         validatorMessage="Enter a valid social security number format YYMMDD"/>
-            <h:message for="socialSecurityNumber" />
+                         requiredMessage="Field can't be empty"
+                         />
+            <h:message 
+                style="color: red"
+                for="socialSecurityNumber" />
             <br></br>
 
             <h:outputLabel value="Email: "></h:outputLabel>
             <h:inputText id ="eMail" 
                          value = "#{studentBean.email}"
                          validator="#{studentBean.validateEmail}"
-                         required="true"/>
-            <h:message for="eMail" />
+                         required="true"
+                         requiredMessage="Field can't be empty"/>
+            <h:message 
+                style="color: red"
+                for="eMail" />
             <br></br>
 
             <h:outputLabel value="Cellphone nr: "></h:outputLabel>
             <h:inputText id ="cellPhone" 
                          value = "#{studentBean.cellPhone}"
-                         required="true"/>
-            <h:message for="cellPhone" />
+                         required="true"
+                         requiredMessage="Field can't be empty"/>
+            <h:message 
+                style="color: red"
+                for="cellPhone" />
             <br></br>
 
             <h:outputLabel value="Phone number"></h:outputLabel>
             <h:inputText id ="phone" 
                          value = "#{studentBean.phoneNumber}"
-                         required="true"/>
-            <h:message for="phone" />
+                         required="true"
+                         requiredMessage="Field can't be empty"/>
+            <h:message 
+                style="color: red"
+                for="phone" />
             <br></br>
 
             <h:outputLabel id ="sex" value="Sex: "></h:outputLabel>
-            <h:selectOneRadio value="#{studentBean.sex}">
+
+            <h:selectOneRadio value="#{studentBean.sex}"
+                              required="true"
+                              requiredMessage="Choose male or female">
                 <f:selectItem itemValue="male" itemLabel="Male" />
                 <f:selectItem itemValue="female" itemLabel="Female" />
+
             </h:selectOneRadio>
+            <h:message 
+                style="color: red"
+                for="sex" />
             <br></br>
 
             <h:outputLabel value="Address: "></h:outputLabel>
             <h:inputText id ="address" 
                          value = "#{studentBean.address}"
-                         required="true"/>
-            <h:message for="address" />
+                         required="true"
+                         requiredMessage="Field can't be empty"/>
+            <h:message 
+                style="color: red"
+                for="address" />
             <br></br>
 
             <h:outputLabel  value="City: "></h:outputLabel>
             <h:inputText id ="city" 
                          value = "#{studentBean.city}"
-                         required="true"/>
-            <h:message for="city" />
+                         validator="#{studentBean.validateLetters}"
+                         required="true"
+                         requiredMessage="Field can't be empty"/>
+            <h:message 
+                style="color: red"
+                for="city" />
             <br></br>
 
             <h:outputLabel  value= "Zip code" ></h:outputLabel>
             <h:inputText id ="zipCode" 
                          value = "#{studentBean.zipCode}"
-                         required="true"/>
-            <h:message for="zipCode" />
+                         required="true"
+                         requiredMessage="Field can't be empty"/>
+            <h:message 
+                style="color: red"
+                for="zipCode" />
             <br></br>
 
             <h:commandButton value="submit" ></h:commandButton>
