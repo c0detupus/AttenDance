@@ -46,7 +46,11 @@ public class Student
     @NotNull
     @Digits(integer = 10, fraction = 0)
     private int zipCode;
-
+    
+    public Student(String fn, String ln){
+        this.firstName = fn;
+        this.lastName = ln;
+    }
     //******* SETTERS--->
     public void setFirstName(String firstName) {
         this.firstName = firstName;

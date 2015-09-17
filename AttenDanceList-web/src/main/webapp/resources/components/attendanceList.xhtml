@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <h:form>
+        <h:dataTable id="attendanceList" value="#{attendanceListBean.student}" var="student">
+            <f:facet name="header">
+                <h:outputText value="Attendance List"/>
+            </f:facet>
+            <h:column>
+                <f:facet name ="header">
+                    <h:outputText value="Last"/>
+                </f:facet>
+                <h:outputText value="#{student.lastName}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="First"/>
+                </f:facet>
+                <h:outputText value="#{student.firstName}"/>
+            </h:column>
+            <h:column>
+                <h:selectBooleanCheckbox value="#{attendanceListBean.selectedSSN[student.firstName]}"/>
+            </h:column>       
+        </h:dataTable>
+        
+            <h:commandButton value="Submit" action="#{attendanceListBean.submit}"/>
+        </h:form>
+    </h:body>
+</html>
+
