@@ -27,6 +27,9 @@ public class Courses {
     
     private Populator pop;
     
+    public Courses(){
+        
+    }
     public Courses(String name, String code, int points){
         this.name = name;
         this.code = code;
