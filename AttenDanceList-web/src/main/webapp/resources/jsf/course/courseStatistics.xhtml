@@ -3,26 +3,30 @@
 <ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
                 template="/resources/template/menubar.xhtml"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
-                xmlns:f="http://xmlns.jcp.org/jsf/core">
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>Facelet Title</title>
     </h:head>
     <ui:define name="menu_bar">
     <h:body>
         <h:form>
-            <h:outputText value="Course: "></h:outputText>
-            <h:selectOneMenu id="selectCourseStats" value="#{statsCourseBean.currentCourse}" >
+            <p:growl id="msgs" showDetail="true" />
+ 
+            <p:outputLabel value="Course: "></p:outputLabel>>
+            <p:selectOneMenu id="selectCourseStats" value="#{statsCourseBean.currentCourse}" >
                 <f:selectItems value="#{statsCourseBean.coursesMap}"/>
-            </h:selectOneMenu>
-
-            <h:outputText value="Select in timespan: "></h:outputText>
-            <h:selectOneRadio id="oneRadio" value="#{statsCourseBean.currentOneRadioValue}">
+            </p:selectOneMenu>
+            <br></br>
+            <p:separator/>
+            <p:outputLabel value="Select in timespan: "></p:outputLabel>
+            <p:selectOneRadio id="oneRadio" value="#{statsCourseBean.currentOneRadioValue}">
                 <f:selectItem itemValue="true" itemLabel="Yes" />
                 <f:selectItem itemValue="false" itemLabel="No" />
                 <!-- will return true or false -->
                 <f:ajax event="click" execute="oneRadio" 
                         render="fromWrapper toWrapper" listener="#{statsCourseBean.onRadioToggle}"></f:ajax>
-            </h:selectOneRadio>
+            </p:selectOneRadio>
             <p/>
             <!-- will render depending on selectOneRadio
             wrapped in a panelgroup for ajax to render -->
@@ -34,21 +38,21 @@
             <br/>
 
             <h:outputText value="Year: "></h:outputText>
-            <h:selectOneMenu id="selectYearStats" value="#{statsCourseBean.currentYear}">
+            <p:selectOneMenu id="selectYearStats" value="#{statsCourseBean.currentYear}">
                 <f:selectItems value="#{statsCourseBean.yearMap}" />
                 <f:ajax event="change" execute="@this" render="selectDayStats" listener="#{statsCourseBean.onMonthOrYearSelect}"/>
-            </h:selectOneMenu>
+            </p:selectOneMenu>
 
             <h:outputText value="Month: "></h:outputText>
-            <h:selectOneMenu id="selectMonthStats" value="#{statsCourseBean.currentMonth}">
+            <p:selectOneMenu id="selectMonthStats" value="#{statsCourseBean.currentMonth}">
                 <f:selectItems value="#{statsCourseBean.monthMap}" />
                 <f:ajax event="change" execute="@this" render="selectDayStats" listener="#{statsCourseBean.onMonthOrYearSelect}"/>
-            </h:selectOneMenu>
+            </p:selectOneMenu>
 
             <h:outputText value="Day: "></h:outputText>
-            <h:selectOneMenu id="selectDayStats" value="#{statsCourseBean.currentDay}">
+            <p:selectOneMenu id="selectDayStats" value="#{statsCourseBean.currentDay}">
                 <f:selectItems value="#{statsCourseBean.dayMap}" />
-            </h:selectOneMenu>
+            </p:selectOneMenu>
             <p/>
 
             <!--will render depending on selectOneRadio 
