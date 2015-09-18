@@ -11,21 +11,21 @@
     <ui:define name="menu_bar">
         <h:body>
             <h:form>
-                <h:outputText id="cName" value="Course name: "></h:outputText>
-                <h:inputText id="iName" value="#{courseBean.name}"></h:inputText>
-                <br></br>
+                <p:panelGrid columns="2">
+                <p:outputLabel id="cName" value="Course name: "></p:outputLabel>
+                <p:inputText id="iName" value="#{courseBean.name}"></p:inputText>
 
-                <h:outputText id="cCode" value="Course code: "></h:outputText>
-                <h:inputText id="iCode" value="#{courseBean.code}"></h:inputText>
-                <br></br>
+                <p:outputLabel id="cCode" value="Course code: "></p:outputLabel>
+                <p:inputText id="iCode" value="#{courseBean.code}"></p:inputText>
 
                 <h:outputLabel id="cPoints" value="Course points: "></h:outputLabel>
 
-                <h:selectOneMenu id="selectCoursePoints" value="#{courseBean.currentPoints}" >
+                <p:selectOneMenu id="selectCoursePoints" value="#{courseBean.currentPoints}" >
                     <f:selectItems value="#{courseBean.coursePointsMap}"/>
-                </h:selectOneMenu>
+                </p:selectOneMenu>
 
-                <h:commandButton value="Submit" action="courseAdded" ></h:commandButton>
+                <p:commandButton value="Submit" action="courseAdded" ></p:commandButton>
+                </p:panelGrid>
             </h:form>
         </h:body>
     </ui:define>
