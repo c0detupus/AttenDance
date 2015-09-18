@@ -60,6 +60,7 @@
             <h:outputLabel value="Cellphone nr: "></h:outputLabel>
             <h:inputText id ="cellPhone" 
                          value = "#{studentBean.cellPhone}"
+                         validator="#{studentBean.validatePhoneNumbers}"
                          required="true"
                          requiredMessage="Field can't be empty"/>
             <h:message 
@@ -70,6 +71,7 @@
             <h:outputLabel value="Phone number"></h:outputLabel>
             <h:inputText id ="phone" 
                          value = "#{studentBean.phoneNumber}"
+                         validator="#{studentBean.validatePhoneNumbers}"
                          required="true"
                          requiredMessage="Field can't be empty"/>
             <h:message 
