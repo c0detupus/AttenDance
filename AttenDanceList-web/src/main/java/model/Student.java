@@ -30,15 +30,21 @@ public class Student
             sex,
             address,
             city,
-            zipCode;
+            zipCode,
+            avgAttendance;
 
     public Student() {
 
     }
 
-    public Student(String fn, String ln) {
-        this.firstName = fn;
-        this.lastName = ln;
+    public Student(String firstName,
+                   String lastName,
+                   String cellPhone,
+                   String avgAttendance) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.cellPhone = cellPhone;
+        this.avgAttendance = avgAttendance;
     }
 
     //******* SETTERS--->
@@ -80,6 +86,10 @@ public class Student
 
     public void setZipCode(String zipCode) {
         this.zipCode = zipCode;
+    }
+
+    public void setAvgAttendance(String avgAttendance) {
+        this.avgAttendance = avgAttendance;
     }
     //<---SETTERS ******
 
@@ -123,6 +133,10 @@ public class Student
     public String getZipCode() {
         return zipCode;
     }
+
+    public String getAvgAttendance() {
+        return avgAttendance;
+    }
     //<---GETTERS******
 
     //******VALIDATORS--->
@@ -152,8 +166,6 @@ public class Student
                             Object value) throws ValidatorException {
         String str = (String) value;
 
-        FacesMessage message = new FacesMessage();
-
         //Replaces first ocurrence of '-' not all occurences cause 
         //ssn can be erroneously bli written with more than one '-'
         String cleaned = str.replaceFirst("[-]", "");
@@ -168,7 +180,38 @@ public class Student
             throw new ValidatorException(new FacesMessage("Use format YYMMDDXXXX or YYMMDD-XXXX"));
         }
 
-        throw new ValidatorException(message);
+    }
+
+    public void validatePhoneNumbers(FacesContext context,
+                                     UIComponent toValidate,
+                                     Object value) throws ValidatorException {
+
+        String str = (String) value;
+
+        String cleaned = str.replaceFirst("\\s", "");
+
+        if(!onlyNumbers(str)) {
+            throw new ValidatorException(
+                    new FacesMessage("Only numbers"));
+        }
+
+    }
+
+    public void validateZipCode(FacesContext context,
+                                UIComponent toValidate,
+                                Object value) throws ValidatorException {
+
+        String str = (String) value;
+        if(!onlyNumbers(str)) {
+            throw new ValidatorException(
+                    new FacesMessage("Only numbers"));
+        }
+
+        if(str.length() != 10) {
+            throw new ValidatorException(
+                    new FacesMessage("Invalid postal code"));
+
+        }
 
     }
     //<---VALIDATORS*****

@@ -6,33 +6,35 @@
         <title>Login</title>
     </h:head>
     <h:body>
-       <h:outputStylesheet library="css" name="login.css"  /> 
-       <h:form>
+        <h:outputStylesheet library="css" name="login.css"  /> 
+        <h:form>
+            <div class="center">
+                <h:outputLabel class="text" value="Username: " style="font-weight:bold" />
+                <h:inputText class="inputField" id="inputUsername" />
+                <br/>
+                <h:outputLabel class="text" value="Password: " style="font-weight:bold" />
+                <h:inputSecret class="inputField" id="password" />
+                <p/>
+                <h:commandButton class="btn" value="Login" />
+            </div>
+        </h:form>
+
+        <!-- TEMPORARY NAVIGATION DURING DEVELOPER MODE -->
         <div class="center">
-        <h:outputLabel class="text" value="Username: " style="font-weight:bold" />
-        <h:inputText class="inputField" id="inputUsername" />
-        <br/>
-        <h:outputLabel class="text" value="Password: " style="font-weight:bold" />
-        <h:inputSecret class="inputField" id="password" />
-        <p/>
-        <h:commandButton class="btn" value="Login" />
+            <h:link value="statsCourse.xhtml" outcome="statisticsCourse" />
+            <p/>
+            <h:link value="statsStudent.xhtml" outcome="statisticsStudent" />
+            <p/>
+            <h:link value="studentCreate.xhtml" outcome="studentCreate" />
+            <p/>
+            <h:link value="courseCrud.xhtml" outcome="courseCrud" />
+            <p/>
+            <h:link value="courseList.xhtml" outcome="courseList" />
+            <p/>
+            <h:link value="attendanceList.xhtml" outcome="attendanceList" />
+            <p/>
+            <h:link value="studentList.xhtml" outcome="studentList" />
         </div>
-       </h:form>
-       
-       <!-- TEMPORARY NAVIGATION DURING DEVELOPER MODE -->
-       <div class="center">
-       <h:link value="statsCourse.xhtml" outcome="statisticsCourse" />
-       <p/>
-       <h:link value="statsStudent.xhtml" outcome="statisticsStudent" />
-       <p/>
-       <h:link value="studentCreate.xhtml" outcome="studentCreate" />
-       <p/>
-       <h:link value="courseCrud.xhtml" outcome="courseCrud" />
-       <p/>
-       <h:link value="courseList.xhtml" outcome="courseList" />
-       <p/>
-       <h:link value="attendanceList.xhtml" outcome="attendanceList" />
-       </div>
     </h:body>
 </html>
 
