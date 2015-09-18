@@ -3,14 +3,15 @@
 <ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
                 template="/resources/template/menubar.xhtml"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
-                xmlns:f="http://xmlns.jcp.org/jsf/core"
-                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+                xmlns:f="http://xmlns.jcp.org/jsf/core"            
+                xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>Facelet Title</title>
     </h:head>
     <ui:define name="menu_bar">
         <h:body>
             <h:form>
+                <p:panelGrid columns="3">
                 <h:outputLabel value="First name: "/>
                 <h:inputText id ="fName" 
                              value = "#{studentBean.firstName}"
@@ -20,7 +21,6 @@
                 <h:message 
                     style="color: red"
                     for="fName" />
-                <br></br>
 
                 <h:outputLabel value="Last name: "></h:outputLabel>
                 <h:inputText id ="lName" 
@@ -32,7 +32,6 @@
                 <h:message
                     style="color: red"
                     for="lName" />            
-                <br></br>
 
                 <h:outputLabel value="Social security number: "></h:outputLabel>
                 <h:inputText id ="socialSecurityNumber" 
@@ -44,7 +43,6 @@
                 <h:message 
                     style="color: red"
                     for="socialSecurityNumber" />
-                <br></br>
 
                 <h:outputLabel value="Email: "></h:outputLabel>
                 <h:inputText id ="eMail" 
@@ -55,8 +53,7 @@
                 <h:message 
                     style="color: red"
                     for="eMail" />
-                <br></br>
-
+                
                 <h:outputLabel value="Cellphone nr: "></h:outputLabel>
                 <h:inputText id ="cellPhone" 
                              value = "#{studentBean.cellPhone}"
@@ -66,7 +63,6 @@
                 <h:message 
                     style="color: red"
                     for="cellPhone" />
-                <br></br>
 
                 <h:outputLabel value="Phone number"></h:outputLabel>
                 <h:inputText id ="phone" 
@@ -77,7 +73,6 @@
                 <h:message 
                     style="color: red"
                     for="phone" />
-                <br></br>
 
                 <h:outputLabel id ="sex" value="Sex: "></h:outputLabel>
 
@@ -91,7 +86,6 @@
                 <h:message 
                     style="color: red"
                     for="sex" />
-                <br></br>
 
                 <h:outputLabel value="Address: "></h:outputLabel>
                 <h:inputText id ="address" 
@@ -101,7 +95,6 @@
                 <h:message 
                     style="color: red"
                     for="address" />
-                <br></br>
 
                 <h:outputLabel  value="City: "></h:outputLabel>
                 <h:inputText id ="city" 
@@ -112,7 +105,6 @@
                 <h:message 
                     style="color: red"
                     for="city" />
-                <br></br>
 
                 <h:outputLabel  value= "Zip code" ></h:outputLabel>
                 <h:inputText id ="zipCode" 
@@ -122,9 +114,9 @@
                 <h:message 
                     style="color: red"
                     for="zipCode" />
-                <br></br>
 
                 <h:commandButton value="submit" ></h:commandButton>
+                </p:panelGrid>
             </h:form>
         </h:body>
     </ui:define>
