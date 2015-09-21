@@ -24,6 +24,17 @@ public class StudentTO {
             city,
             zipCode,
             avgAttendance;
+    
+    //temporarily added a constructor for hardcoded testing
+    public StudentTO(String firstName,
+            String lastName,
+            String cellPhone,
+            String avgAttendance) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.cellPhone = cellPhone;
+        this.avgAttendance = avgAttendance;
+    }
 
     public long getId() {
         return id;

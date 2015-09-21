@@ -5,6 +5,7 @@
  */
 package afk.student;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
 import to.StudentTO;
@@ -14,9 +15,10 @@ import to.StudentTO;
  * @author c0detupus
  */
 @Stateless
-public class StudentServiceSlsb implements StudentServiceIntf
+public class StudentServiceSLSB implements StudentServiceIntf
 {
-
+    List<StudentTO> studentList;
+    
     @Override
     public void createStudent(StudentTO studentTo) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -24,7 +26,11 @@ public class StudentServiceSlsb implements StudentServiceIntf
 
     @Override
     public List<StudentTO> getAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        studentList = new ArrayList<>();
+        studentList.add(new StudentTO("Kajri", "Qu","076527771", "23"));
+        studentList.add(new StudentTO("Melisa", "Avdavic","07652121", "110"));
+        studentList.add(new StudentTO("Urban", "Lundberg", "076527111", "100"));
+        return studentList;
     }
 
     @Override

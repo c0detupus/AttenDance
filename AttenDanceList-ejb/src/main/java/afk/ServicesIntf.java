@@ -5,16 +5,14 @@
  */
 package afk;
 
-
-import afk.student.StudentServiceIntf;
+import afk.student.StudentServiceSLSB;
 
 /**
  *
  * @author c0detupus
  */
 public interface ServicesIntf {
-   public StudentServiceIntf getStudentService();
-   //CRUF
-  
-   
+
+    public StudentServiceSLSB getStudentService();
+
 }
