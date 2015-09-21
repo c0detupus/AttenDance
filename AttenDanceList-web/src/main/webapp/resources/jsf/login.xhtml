@@ -1,22 +1,23 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>Login</title>
     </h:head>
     <h:body>
-        <h:outputStylesheet library="css" name="login.css"  /> 
+ 
         <h:form>
-            <div class="center">
-                <h:outputLabel class="text" value="Username: " style="font-weight:bold" />
-                <h:inputText class="inputField" id="inputUsername" />
+            
+                <p:outputLabel class="text" value="Username: " style="font-weight:bold" />
+                <p:inputText class="inputField" id="inputUsername" />
                 <br/>
-                <h:outputLabel class="text" value="Password: " style="font-weight:bold" />
-                <h:inputSecret class="inputField" id="password" />
+                <p:outputLabel class="text" value="Password: " style="font-weight:bold" />
+                <p:password class="inputField" id="password" />
                 <p/>
-                <h:commandButton class="btn" value="Login" />
-            </div>
+                <p:commandButton class="btn" value="Login" />
+            
         </h:form>
 
         <!-- TEMPORARY NAVIGATION DURING DEVELOPER MODE -->
