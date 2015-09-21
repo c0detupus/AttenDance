@@ -7,7 +7,7 @@ package afk.domain.student;
 
 import java.util.List;
 import javax.ejb.Stateless;
-import to.StudentTo;
+import to.StudentTO;
 
 /**
  *
@@ -18,18 +18,18 @@ public class StudentServiceSlsb implements StudentServiceIntf
 {
 
     @Override
-    public List<StudentTo> getAll() {
+    public List<StudentTO> getAll() {
         return null;
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void createStudent(StudentTo studentTo ) {
+    public void createStudent(StudentTO studentTo ) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public StudentTo findStudent(int id) {
+    public StudentTO findStudent(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

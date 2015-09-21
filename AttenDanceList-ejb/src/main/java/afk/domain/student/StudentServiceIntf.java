@@ -7,7 +7,7 @@ package afk.domain.student;
 
 import java.util.List;
 import javax.ejb.Local;
-import to.StudentTo;
+import to.StudentTO;
 
 /**
  *
@@ -17,11 +17,11 @@ import to.StudentTo;
 public interface StudentServiceIntf
 {
 
-    public List<StudentTo> getAll();
+    public List<StudentTO> getAll();
 
-    public void createStudent(StudentTo studentTo);
+    public void createStudent(StudentTO studentTo);
 
-    public StudentTo findStudent(int id);
+    public StudentTO findStudent(int id);
 
     public int updateStudent(int id);
 
