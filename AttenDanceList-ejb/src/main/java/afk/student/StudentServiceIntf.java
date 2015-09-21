@@ -7,7 +7,7 @@ package afk.student;
 
 import java.util.List;
 
-import to.StudentTO;
+import afk.to.StudentTO;
 
 /**
  *

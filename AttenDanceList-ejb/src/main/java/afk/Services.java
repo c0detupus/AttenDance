@@ -1,7 +1,7 @@
 package afk;
 
-import afk.student.StudentServiceIntf;
-import javax.ejb.EJB;
+import afk.course.CourseServiceSLSB;
+import afk.student.StudentServiceSLSB;
 
 /**
  *
@@ -10,21 +10,16 @@ import javax.ejb.EJB;
 public class Services implements ServicesIntf
 {
 
-    @EJB
-    StudentServiceIntf studentServiceIntf;
+    @Override
+    public StudentServiceSLSB getStudentService() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
     @Override
-    public StudentServiceIntf getStudentService() {
-        return getStudentServiceIntf();
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public CourseServiceSLSB getCourseService() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public StudentServiceIntf getStudentServiceIntf() {
-        return studentServiceIntf;
-    }
-
-    public void setStudentServiceIntf(StudentServiceIntf studentServiceIntf) {
-        this.studentServiceIntf = studentServiceIntf;
-    }
+    
 
 }

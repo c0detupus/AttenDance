@@ -7,14 +7,14 @@ package afk.student;
 
 import java.util.List;
 import javax.ejb.Stateless;
-import to.StudentTO;
+import afk.to.StudentTO;
 
 /**
  *
  * @author c0detupus
  */
 @Stateless
-public class StudentServiceSlsb implements StudentServiceIntf
+public class StudentServiceSLSB implements StudentServiceIntf
 {
 
     @Override
