@@ -7,7 +7,7 @@ package afk;
 
 import afk.domain.student.StudentServiceIntf;
 import java.util.List;
-import to.StudentTo;
+import to.StudentTO;
 
 /**
  *
