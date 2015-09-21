@@ -5,16 +5,21 @@
  */
 package helper;
 
+import afk.to.StudentTO;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
+import model.Student;
 
 /**
  *
  * @author valance
  */
-public class Populator {
+public class Populator
+{
 
     private Map<String, String> courseMap;
     private Map<String, String> studentMap;
@@ -22,7 +27,7 @@ public class Populator {
     private Map<String, Integer> monthMap;
 
     private Map<String, String> dayMap;
-    
+
     private Map<Integer, Integer> coursePointsMap;
 
     //will populate the map depending on database
@@ -67,7 +72,7 @@ public class Populator {
         monthMap.put("December", 11);
         return monthMap;
     }
-    
+
     //will populate amount of days depending on month and year(leap year)
     public Map populateDayMap(int month, int year) {
         int iDay = 1;
@@ -76,17 +81,45 @@ public class Populator {
         int daysInMonth = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
         dayMap = new LinkedHashMap<>();
 
-        for (int i = 1; i <= daysInMonth; i++) {
+        for(int i = 1; i <= daysInMonth; i++) {
             String day = Integer.toString(i);
             dayMap.put(day, day);
         }
         return dayMap;
     }
-    
-    public Map populateCoursePointsMap(){
+
+    public Map populateCoursePointsMap() {
         coursePointsMap = new LinkedHashMap<>();
         coursePointsMap.put(50, 50);
         coursePointsMap.put(100, 100);
         return coursePointsMap;
+    }
+
+    public List<Student> studentTOconverter(List<StudentTO> studentTOList) {
+
+        List<Student> studenList = new ArrayList<>();
+
+        for(StudentTO sTO : studentTOList) {
+
+            Student student = new Student();
+
+            student.setFirstName(sTO.getFirstName());
+            student.setLastName(sTO.getLastName());
+            student.setSocialSecurityNumber(sTO.getSocialSecurityNumber());
+            student.setEmail(sTO.getEmail());
+            student.setCellPhone(sTO.getCellPhone());
+            student.setPhoneNumber(sTO.getPhoneNumber());
+            student.setSex(sTO.getSex());
+            student.setAvgAttendance(sTO.getAvgAttendance());
+            student.setAddress(sTO.getAddress());
+            student.setZipCode(sTO.getZipCode());
+            student.setCity(sTO.getCity());
+
+            studenList.add(student);
+
+        }
+
+        return studenList;
+
     }
 }

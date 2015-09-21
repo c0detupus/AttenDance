@@ -5,7 +5,7 @@
  */
 package afk;
 
-import java.util.ArrayList;
+import helper.Populator;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -20,25 +20,20 @@ import model.Student;
 @SessionScoped
 public class StudentListBean
 {
-//    @EJB Services services;
 
-    
-    private String firstName;
+    @EJB
+    private Services services;
+
     private List<Student> students;
     private int studentAmount;
 
+    private Populator populator;
+
     public List<Student> getStudents() {
-        List<Student> result; 
-        students = new ArrayList<>();
-        students.add(new Student("Kajri", "Qu","076527771", "23"));
-        students.add(new Student("Melisa", "Avdavic","07652121", "110"));
-        students.add(new Student("Urban", "Lundberg", "076527111", "100"));
-//        List<StudentTo>  = services.getStudentService().getAll();
-        // TeacherTo tto= services.getTeacherService().findTeacherA(19);
-//        this.setFirstName(tto.getFirstName());
-//        this.setFirstName(tto.getFirstName());
-//        this.setFirstName(tto.getFirstName());
-        
+
+        students = populator.studentTOconverter(services.getStudentService()
+                .getAll());
+
         return students;
     }
 
