@@ -3,27 +3,30 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package afk.domain.student;
+package afk.student;
 
 import java.util.List;
-import javax.ejb.Local;
 import to.StudentTo;
 
 /**
  *
  * @author c0detupus
  */
-@Local
 public interface StudentServiceIntf
 {
 
-    public List<StudentTo> getAll();
-
+    //Create
     public void createStudent(StudentTo studentTo);
 
-    public StudentTo findStudent(int id);
+    //Read
+    public List<StudentTo> getAll();
 
-    public int updateStudent(int id);
+    public StudentTo getById(long id);
 
-    public int deleteStudent(int id);
+    //Update
+    public int updateStudent(long id);
+
+    //Delete
+    public int deleteStudent(long id);
+
 }

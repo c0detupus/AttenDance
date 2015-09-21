@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package afk.domain.student;
+package afk.student;
 
 import java.util.List;
 import javax.ejb.Stateless;
@@ -18,29 +18,28 @@ public class StudentServiceSlsb implements StudentServiceIntf
 {
 
     @Override
+    public void createStudent(StudentTo studentTo) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
     public List<StudentTo> getAll() {
-        return null;
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void createStudent(StudentTo studentTo ) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public StudentTo findStudent(int id) {
+    public StudentTo getById(long id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public int updateStudent(int id) {
+    public int updateStudent(long id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public int deleteStudent(int id) {
+    public int deleteStudent(long id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }
