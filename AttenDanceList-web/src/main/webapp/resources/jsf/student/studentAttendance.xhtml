@@ -23,10 +23,10 @@
                         <h:outputText value="#{student.firstName}"/>
                     </p:column>
                     <p:column>
-                        <h:selectBooleanCheckbox value="#{attendanceListBean.selectedSSN[student.firstName]}"/>
+                        <p:selectBooleanCheckbox value="#{attendanceListBean.selectedSSN[student.firstName]}"/>
                     </p:column>       
                 </p:dataTable>
-                <h:commandButton value="Submit" action="#{attendanceListBean.submit}"/>
+                <p:commandButton value="Submit" action="#{attendanceListBean.submit}"/>
             </h:form>
         </h:body>
     </ui:define>
