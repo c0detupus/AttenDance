@@ -5,6 +5,7 @@
  */
 package afk;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
@@ -15,7 +16,7 @@ import model.Course;
  * @author valance
  */
 @ManagedBean(name="courseListBean")
-public class CourseListBean {
+public class CourseListBean implements Serializable {
     
     private List<Course> courses;
     private int total;

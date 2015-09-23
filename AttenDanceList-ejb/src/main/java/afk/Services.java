@@ -1,7 +1,10 @@
 package afk;
 
 import afk.course.CourseServiceSLSB;
+import afk.student.StudentServiceIntf;
 import afk.student.StudentServiceSLSB;
+import java.io.Serializable;
+import javax.ejb.EJB;
 import javax.ejb.Local;
 import javax.ejb.Stateless;
 
@@ -11,17 +14,20 @@ import javax.ejb.Stateless;
  */
 @Stateless
 @Local
-public class Services implements ServicesIntf
+public class Services implements ServicesIntf,Serializable
 {
 
+    @EJB StudentServiceIntf studentService;
+    @EJB StudentServiceIntf courseService;
+    
     @Override
-    public StudentServiceSLSB getStudentService() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public StudentServiceIntf getStudentService() {
+        return studentService;
     }
 
     @Override
-    public CourseServiceSLSB getCourseService() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public StudentServiceIntf getCourseService() {
+        return courseService;
     }
 
 }

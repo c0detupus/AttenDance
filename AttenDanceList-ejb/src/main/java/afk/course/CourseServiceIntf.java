@@ -7,11 +7,13 @@ package afk.course;
 
 import afk.to.CourseTO;
 import java.util.List;
+import javax.ejb.Local;
 
 /**
  *
  * @author c0detupus
  */
+@Local
 public interface CourseServiceIntf
 {
 

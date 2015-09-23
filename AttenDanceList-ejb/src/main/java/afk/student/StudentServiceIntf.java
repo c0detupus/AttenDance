@@ -8,11 +8,13 @@ package afk.student;
 import java.util.List;
 
 import afk.to.StudentTO;
+import javax.ejb.Local;
 
 /**
  *
  * @author c0detupus
  */
+@Local
 public interface StudentServiceIntf
 {
 

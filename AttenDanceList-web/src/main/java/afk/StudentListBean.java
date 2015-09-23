@@ -6,6 +6,7 @@
 package afk;
 
 import helper.Populator;
+import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -18,11 +19,11 @@ import model.Student;
  */
 @ManagedBean(name = "studentListBean")
 @SessionScoped
-public class StudentListBean
+public class StudentListBean implements Serializable
 {
 
-    @EJB
-    private Services services;
+    //@EJB
+    //private ServicesIntf services;
 
     private List<Student> students;
     private int studentAmount;
@@ -31,8 +32,7 @@ public class StudentListBean
 
     public List<Student> getStudents() {
 
-        students = populator.studentTOconverter(services.getStudentService()
-                .getAll());
+
 
         return students;
     }

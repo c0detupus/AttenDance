@@ -1,17 +1,20 @@
 package afk;
 
 import afk.course.CourseServiceSLSB;
+import afk.student.StudentServiceIntf;
 import afk.student.StudentServiceSLSB;
+import javax.ejb.Local;
 
 /**
  *
  * @author c0detupus
  */
+@Local
 public interface ServicesIntf
 {
 
-    public StudentServiceSLSB getStudentService();
+    public StudentServiceIntf getStudentService();
 
-    public CourseServiceSLSB getCourseService();
+    public StudentServiceIntf getCourseService();
 
 }

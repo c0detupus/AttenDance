@@ -1,5 +1,6 @@
 package afk;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -12,7 +13,7 @@ import model.Student;
  * @author valance
  */
 @ManagedBean(name = "attendanceListBean")
-public class AttendanceListBean
+public class AttendanceListBean implements Serializable
 {
 
     private List<Student> student;

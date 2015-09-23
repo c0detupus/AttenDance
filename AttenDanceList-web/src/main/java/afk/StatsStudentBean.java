@@ -1,6 +1,7 @@
 package afk;
 
 import helper.Populator;
+import java.io.Serializable;
 import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
@@ -13,7 +14,7 @@ import javax.faces.event.AjaxBehaviorEvent;
  */
 @ManagedBean(name = "statsStudentBean")
 @SessionScoped
-public class StatsStudentBean {
+public class StatsStudentBean implements Serializable {
 
     private int currentYear;
     private int currentMonth;
