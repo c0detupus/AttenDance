@@ -12,7 +12,7 @@
         <h:body>
             <p:dataTable id="courseList" value="#{courseListBean.courses}" var="course">
                 <f:facet name="header">
-                    <h:outputText value="Course List"/>
+                    <p:outputLabel value="Course List"/>
                 </f:facet>
                 <p:column headerText="Name">
                     <h:outputText value="#{course.name}"/>

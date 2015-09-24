@@ -11,23 +11,23 @@
         <h:body>
             <p:dataTable var="student" value="#{studentListBean.students}">
                 <p:column headerText="First name:">
-                    <h:outputText value="#{student.firstName}" />
+                    <p:outputLabel value="#{student.firstName}" />
                 </p:column>
 
                 <p:column headerText="Last name:">
-                    <h:outputText value="#{student.lastName}" />
+                    <p:outputLabel value="#{student.lastName}" />
                 </p:column>
 
                 <p:column headerText="Cellphone:">
-                    <h:outputText value="#{student.cellPhone}" />
+                    <p:outputLabel value="#{student.cellPhone}" />
                 </p:column>
 
                 <p:column headerText="Average attendance in %:">
-                    <h:outputText value="#{student.avgAttendance}" />
+                    <p:outputLabel value="#{student.avgAttendance}" />
                 </p:column>
 
                 <p:column >
-                    <h:commandButton value="view"/>
+                    <p:commandButton value="view"/>
                 </p:column>
             </p:dataTable>
         </h:body>

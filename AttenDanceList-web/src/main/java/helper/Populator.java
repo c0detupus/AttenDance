@@ -105,15 +105,15 @@ public class Populator
 
             student.setFirstName(sTO.getFirstName());
             student.setLastName(sTO.getLastName());
-            student.setSocialSecurityNumber(sTO.getSocialSecurityNumber());
-            student.setEmail(sTO.getEmail());
-            student.setCellPhone(sTO.getCellPhone());
-            student.setPhoneNumber(sTO.getPhoneNumber());
-            student.setSex(sTO.getSex());
+//            student.setSocialSecurityNumber(sTO.getSocialSecurityNumber());
+//            student.setEmail(sTO.getEmail());
+//            student.setCellPhone(sTO.getCellPhone());
+//            student.setPhoneNumber(sTO.getPhoneNumber());
+//            student.setSex(sTO.getSex());
             student.setAvgAttendance(sTO.getAvgAttendance());
-            student.setAddress(sTO.getAddress());
-            student.setZipCode(sTO.getZipCode());
-            student.setCity(sTO.getCity());
+//            student.setAddress(sTO.getAddress());
+//            student.setZipCode(sTO.getZipCode());
+//            student.setCity(sTO.getCity());
 
             studenList.add(student);
 
