@@ -101,22 +101,10 @@ public class Populator
 
         for(StudentTO sTO : studentTOList) {
 
-            Student student = new Student();
-
-            student.setFirstName(sTO.getFirstName());
-            student.setLastName(sTO.getLastName());
-//            student.setSocialSecurityNumber(sTO.getSocialSecurityNumber());
-//            student.setEmail(sTO.getEmail());
-//            student.setCellPhone(sTO.getCellPhone());
-//            student.setPhoneNumber(sTO.getPhoneNumber());
-//            student.setSex(sTO.getSex());
-            student.setAvgAttendance(sTO.getAvgAttendance());
-//            student.setAddress(sTO.getAddress());
-//            student.setZipCode(sTO.getZipCode());
-//            student.setCity(sTO.getCity());
-
-            studenList.add(student);
-
+            studenList.add(new Student(sTO.getFirstName(),
+                                       sTO.getLastName(),
+                                       sTO.getCellPhone(),
+                                       sTO.getAvgAttendance()));
         }
 
         return studenList;

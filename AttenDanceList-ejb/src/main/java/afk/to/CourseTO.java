@@ -9,13 +9,21 @@ package afk.to;
  *
  * @author kajri.qu
  */
-public class CourseTO {
-    
+public class CourseTO
+{
+
     private long id;
-    
+
     private String name,
             code,
             points;
+
+    public CourseTO(String name, String code, String points) {
+        this.name = name;
+        this.code = code;
+        this.points = points;
+
+    }
 
     public long getId() {
         return id;
@@ -48,5 +56,5 @@ public class CourseTO {
     public void setPoints(String points) {
         this.points = points;
     }
-    
+
 }

@@ -24,11 +24,7 @@ public class CourseListBean implements Serializable {
     //hardcoded, replace with db queries or helper class
     public List<Course> getCourses(){
         courses = new ArrayList<>();
-        courses.add(new Course("Java EE", "JEE", 100));
-        courses.add(new Course("Java SE", "JSE", 100));
-        courses.add(new Course("CSS", "CSS", 50));
-        courses.add(new Course("JavaScript", "JS", 50));
-        
+       
         return courses;
     }
     

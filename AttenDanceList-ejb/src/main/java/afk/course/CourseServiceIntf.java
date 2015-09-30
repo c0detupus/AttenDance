@@ -23,7 +23,7 @@ public interface CourseServiceIntf
     //Read
     public CourseTO getCourse(long id);
 
-    public List<CourseTO> getAll(long id);
+    public List<CourseTO> getAll();
 
     //Update
     public int updateCourse(long id);

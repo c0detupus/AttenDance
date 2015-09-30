@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import model.Student;
 
 /**
  *
@@ -30,11 +31,9 @@ public class StudentListBean implements Serializable
     private Populator populator;
 
     public List<StudentTO> getStudents() {
-
-        
-        //populator.studentTOconverter(
-        
-        
+//populator.studentTOconverter(
+//         students = populator.studentTOconverter(services.getStudentService()
+//                .getAll());
         students = new ArrayList<>();
         students = services.getStudentService()
                 .getAll();
