@@ -5,10 +5,13 @@
  */
 package afk.course;
 
+import afk.entities.CourseEntity;
+import afk.helper.Helper;
 import afk.to.CourseTO;
-import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 /**
  *
@@ -18,10 +21,14 @@ import javax.ejb.Stateless;
 public class CourseServiceSLSB implements CourseServiceIntf
 {
 
+    @PersistenceContext(unitName = "PU")
+    EntityManager em;
+
     @Override
     public int createCourse(CourseTO courseTO) {
+
+        em.persist(Helper.convertCourseTO(courseTO));
         return 0;
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
@@ -32,14 +39,11 @@ public class CourseServiceSLSB implements CourseServiceIntf
 
     @Override
     public List<CourseTO> getAll() {
-        List<CourseTO> courses = new ArrayList<>();
 
-        courses.add(new CourseTO("Java EE", "JEE", "100"));
-        courses.add(new CourseTO("Java SE", "JSE", "100"));
-        courses.add(new CourseTO("CSS", "CSS", "50"));
-        courses.add(new CourseTO("JavaScript", "JS", "50"));
+        List<CourseEntity> courseEntites = em
+                .createQuery("SELECT c FROM ROOT.COURSE c").getResultList();
 
-        return courses;
+        return Helper.courseEntityConverter(courseEntites);
 
     }
 

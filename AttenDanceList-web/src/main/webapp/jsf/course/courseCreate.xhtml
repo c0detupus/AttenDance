@@ -24,7 +24,7 @@
                     <f:selectItems value="#{courseBean.coursePointsMap}"/>
                 </p:selectOneMenu>
 
-                <p:commandButton value="Submit" action="courseAdded" ></p:commandButton>
+                <p:commandButton value="Submit" action="#{courseBean.submit()}" ></p:commandButton>
                 </p:panelGrid>
             </h:form>
         </h:body>

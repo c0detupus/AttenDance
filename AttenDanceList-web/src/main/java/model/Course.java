@@ -1,8 +1,13 @@
 package model;
 
+import afk.Services;
+import afk.ServicesIntf;
+import afk.to.CourseTO;
 import helper.Populator;
+import java.io.Serializable;
 import java.util.Map;
 import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
@@ -12,20 +17,23 @@ import javax.faces.bean.SessionScoped;
  */
 @ManagedBean(name = "courseBean")
 @SessionScoped
-public class Course {
+public class Course implements Serializable {
 
     private String name;
     private String code;
 
-    private int currentPoints;
+    private String currentPoints;
     private Map<Integer, Integer> coursePointsMap;
     
     private Populator pop;
     
+    @EJB
+    ServicesIntf services;
+    
     public Course(){
         
     }
-    public Course(String name, String code, int points){
+    public Course(String name, String code, String points){
         this.name = name;
         this.code = code;
         this.currentPoints = points;
@@ -37,6 +45,11 @@ public class Course {
         coursePointsMap = pop.populateCoursePointsMap();
         
     }
+    
+    public void submit(){
+        services.getCourseService().createCourse(new CourseTO(this.name, this.code, this.currentPoints));
+    }
+    
     public String getName() {
         return name;
     }
@@ -52,11 +65,11 @@ public class Course {
     public void setCode(String code) {
         this.code = code;
     }
-        public int getCurrentPoints() {
+        public String getCurrentPoints() {
         return currentPoints;
     }
 
-    public void setCurrentPoints(int currentPoints) {
+    public void setCurrentPoints(String currentPoints) {
         this.currentPoints = currentPoints;
     }
 

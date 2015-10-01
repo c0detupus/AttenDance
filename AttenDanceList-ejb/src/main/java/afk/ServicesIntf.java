@@ -1,5 +1,6 @@
 package afk;
 
+import afk.course.CourseServiceIntf;
 import afk.course.CourseServiceSLSB;
 import afk.student.StudentServiceIntf;
 import afk.student.StudentServiceSLSB;
@@ -15,6 +16,6 @@ public interface ServicesIntf
 
     public StudentServiceIntf getStudentService();
 
-    public StudentServiceIntf getCourseService();
+    public CourseServiceIntf getCourseService();
 
 }

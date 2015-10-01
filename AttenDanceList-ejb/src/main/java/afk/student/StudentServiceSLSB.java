@@ -19,7 +19,7 @@ import javax.persistence.PersistenceContext;
 @Stateless
 public class StudentServiceSLSB implements StudentServiceIntf
 {   
-    @PersistenceContext(unitName = "StudentEntity")
+    @PersistenceContext(unitName = "PU")
     private EntityManager em;
     
     private List<StudentTO> studentList;

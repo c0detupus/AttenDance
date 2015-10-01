@@ -5,6 +5,7 @@
  */
 package helper;
 
+import afk.to.CourseTO;
 import afk.to.StudentTO;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -12,6 +13,7 @@ import java.util.GregorianCalendar;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import model.Course;
 import model.Student;
 
 /**
@@ -110,5 +112,18 @@ public class Populator
 
         return studenList;
 
+    }
+    
+    public static List<Course> courseTOconverter(List<CourseTO> courseTOList) {
+        
+        List<Course> courseList = new ArrayList<>();
+        
+        for(CourseTO cto : courseTOList) {
+            
+            courseList.add(new Course(cto.getName(),
+                           cto.getCode(),
+                           cto.getPoints()));
+        }
+        return courseList;
     }
 }
