@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
 import afk.to.StudentTO;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 /**
  *
@@ -16,12 +18,18 @@ import afk.to.StudentTO;
  */
 @Stateless
 public class StudentServiceSLSB implements StudentServiceIntf
-{
-    List<StudentTO> studentList;
+{   
+    @PersistenceContext(unitName = "StudentEntity")
+    private EntityManager em;
+    
+    private List<StudentTO> studentList;
+    
+    private int removeCheck;
     
     @Override
     public void createStudent(StudentTO studentTo) {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //convert to entity
+        em.persist(studentTo);
     }
 
     @Override
@@ -52,7 +60,13 @@ public class StudentServiceSLSB implements StudentServiceIntf
 
     @Override
     public int deleteStudent(long id) {
-         return 0; //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         try {
+             em.remove(id);
+             removeCheck = 0;
+         } catch(Exception e) {
+             removeCheck = 1;
+         }
+         return removeCheck;
     }
 
 }
