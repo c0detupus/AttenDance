@@ -102,7 +102,6 @@ public class Populator
         List<Student> studenList = new ArrayList<>();
 
         for(StudentTO sTO : studentTOList) {
-            
 
             studenList.add(new Student(sTO.getFirstName(),
                                        sTO.getLastName(),
@@ -113,16 +112,17 @@ public class Populator
         return studenList;
 
     }
-    
+
     public static List<Course> courseTOconverter(List<CourseTO> courseTOList) {
-        
+
+       
         List<Course> courseList = new ArrayList<>();
-        
+
         for(CourseTO cto : courseTOList) {
-            
+
             courseList.add(new Course(cto.getName(),
-                           cto.getCode(),
-                           cto.getPoints()));
+                                      cto.getCode(),
+                                      cto.getPoints()));
         }
         return courseList;
     }

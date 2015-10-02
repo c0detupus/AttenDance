@@ -8,6 +8,7 @@ package afk.course;
 import afk.entities.CourseEntity;
 import afk.helper.Helper;
 import afk.to.CourseTO;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -41,8 +42,20 @@ public class CourseServiceSLSB implements CourseServiceIntf
     public List<CourseTO> getAll() {
 
         List<CourseEntity> courseEntites = em
-                .createQuery("SELECT c FROM ROOT.COURSE c").getResultList();
+                .createQuery("SELECT c FROM CourseEntity AS c").getResultList();
 
+        List<CourseTO> asda = new ArrayList<>();
+//        asda.add(new CourseTO("asd", "asd", "zdf"));
+
+        System.out
+                .println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        System.out.println(asda + "THIS IS ASDA");
+        System.out.println(courseEntites
+                + "THIS IS COURSEENTITY THAT IS CONVERTED TO COURSETO");
+        Helper.courseEntityConverter(courseEntites);
+        System.out.println(Helper.courseEntityConverter(courseEntites));
+        System.out
+                .println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
         return Helper.courseEntityConverter(courseEntites);
 
     }

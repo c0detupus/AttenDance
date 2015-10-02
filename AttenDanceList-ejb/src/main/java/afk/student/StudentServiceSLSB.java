@@ -38,6 +38,7 @@ public class StudentServiceSLSB implements StudentServiceIntf
         studentList.add(new StudentTO("Kajri", "Qu","076527771", "23"));
         studentList.add(new StudentTO("Melisa", "Avdavic","07652121", "110"));
         studentList.add(new StudentTO("Urban", "Lundberg", "076527111", "100"));
+
         return studentList;
     }
 

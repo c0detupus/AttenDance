@@ -18,16 +18,16 @@ public class CourseTO
             code,
             points;
 
-    public CourseTO(String name, String code, String points) {
-        this.name = name;
-        this.code = code;
-        this.points = points;
+//    public CourseTO(String name, String code, String points) {
+//        this.name = name;
+//        this.code = code;
+//        this.points = points;
+//
+//    }
 
-    }
-
-    public CourseTO() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+//    public CourseTO() {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    }
 
     public long getId() {
         return id;

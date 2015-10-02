@@ -32,11 +32,17 @@ public class Helper
     public static List<CourseTO> courseEntityConverter(List<CourseEntity> courseEntityList) {
 
         List<CourseTO> cTOList = new ArrayList<>();
+ for(CourseEntity ce : courseEntityList) {
 
-        for(CourseEntity ce : courseEntityList) {
-
+     
+     
             CourseTO cTO = new CourseTO();
 
+            
+        System.out
+                .println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+       
+            
             cTO.setId(ce.getId());
             cTO.setName(ce.getName());
             cTO.setCode(ce.getCode());
