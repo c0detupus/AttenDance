@@ -7,6 +7,7 @@ package helper;
 
 import afk.to.CourseTO;
 import afk.to.StudentTO;
+import afk.to.TeacherTO;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -15,6 +16,7 @@ import java.util.List;
 import java.util.Map;
 import model.Course;
 import model.Student;
+import model.Teacher;
 
 /**
  *
@@ -124,14 +126,32 @@ public class Helper {
 
         for (CourseTO cto : courseTOList) {
             Course c = new Course();
-            
+
             c.setName(cto.getName());
             c.setCode(cto.getCode());
-            c.setCurrentPoints( cto.getPoints());
-            
+            c.setCurrentPoints(cto.getPoints());
+
             courseList.add(c);
         }
         return courseList;
+    }
+
+    public static List<Teacher> teacherTOListConverter(List<TeacherTO> teacherTOList) {
+
+        List<Teacher> teacherList = new ArrayList<>();
+
+        for (TeacherTO tto : teacherTOList) {
+            Teacher t = new Teacher();
+
+            t.setFirstName(tto.getFirstName());
+            t.setLastName(tto.getLastName());
+            t.setSocialSecurityNumber(tto.getSocialSecurityNumber());
+            t.setPhoneNumber(tto.getPhoneNumber());
+            t.setCellPhone(tto.getCellPhone());
+
+            teacherList.add(t);
+        }
+        return teacherList;
     }
 
     public static CourseTO courseConverter(Course c) {
@@ -160,5 +180,22 @@ public class Helper {
         sto.setZipCode(s.getZipCode());
 
         return sto;
+    }
+
+    public static TeacherTO teacherConverter(Teacher t) {
+        TeacherTO tto = new TeacherTO();
+
+        tto.setAddress(t.getAddress());
+        tto.setCellPhone(t.getCellPhone());
+        tto.setCity(t.getCity());
+        tto.setEmail(t.getEmail());
+        tto.setFirstName(t.getFirstName());
+        tto.setLastName(t.getLastName());
+        tto.setPhoneNumber(t.getPhoneNumber());
+        tto.setSex(t.getSex());
+        tto.setSocialSecurityNumber(t.getSocialSecurityNumber());
+        tto.setZipCode(t.getZipCode());
+        
+        return tto;
     }
 }

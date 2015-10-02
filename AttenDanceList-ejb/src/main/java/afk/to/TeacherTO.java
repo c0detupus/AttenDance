@@ -3,52 +3,27 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package afk.entities;
-
-import java.io.Serializable;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+package afk.to;
 
 /**
  *
- * @author c0detupus
+ * @author valance
  */
-@Entity
-@Table(name = "Student")
-public class StudentEntity implements Serializable {
+public class TeacherTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "student_id")
     private long id;
 
-    @Column(name = "first_name")
-    private String firstName;
-    @Column(name = "last_name")
-    private String lastName;
-    @Column(name = "ssn")
-    private String socialSecurityNumber;
-    @Column(name = "email")
-    private String email;
-    @Column(name = "cellphone")
-    private String cellPhone;
-    @Column(name = "phone_number")
-    private String phoneNumber;
-    @Column(name = "sex")
-    private String sex;
-    @Column(name = "address")
-    private String address;
-    @Column(name = "city")
-    private String city;
-    @Column(name = "zip_code")
-    private String zipCode;
-    @Column(name = "avg_attendance")
-    private String avgAttendance;
-
+    private String firstName,
+            lastName,
+            socialSecurityNumber,
+            email,
+            cellPhone,
+            phoneNumber,
+            sex,
+            address,
+            city,
+            zipCode;
+    
     public long getId() {
         return id;
     }
@@ -135,14 +110,6 @@ public class StudentEntity implements Serializable {
 
     public void setZipCode(String zipCode) {
         this.zipCode = zipCode;
-    }
-
-    public String getAvgAttendance() {
-        return avgAttendance;
-    }
-
-    public void setAvgAttendance(String avgAttendance) {
-        this.avgAttendance = avgAttendance;
     }
 
 }

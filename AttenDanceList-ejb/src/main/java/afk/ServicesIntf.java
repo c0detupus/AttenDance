@@ -1,9 +1,8 @@
 package afk;
 
 import afk.course.CourseServiceIntf;
-import afk.course.CourseServiceSLSB;
 import afk.student.StudentServiceIntf;
-import afk.student.StudentServiceSLSB;
+import afk.teacher.TeacherServiceIntf;
 import javax.ejb.Local;
 
 /**
@@ -17,5 +16,6 @@ public interface ServicesIntf
     public StudentServiceIntf getStudentService();
 
     public CourseServiceIntf getCourseService();
-
+    
+    public TeacherServiceIntf getTeacherService();
 }

@@ -5,25 +5,47 @@
  */
 package afk.entities;
 
+import java.io.Serializable;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
  *
  * @author c0detupus
  */
-public class TeacherEntity
-{
+@Entity
+@Table(name = "Teacher")
+public class TeacherEntity implements Serializable {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "teacher_id")
     private long id;
 
-    private String firstName,
-            lastName,
-            socialSecurityNumber,
-            email,
-            cellPhone,
-            phoneNumber,
-            sex,
-            address,
-            city,
-            zipCode;
+    @Column(name = "first_name")
+    private String firstName;
+    @Column(name = "last_name")
+    private String lastName;
+    @Column(name = "ssn")
+    private String socialSecurityNumber;
+    @Column(name = "email")
+    private String email;
+    @Column(name = "cellphone")
+    private String cellPhone;
+    @Column(name = "phone_number")
+    private String phoneNumber;
+    @Column(name = "sex")
+    private String sex;
+    @Column(name = "address")
+    private String address;
+    @Column(name = "city")
+    private String city;
+    @Column(name = "zip_code")
+    private String zipCode;
 
     public long getId() {
         return id;

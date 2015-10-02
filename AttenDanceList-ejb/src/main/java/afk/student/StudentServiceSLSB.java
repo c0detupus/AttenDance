@@ -24,8 +24,6 @@ public class StudentServiceSLSB implements StudentServiceIntf {
     @PersistenceContext(unitName = "PU")
     private EntityManager em;
     
-    private List<StudentTO> studentList;
-    
     private int removeCheck;
     
     @Override

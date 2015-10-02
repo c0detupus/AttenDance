@@ -7,8 +7,10 @@ package afk.helper;
 
 import afk.entities.CourseEntity;
 import afk.entities.StudentEntity;
+import afk.entities.TeacherEntity;
 import afk.to.CourseTO;
 import afk.to.StudentTO;
+import afk.to.TeacherTO;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,7 +34,7 @@ public class Helper {
 
     public static StudentEntity studentTOConverter(StudentTO s) {
         StudentEntity se = new StudentEntity();
-        
+
         se.setId(s.getId());
         se.setAddress(s.getAddress());
         se.setAvgAttendance(s.getAvgAttendance());
@@ -47,6 +49,24 @@ public class Helper {
         se.setZipCode(s.getZipCode());
 
         return se;
+    }
+
+    public static TeacherEntity teacherTOConverter(TeacherTO t) {
+        TeacherEntity te = new TeacherEntity();
+
+        te.setId(t.getId());
+        te.setAddress(t.getAddress());
+        te.setCellPhone(t.getCellPhone());
+        te.setCity(t.getCity());
+        te.setEmail(t.getEmail());
+        te.setFirstName(t.getFirstName());
+        te.setLastName(t.getLastName());
+        te.setPhoneNumber(t.getPhoneNumber());
+        te.setSex(t.getSex());
+        te.setSocialSecurityNumber(t.getSocialSecurityNumber());
+        te.setZipCode(t.getZipCode());
+
+        return te;
     }
 
     public static List<CourseTO> courseEntityListConverter(List<CourseEntity> courseEntityList) {
@@ -90,6 +110,30 @@ public class Helper {
             toList.add(sto);
         }
 
+        return toList;
+    }
+
+    public static List<TeacherTO> teacherEntityListConverter(List<TeacherEntity> tList) {
+
+        List<TeacherTO> toList = new ArrayList<>();
+
+        for (TeacherEntity t : tList) {
+            TeacherTO tto = new TeacherTO();
+
+            tto.setId(t.getId());
+            tto.setAddress(t.getAddress());
+            tto.setCellPhone(t.getCellPhone());
+            tto.setCity(t.getCity());
+            tto.setEmail(t.getEmail());
+            tto.setFirstName(t.getFirstName());
+            tto.setLastName(t.getLastName());
+            tto.setPhoneNumber(t.getPhoneNumber());
+            tto.setSex(t.getSex());
+            tto.setSocialSecurityNumber(t.getSocialSecurityNumber());
+            tto.setZipCode(t.getZipCode());
+            
+            toList.add(tto);
+        }
         return toList;
     }
 }

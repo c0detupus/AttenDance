@@ -1,9 +1,8 @@
 package afk;
 
 import afk.course.CourseServiceIntf;
-import afk.course.CourseServiceSLSB;
 import afk.student.StudentServiceIntf;
-import afk.student.StudentServiceSLSB;
+import afk.teacher.TeacherServiceIntf;
 import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.ejb.Local;
@@ -20,6 +19,7 @@ public class Services implements ServicesIntf,Serializable
 
     @EJB StudentServiceIntf studentService;
     @EJB CourseServiceIntf courseService;
+    @EJB TeacherServiceIntf teacherService;
     
     @Override
     public StudentServiceIntf getStudentService() {
@@ -31,4 +31,9 @@ public class Services implements ServicesIntf,Serializable
         return courseService;
     }
 
+    @Override
+    public TeacherServiceIntf getTeacherService() {
+        return teacherService;
+    }
+    
 }

@@ -1,0 +1,124 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/resources/template/menubar.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"            
+                xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <ui:define name="menu_bar">
+        <h:body>
+            <h:form>
+                <p:panelGrid columns="3">
+                    <p:outputLabel value="First name: "/>
+                    <p:inputText id ="fName" 
+                                 value = "#{teacherBean.firstName}"
+                                 validator ="#{teacherBean.validateLetters}"
+                                 required="true"
+                                 requiredMessage="Field can't be empty"/>
+                    <p:message 
+                        style="color: red"
+                        for="fName" />
+
+                    <p:outputLabel value="Last name: "></p:outputLabel>
+                    <p:inputText id ="lName" 
+                                 value = "#{teacherBean.lastName}"
+                                 validator ="#{teacherBean.validateLetters}"
+                                 required="true"
+                                 requiredMessage="Field can't be empty"
+                                 />
+                    <p:message
+                        style="color: red"
+                        for="lName" />            
+
+                    <p:outputLabel value="Social security number: "></p:outputLabel>
+                    <p:inputText id ="socialSecurityNumber" 
+                                 value = "#{teacherBean.socialSecurityNumber}"
+                                 validator="#{teacherBean.validateSSN}"
+                                 required="true"
+                                 requiredMessage="Field can't be empty"
+                                 />
+                    <p:message 
+                        style="color: red"
+                        for="socialSecurityNumber" />
+
+                    <p:outputLabel value="Email: "></p:outputLabel>
+                    <p:inputText id ="eMail" 
+                                 value = "#{teacherBean.email}"
+                                 validator="#{teacherBean.validateEmail}"
+                                 required="true"
+                                 requiredMessage="Field can't be empty"/>
+                    <p:message 
+                        style="color: red"
+                        for="eMail" />
+
+                    <p:outputLabel value="Cellphone nr: "></p:outputLabel>
+                    <p:inputText id ="cellPhone" 
+                                 value = "#{teacherBean.cellPhone}"
+                                 validator="#{teacherBean.validatePhoneNumbers}"
+                                 required="true"
+                                 requiredMessage="Field can't be empty"/>
+                    <p:message 
+                        style="color: red"
+                        for="cellPhone" />
+
+                    <p:outputLabel value="Phone number"></p:outputLabel>
+                    <p:inputText id ="phone" 
+                                 value = "#{teacherBean.phoneNumber}"
+                                 validator="#{teacherBean.validatePhoneNumbers}"
+                                 required="true"
+                                 requiredMessage="Field can't be empty"/>
+                    <p:message 
+                        style="color: red"
+                        for="phone" />
+
+                    <p:outputLabel id ="sex" value="Sex: "></p:outputLabel>
+
+                    <p:selectOneRadio value="#{teacherBean.sex}"
+                                      required="true"
+                                      requiredMessage="Choose male or female">
+                        <f:selectItem itemValue="male" itemLabel="Male" />
+                        <f:selectItem itemValue="female" itemLabel="Female" />
+
+                    </p:selectOneRadio>
+                    <p:message 
+                        style="color: red"
+                        for="sex" />
+
+                    <p:outputLabel value="Address: "></p:outputLabel>
+                    <p:inputText id ="address" 
+                                 value = "#{teacherBean.address}"
+                                 required="true"
+                                 requiredMessage="Field can't be empty"/>
+                    <p:message 
+                        style="color: red"
+                        for="address" />
+
+                    <p:outputLabel  value="City: "></p:outputLabel>
+                    <p:inputText id ="city" 
+                                 value = "#{teacherBean.city}"
+                                 validator="#{teacherBean.validateLetters}"
+                                 required="true"
+                                 requiredMessage="Field can't be empty"/>
+                    <p:message 
+                        style="color: red"
+                        for="city" />
+
+                    <p:outputLabel  value= "Zip code" ></p:outputLabel>
+                    <p:inputText id ="zipCode" 
+                                 value = "#{teacherBean.zipCode}"
+                                 required="true"
+                                 requiredMessage="Field can't be empty"/>
+                    <p:message 
+                        style="color: red"
+                        for="zipCode" />
+
+                    <p:commandButton value="Submit" action="#{teacherBean.submit()}"></p:commandButton>
+                </p:panelGrid>  
+            </h:form>
+        </h:body>
+    </ui:define>
+</ui:composition>
+
