@@ -5,7 +5,7 @@
  */
 package afk;
 
-import helper.Populator;
+import helper.Helper;
 import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
@@ -25,12 +25,9 @@ public class StudentListBean implements Serializable {
     private List<Student> students;
     private int studentAmount;
 
-    private Populator populator;
-
     public List<Student> getStudents() {
-        populator = new Populator();
 
-        students = populator.studentTOconverter(services.getStudentService().getAll());
+        students = Helper.studentTOListConverter(services.getStudentService().getAll());
 
         return students;
     }

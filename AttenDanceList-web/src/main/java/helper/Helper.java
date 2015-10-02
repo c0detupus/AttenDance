@@ -20,8 +20,7 @@ import model.Student;
  *
  * @author valance
  */
-public class Populator
-{
+public class Helper {
 
     private Map<String, String> courseMap;
     private Map<String, String> studentMap;
@@ -83,7 +82,7 @@ public class Populator
         int daysInMonth = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
         dayMap = new LinkedHashMap<>();
 
-        for(int i = 1; i <= daysInMonth; i++) {
+        for (int i = 1; i <= daysInMonth; i++) {
             String day = Integer.toString(i);
             dayMap.put(day, day);
         }
@@ -97,33 +96,69 @@ public class Populator
         return coursePointsMap;
     }
 
-    public List<Student> studentTOconverter(List<StudentTO> studentTOList) {
+    public static List<Student> studentTOListConverter(List<StudentTO> studentTOList) {
 
-        List<Student> studenList = new ArrayList<>();
+        List<Student> studentList = new ArrayList<>();
 
-        for(StudentTO sTO : studentTOList) {
+        for (StudentTO sTO : studentTOList) {
 
-            studenList.add(new Student(sTO.getFirstName(),
-                                       sTO.getLastName(),
-                                       sTO.getCellPhone(),
-                                       sTO.getAvgAttendance()));
+            Student s = new Student();
+
+            s.setFirstName(sTO.getFirstName());
+            s.setLastName(sTO.getLastName());
+            s.setSocialSecurityNumber(sTO.getSocialSecurityNumber());
+            s.setPhoneNumber(sTO.getPhoneNumber());
+            s.setCellPhone(sTO.getCellPhone());
+            s.setAvgAttendance(sTO.getAvgAttendance());
+
+            studentList.add(s);
         }
 
-        return studenList;
+        return studentList;
 
     }
 
-    public static List<Course> courseTOconverter(List<CourseTO> courseTOList) {
+    public static List<Course> courseTOListConverter(List<CourseTO> courseTOList) {
 
-       
         List<Course> courseList = new ArrayList<>();
 
-        for(CourseTO cto : courseTOList) {
-
-            courseList.add(new Course(cto.getName(),
-                                      cto.getCode(),
-                                      cto.getPoints()));
+        for (CourseTO cto : courseTOList) {
+            Course c = new Course();
+            
+            c.setName(cto.getName());
+            c.setCode(cto.getCode());
+            c.setCurrentPoints( cto.getPoints());
+            
+            courseList.add(c);
         }
         return courseList;
+    }
+
+    public static CourseTO courseConverter(Course c) {
+        CourseTO cto = new CourseTO();
+
+        cto.setName(c.getName());
+        cto.setCode(c.getCode());
+        cto.setPoints(c.getCurrentPoints());
+
+        return cto;
+    }
+
+    public static StudentTO studentConverter(Student s) {
+        StudentTO sto = new StudentTO();
+
+        sto.setAddress(s.getAddress());
+        sto.setAvgAttendance(s.getAvgAttendance());
+        sto.setCellPhone(s.getCellPhone());
+        sto.setCity(s.getCity());
+        sto.setEmail(s.getEmail());
+        sto.setFirstName(s.getFirstName());
+        sto.setLastName(s.getLastName());
+        sto.setPhoneNumber(s.getPhoneNumber());
+        sto.setSex(s.getSex());
+        sto.setSocialSecurityNumber(s.getSocialSecurityNumber());
+        sto.setZipCode(s.getZipCode());
+
+        return sto;
     }
 }

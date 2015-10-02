@@ -1,6 +1,6 @@
 package afk;
 
-import helper.Populator;
+import helper.Helper;
 import java.io.Serializable;
 import java.util.Map;
 import javax.annotation.PostConstruct;
@@ -32,11 +32,11 @@ public class StatsStudentBean implements Serializable {
     private Map<String, String> dayMap;
     private Map<String, String> toDayMap;
 
-    private Populator pop;
+    private Helper pop;
 
     @PostConstruct
     public void init() {
-        pop = new Populator();
+        pop = new Helper();
 
         courseMap = pop.populateCoursesMap();
         yearMap = pop.populateYearMap();
@@ -136,11 +136,11 @@ public class StatsStudentBean implements Serializable {
         this.toDay = toDay;
     }
 
-    public Populator getPop() {
+    public Helper getPop() {
         return pop;
     }
 
-    public void setPop(Populator pop) {
+    public void setPop(Helper pop) {
         this.pop = pop;
     }
 

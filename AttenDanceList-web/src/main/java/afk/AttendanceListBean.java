@@ -25,9 +25,9 @@ public class AttendanceListBean implements Serializable
     //hardcoded, replace with db queries or helper class
     public List<Student> getStudent() {
         student = new ArrayList<>();
-        student.add(new Student("Alexander", "Mehtälä", "076527771", "23"));
-        student.add(new Student("Felicia", "Zhu", "076527771", "23"));
-        student.add(new Student("Kajri", "Qu", "076527771", "23"));
+//        student.add(new Student("Alexander", "Mehtälä", "076527771", "23"));
+//        student.add(new Student("Felicia", "Zhu", "076527771", "23"));
+//        student.add(new Student("Kajri", "Qu", "076527771", "23"));
 
         return student;
     }

@@ -5,6 +5,10 @@
  */
 package model;
 
+import afk.ServicesIntf;
+import helper.Helper;
+import java.io.Serializable;
+import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -18,9 +22,11 @@ import javax.faces.validator.ValidatorException;
  */
 @ManagedBean(name = "studentBean")
 @SessionScoped
-public class Student
+public class Student implements Serializable
 {
-
+    @EJB
+    ServicesIntf services;
+    
     private String firstName,
             lastName,
             socialSecurityNumber,
@@ -33,20 +39,9 @@ public class Student
             zipCode,
             avgAttendance;
 
-    public Student() {
-
+    public void submit() {
+        services.getStudentService().createStudent(Helper.studentConverter(this));
     }
-
-    public Student(String firstName,
-                   String lastName,
-                   String cellPhone,
-                   String avgAttendance) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.cellPhone = cellPhone;
-        this.avgAttendance = avgAttendance;
-    }
-
     //******* SETTERS--->
     public void setFirstName(String firstName) {
         this.firstName = firstName;

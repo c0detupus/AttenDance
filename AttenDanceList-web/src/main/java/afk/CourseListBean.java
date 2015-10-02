@@ -5,9 +5,8 @@
  */
 package afk;
 
-import helper.Populator;
+import helper.Helper;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -17,27 +16,25 @@ import model.Course;
  *
  * @author valance
  */
-@ManagedBean(name="courseListBean")
+@ManagedBean(name = "courseListBean")
 public class CourseListBean implements Serializable {
-    
-    private List<Course> courses;
-    private int total;
-    
-    private Populator pop;
-    
+
     @EJB
     ServicesIntf services;
     
+    private List<Course> courses;
+    private int total;
+
     //hardcoded, replace with db queries or helper class
-    public List<Course> getCourses(){
+    public List<Course> getCourses() {
 //        courses = new ArrayList<>();
-        
-       courses = Populator.courseTOconverter(services.getCourseService().getAll());
+
+        courses = Helper.courseTOListConverter(services.getCourseService().getAll());
 //       
         return courses;
     }
-    
-    public int getTotal(){
+
+    public int getTotal() {
         total = courses.size();
         return total;
     }

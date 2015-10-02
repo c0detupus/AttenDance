@@ -1,6 +1,6 @@
 package afk;
 
-import helper.Populator;
+import helper.Helper;
 import java.io.Serializable;
 import java.util.Map;
 import javax.annotation.PostConstruct;
@@ -40,13 +40,13 @@ public class StatsCourseBean implements Serializable {
     private Map<String, String> dayMap;
     private Map<String, String> toDayMap;
 
-    private Populator pop;
+    private Helper pop;
 
     @PostConstruct
     public void init() {
         //will populate the map depending on database
         //hardcoded for now
-        pop = new Populator();
+        pop = new Helper();
 
         courseMap = pop.populateCoursesMap();
         yearMap = pop.populateYearMap();
@@ -54,10 +54,6 @@ public class StatsCourseBean implements Serializable {
         dayMap = pop.populateDayMap(currentMonth, currentYear);
 
         currentOneRadioValue = false;
-//        coursesList = new ArrayList<>();
-//        this.coursesList.add(new Courses("Java EE", 100));
-//        this.coursesList.add(new Courses("JavaScript", 50));
-//        this.coursesList.add(new Courses("CSS", 50));
     }
 
     public void onMonthOrYearSelect(AjaxBehaviorEvent e) {

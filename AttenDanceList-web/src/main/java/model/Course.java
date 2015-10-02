@@ -3,7 +3,7 @@ package model;
 import afk.Services;
 import afk.ServicesIntf;
 import afk.to.CourseTO;
-import helper.Populator;
+import helper.Helper;
 import java.io.Serializable;
 import java.util.Map;
 import javax.annotation.PostConstruct;
@@ -25,29 +25,21 @@ public class Course implements Serializable {
     private String currentPoints;
     private Map<Integer, Integer> coursePointsMap;
     
-    private Populator pop;
+    private Helper pop;
     
     @EJB
     ServicesIntf services;
     
-    public Course(){
-        
-    }
-    public Course(String name, String code, String points){
-        this.name = name;
-        this.code = code;
-        this.currentPoints = points;
-    }
     @PostConstruct
     public void init(){
-        pop = new Populator();
+        pop = new Helper();
         
         coursePointsMap = pop.populateCoursePointsMap();
         
     }
     
     public void submit(){
-        services.getCourseService().createCourse(new CourseTO(this.name, this.code, this.currentPoints));
+        services.getCourseService().createCourse(Helper.courseConverter(this));
     }
     
     public String getName() {

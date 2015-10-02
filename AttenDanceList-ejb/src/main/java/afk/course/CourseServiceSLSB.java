@@ -8,7 +8,6 @@ package afk.course;
 import afk.entities.CourseEntity;
 import afk.helper.Helper;
 import afk.to.CourseTO;
-import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -27,8 +26,8 @@ public class CourseServiceSLSB implements CourseServiceIntf
 
     @Override
     public int createCourse(CourseTO courseTO) {
-
-        em.persist(Helper.convertCourseTO(courseTO));
+        
+        em.persist(Helper.courseTOConverter(courseTO));
         return 0;
     }
 
@@ -44,19 +43,7 @@ public class CourseServiceSLSB implements CourseServiceIntf
         List<CourseEntity> courseEntites = em
                 .createQuery("SELECT c FROM CourseEntity AS c").getResultList();
 
-        List<CourseTO> asda = new ArrayList<>();
-//        asda.add(new CourseTO("asd", "asd", "zdf"));
-
-        System.out
-                .println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-        System.out.println(asda + "THIS IS ASDA");
-        System.out.println(courseEntites
-                + "THIS IS COURSEENTITY THAT IS CONVERTED TO COURSETO");
-        Helper.courseEntityConverter(courseEntites);
-        System.out.println(Helper.courseEntityConverter(courseEntites));
-        System.out
-                .println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-        return Helper.courseEntityConverter(courseEntites);
+        return Helper.courseEntityListConverter(courseEntites);
 
     }
 

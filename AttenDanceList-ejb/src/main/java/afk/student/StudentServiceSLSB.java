@@ -5,6 +5,8 @@
  */
 package afk.student;
 
+import afk.entities.StudentEntity;
+import afk.helper.Helper;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -17,8 +19,8 @@ import javax.persistence.PersistenceContext;
  * @author c0detupus
  */
 @Stateless
-public class StudentServiceSLSB implements StudentServiceIntf
-{   
+public class StudentServiceSLSB implements StudentServiceIntf {    
+
     @PersistenceContext(unitName = "PU")
     private EntityManager em;
     
@@ -29,45 +31,44 @@ public class StudentServiceSLSB implements StudentServiceIntf
     @Override
     public void createStudent(StudentTO studentTo) {
         //convert to entity
-        em.persist(studentTo);
+        em.persist(Helper.studentTOConverter(studentTo));
     }
-
+    
     @Override
     public List<StudentTO> getAll() {
-        studentList = new ArrayList<>();
-        studentList.add(new StudentTO("Kajri", "Qu","076527771", "23"));
-        studentList.add(new StudentTO("Melisa", "Avdavic","07652121", "110"));
-        studentList.add(new StudentTO("Urban", "Lundberg", "076527111", "100"));
+        
+        List<StudentEntity> studentList = em
+                .createQuery("SELECT s FROM StudentEntity AS s").getResultList();
 
-        return studentList;
+        return Helper.studentEntityListConverter(studentList);
     }
-
+    
     @Override
     public StudentTO getById(long id) {
-         return null;
-       // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return null;
+        // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
     @Override
     public int updateStudent(long id) {
-         return 0;
-       // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return 0;
+        // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
     @Override
     public StudentTO findStudent(int id) {
-         return null;//throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return null;//throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
     @Override
     public int deleteStudent(long id) {
-         try {
-             em.remove(id);
-             removeCheck = 0;
-         } catch(Exception e) {
-             removeCheck = 1;
-         }
-         return removeCheck;
+        try {
+            em.remove(id);
+            removeCheck = 0;
+        } catch (Exception e) {
+            removeCheck = 1;
+        }
+        return removeCheck;
     }
-
+    
 }
