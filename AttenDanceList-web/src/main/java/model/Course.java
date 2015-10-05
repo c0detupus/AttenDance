@@ -8,10 +8,8 @@ import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-import javax.faces.event.ActionEvent;
 
 /**
  *
@@ -19,7 +17,8 @@ import javax.faces.event.ActionEvent;
  */
 @ManagedBean(name = "courseBean")
 @ViewScoped
-public class Course implements Serializable {
+public class Course implements Serializable
+{
 
     private long id;
 
@@ -48,31 +47,34 @@ public class Course implements Serializable {
 
         Map<String, String> params = FacesContext.getCurrentInstance().
                 getExternalContext().getRequestParameterMap();
-        if (!params.isEmpty()) {
+        if(!params.isEmpty()) {
             System.out.println("Course param: " + params.size());
             currentId = Long.valueOf(params.get("id"));
-            course = Helper.courseTOConverter(services.getCourseService().getCourse(currentId));
+            course = Helper.courseTOConverter(services.getCourseService()
+                    .getCourse(currentId));
         }
 
         coursePointsMap = Helper.populateCoursePointsMap();
     }
 
     public void submit() {
-        services.getCourseService().createCourse(Helper.courseConverter(this));
-        int i = services.getCourseService().updateCourse(Helper.courseConverter(this));
+        int i = services.getCourseService().createCourse(Helper
+                .courseConverter(this));
+
         Messages.showMessage(i);
     }
 
     public void save() {
         setCurrentFields();
-        int i = services.getCourseService().updateCourse(Helper.courseConverter(this));
+        int i = services.getCourseService().updateCourse(Helper
+                .courseConverter(this));
         Messages.showMessage(i);
     }
 
     public void delete() {
         setCurrentFields();
-        services.getCourseService().deleteCourse(currentId);
-        int i = services.getCourseService().updateCourse(Helper.courseConverter(this));
+        int i = services.getCourseService().deleteCourse(currentId);
+
         Messages.showMessage(i);
     }
 

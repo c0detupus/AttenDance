@@ -18,7 +18,8 @@ import javax.persistence.PersistenceContext;
  * @author c0detupus
  */
 @Stateless
-public class CourseServiceSLSB implements CourseServiceIntf {
+public class CourseServiceSLSB implements CourseServiceIntf
+{
 
     @PersistenceContext(unitName = "PU")
     EntityManager em;
@@ -29,7 +30,7 @@ public class CourseServiceSLSB implements CourseServiceIntf {
         try {
             em.persist(EJBHelper.courseTOConverter(courseTO));
 
-        } catch (Exception ex) {
+        } catch(Exception ex) {
 
             return 0;
 
@@ -66,7 +67,7 @@ public class CourseServiceSLSB implements CourseServiceIntf {
 
             em.merge(EJBHelper.courseTOConverter(courseTO));
 
-        } catch (Exception e) {
+        } catch(Exception e) {
 
             return 0;
 
@@ -78,10 +79,16 @@ public class CourseServiceSLSB implements CourseServiceIntf {
     @Override
     public int deleteCourse(long courseId) {
 
-        CourseEntity ce = em.find(CourseEntity.class, courseId);
+//        CourseEntity ce = new CourseEntity();
+//        ce.setId(courseId);
         try {
-            System.out.println("SLSB: " + ce.getId());
+//            System.out.println("SLSB: " + ce.getId());
+//            em.getTransaction().begin();
+//            em.remove(ce);
+//            em.getTransaction().commit();
+
             em.getTransaction().begin();
+            CourseEntity ce = em.find(CourseEntity.class, courseId);
             em.remove(ce);
             em.getTransaction().commit();
 
@@ -90,8 +97,9 @@ public class CourseServiceSLSB implements CourseServiceIntf {
 //            System.out.println("SLSB: " + courseTO.getName());
 //            em.remove(EJBHelper.courseTOConverter(courseTO));
 //            em.getTransaction().commit();
-        } catch (Exception e) {
+        } catch(Exception e) {
 
+            System.out.println(e);
             return 0;
         }
         return 1;
