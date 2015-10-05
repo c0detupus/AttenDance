@@ -17,17 +17,15 @@ import javax.ejb.Local;
 public interface TeacherServiceIntf {
 
     //Create
-    public void createTeacher(TeacherTO teacherTo);
+    public int createTeacher(TeacherTO teacherTo);
 
     //Read
     public List<TeacherTO> getAll();
 
-    public TeacherTO getById(long id);
+    public TeacherTO getTeacher(long id);
 
     //Update
-    public int updateTeacher(long id);
-
-    public TeacherTO findTeacher(int id);
+    public int updateTeacher(TeacherTO teacherTO);
 
     //Delete
     public int deleteTeacher(long id);

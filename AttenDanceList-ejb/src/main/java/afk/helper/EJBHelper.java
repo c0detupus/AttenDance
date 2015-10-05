@@ -154,6 +154,25 @@ public class EJBHelper {
 
         return te;
     }
+        public static TeacherTO teacherEntityConverter(TeacherEntity t) {
+
+        TeacherTO tto = new TeacherTO();
+
+        tto.setId(t.getId());
+        tto.setAddress(t.getAddress());
+        tto.setCellPhone(t.getCellPhone());
+        tto.setCity(t.getCity());
+        tto.setEmail(t.getEmail());
+        tto.setFirstName(t.getFirstName());
+        tto.setLastName(t.getLastName());
+        tto.setPhoneNumber(t.getPhoneNumber());
+        tto.setSex(t.getSex());
+        tto.setSocialSecurityNumber(t.getSocialSecurityNumber());
+        tto.setZipCode(t.getZipCode());
+
+        return tto;
+
+    }
 
     public static List<TeacherTO> teacherEntityListConverter(List<TeacherEntity> tList) {
 

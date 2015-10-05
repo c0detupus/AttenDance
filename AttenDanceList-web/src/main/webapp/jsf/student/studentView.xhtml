@@ -11,7 +11,7 @@
     <ui:define name="menu_bar">
         <h:body>
             <h:form>
-                <p:panel header ="Student view">
+                <p:panel id="panel" header ="Student view">
                     <p:panelGrid columns="3">
                         <p:outputLabel value="First name: "/>
                         <p:inputText id ="fName" 
@@ -118,7 +118,7 @@
                 </p:panel>
                 <p:toolbar>
                     <f:facet name="left">
-                        <p:commandButton value="Save" action="#{studentBean.add()}" ></p:commandButton>
+                        <p:commandButton value="Save" update="panel" action="#{studentBean.update()}" ></p:commandButton>
                         <p:commandButton value="Delete" action="#{studentBean.delete()}" ></p:commandButton>
                     </f:facet>
                 </p:toolbar>

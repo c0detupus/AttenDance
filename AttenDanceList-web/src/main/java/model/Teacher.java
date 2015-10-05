@@ -7,7 +7,10 @@ package model;
 
 import afk.ServicesIntf;
 import helper.Helper;
+import helper.Messages;
 import java.io.Serializable;
+import java.util.Map;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -16,7 +19,6 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
 
-
 /**
  *
  * @author valance
@@ -24,10 +26,12 @@ import javax.faces.validator.ValidatorException;
 @ManagedBean(name = "teacherBean")
 @SessionScoped
 public class Teacher implements Serializable {
-    
+
     @EJB
-    ServicesIntf services;
-    
+    private ServicesIntf services;
+
+    private long id;
+
     private String firstName,
             lastName,
             socialSecurityNumber,
@@ -38,47 +42,100 @@ public class Teacher implements Serializable {
             address,
             city,
             zipCode;
-    
-    public void submit(){
-        services.getTeacherService().createTeacher(Helper.teacherConverter(this));
+
+    private Teacher teacher;
+
+    @PostConstruct
+    public void init() {
+
+        Map<String, String> params = FacesContext.getCurrentInstance().
+                getExternalContext().getRequestParameterMap();
+        if (!params.isEmpty()) {
+            id = Long.valueOf(params.get("id"));
+            teacher = Helper.teacherTOConverter(services.getTeacherService().getTeacher(id));
+            initialize();
+        }
     }
+
+    private void initialize() {
+        firstName = teacher.getFirstName();
+        lastName = teacher.getLastName();
+        socialSecurityNumber = teacher.getSocialSecurityNumber();
+        email = teacher.getEmail();
+        cellPhone = teacher.getCellPhone();
+        phoneNumber = teacher.getPhoneNumber();
+        sex = teacher.getSex();
+        address = teacher.getAddress();
+        city = teacher.getCity();
+        zipCode = teacher.getZipCode();
+    }
+
+    public void add() {
+        int i = services.getTeacherService().createTeacher(Helper.teacherConverter(this));
+        Messages.showMessage(i);
+        clear();
+    }
+
+    public void update() {
+        int i = services.getTeacherService().updateTeacher(Helper.teacherConverter(this));
+        Messages.showMessage(i);
+    }
+
+    public void delete() {
+        int i = services.getTeacherService().deleteTeacher(id);
+        Messages.showMessage(i);
+    }
+
+    public void clear() {
+        firstName = null;
+        lastName = null;
+        socialSecurityNumber = null;
+        email = null;
+        cellPhone = null;
+        phoneNumber = null;
+        sex = null;
+        address = null;
+        city = null;
+        zipCode = null;
+    }
+
     //******VALIDATORS--->
     public void validateLetters(FacesContext context,
-                                UIComponent toValidate,
-                                Object value) throws ValidatorException {
+            UIComponent toValidate,
+            Object value) throws ValidatorException {
 
         String str = (String) value;
 
-        if(!onlyLettersSC(str)) {
+        if (!onlyLettersSC(str)) {
             throw new ValidatorException(new FacesMessage("Can only have letters"));
         }
     }
 
     public void validateEmail(FacesContext context,
-                              UIComponent toValidate,
-                              Object value) throws ValidatorException {
+            UIComponent toValidate,
+            Object value) throws ValidatorException {
         String str = (String) value;
-        if(-1 == value.toString().indexOf("@") && !onlyLetters(str)) {
+        if (-1 == value.toString().indexOf("@")) {
             FacesMessage message = new FacesMessage("Invalid email address");
             throw new ValidatorException(message);
         }
     }
 
     public void validateSSN(FacesContext context,
-                            UIComponent toValidate,
-                            Object value) throws ValidatorException {
+            UIComponent toValidate,
+            Object value) throws ValidatorException {
         String str = (String) value;
 
         //Replaces first ocurrence of '-' not all occurences cause 
         //ssn can be erroneously bli written with more than one '-'
         String cleaned = str.replaceFirst("[-]", "");
 
-        if(!onlyNumbers(cleaned)) {
+        if (!onlyNumbers(cleaned)) {
             throw new ValidatorException(
                     new FacesMessage("Only numbers preffered format YYMMDDXXXX or YYMMDD-XXXX"));
         }
 
-        if(cleaned.length() != 10) {
+        if (cleaned.length() != 10) {
 
             throw new ValidatorException(new FacesMessage("Use format YYMMDDXXXX or YYMMDD-XXXX"));
         }
@@ -86,14 +143,14 @@ public class Teacher implements Serializable {
     }
 
     public void validatePhoneNumbers(FacesContext context,
-                                     UIComponent toValidate,
-                                     Object value) throws ValidatorException {
+            UIComponent toValidate,
+            Object value) throws ValidatorException {
 
         String str = (String) value;
 
         String cleaned = str.replaceFirst("\\s", "");
 
-        if(!onlyNumbers(str)) {
+        if (!onlyNumbers(str)) {
             throw new ValidatorException(
                     new FacesMessage("Only numbers"));
         }
@@ -101,16 +158,16 @@ public class Teacher implements Serializable {
     }
 
     public void validateZipCode(FacesContext context,
-                                UIComponent toValidate,
-                                Object value) throws ValidatorException {
+            UIComponent toValidate,
+            Object value) throws ValidatorException {
 
         String str = (String) value;
-        if(!onlyNumbers(str)) {
+        if (!onlyNumbers(str)) {
             throw new ValidatorException(
                     new FacesMessage("Only numbers"));
         }
 
-        if(str.length() != 10) {
+        if (str.length() != 10) {
             throw new ValidatorException(
                     new FacesMessage("Invalid postal code"));
 
@@ -133,10 +190,18 @@ public class Teacher implements Serializable {
 
     }
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
     private boolean onlyNumbers(String str) {
         return str.matches("[0-9]+");
     }
-    
+
     public String getFirstName() {
         return firstName;
     }

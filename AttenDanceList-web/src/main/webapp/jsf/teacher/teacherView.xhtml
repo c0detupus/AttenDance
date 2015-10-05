@@ -10,8 +10,8 @@
     </h:head>
     <ui:define name="menu_bar">
         <h:body>
-            <h:form id="form">
-                <p:panel id="panel" header="Add a new teacher" >
+            <h:form>
+                <p:panel id="panel" header ="Teacher view">
                     <p:panelGrid columns="3">
                         <p:outputLabel value="First name: "/>
                         <p:inputText id ="fName" 
@@ -28,8 +28,7 @@
                                      value = "#{teacherBean.lastName}"
                                      validator ="#{teacherBean.validateLetters}"
                                      required="true"
-                                     requiredMessage="Field can't be empty"
-                                     />
+                                     requiredMessage="Field can't be empty"/>
                         <p:message
                             style="color: red"
                             for="lName" />            
@@ -115,13 +114,12 @@
                         <p:message 
                             style="color: red"
                             for="zipCode" />
-
                     </p:panelGrid>  
                 </p:panel>
                 <p:toolbar>
                     <f:facet name="left">
-                        <p:commandButton value="Add" update="panel" action="#{teacherBean.add()}"></p:commandButton>
-                        <p:commandButton id="reset" value="Clear" update="panel" process="@this" action="#{teacherBean.clear()}" ></p:commandButton>
+                        <p:commandButton value="Save" update="panel" action="#{teacherBean.update()}" ></p:commandButton>
+                        <p:commandButton value="Delete" action="#{teacherBean.delete()}" ></p:commandButton>
                     </f:facet>
                 </p:toolbar>
             </h:form>

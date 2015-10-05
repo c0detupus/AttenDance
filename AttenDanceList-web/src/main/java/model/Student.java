@@ -218,7 +218,7 @@ public class Student implements Serializable {
             UIComponent toValidate,
             Object value) throws ValidatorException {
         String str = (String) value;
-        if (-1 == value.toString().indexOf("@") && !onlyLetters(str)) {
+        if (-1 == value.toString().indexOf("@")) {
             FacesMessage message = new FacesMessage("Invalid email address");
             throw new ValidatorException(message);
         }

@@ -147,6 +147,12 @@ public class Helper {
         for (TeacherTO tto : teacherTOList) {
             Teacher t = new Teacher();
 
+            t.setId(tto.getId());
+            t.setAddress(tto.getAddress());
+            t.setCity(tto.getCity());
+            t.setEmail(tto.getEmail());
+            t.setSex(tto.getSex());
+            t.setZipCode(tto.getZipCode());
             t.setFirstName(tto.getFirstName());
             t.setLastName(tto.getLastName());
             t.setSocialSecurityNumber(tto.getSocialSecurityNumber());
@@ -192,8 +198,9 @@ public class Helper {
         s.setFirstName(sto.getFirstName());
         s.setLastName(sto.getLastName());
         s.setPhoneNumber(sto.getPhoneNumber());
-        s.setSex(s.getSex());
+        s.setSex(sto.getSex());
         s.setSocialSecurityNumber(sto.getSocialSecurityNumber());
+        s.setZipCode(sto.getZipCode());
 
         return s;
     }
@@ -232,5 +239,23 @@ public class Helper {
         tto.setZipCode(t.getZipCode());
 
         return tto;
+    }
+
+    public static Teacher teacherTOConverter(TeacherTO tto) {
+        Teacher t = new Teacher();
+
+        t.setId(tto.getId());
+        t.setAddress(tto.getAddress());
+        t.setCellPhone(tto.getCellPhone());
+        t.setCity(tto.getCity());
+        t.setEmail(tto.getEmail());
+        t.setFirstName(tto.getFirstName());
+        t.setLastName(tto.getLastName());
+        t.setPhoneNumber(tto.getPhoneNumber());
+        t.setSex(tto.getSex());
+        t.setSocialSecurityNumber(tto.getSocialSecurityNumber());
+        t.setZipCode(tto.getZipCode());
+
+        return t;
     }
 }

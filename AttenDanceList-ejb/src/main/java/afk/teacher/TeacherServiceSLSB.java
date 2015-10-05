@@ -19,42 +19,64 @@ import javax.persistence.PersistenceContext;
  */
 @Stateless
 public class TeacherServiceSLSB implements TeacherServiceIntf {
-    
+
     @PersistenceContext(unitName = "PU")
     private EntityManager em;
-    
+
     @Override
-    public void createTeacher(TeacherTO teacherTo) {
-        em.persist(EJBHelper.teacherTOConverter(teacherTo));
+    public int createTeacher(TeacherTO teacherTo) {
+        try {
+            em.persist(EJBHelper.teacherTOConverter(teacherTo));
+
+        } catch (Exception ex) {
+
+            return 0;
+
+        }
+
+        return 1;
+    }
+
+    @Override
+    public TeacherTO getTeacher(long id) {
+        TeacherTO tto = EJBHelper.teacherEntityConverter((TeacherEntity) em
+                .createQuery("SELECT t FROM TeacherEntity AS t WHERE t.id = "
+                        + id).getSingleResult());
+
+        return tto;
     }
 
     @Override
     public List<TeacherTO> getAll() {
-        
+
         List<TeacherEntity> teacherList = em
                 .createQuery("SELECT t FROM TeacherEntity AS t").getResultList();
-        
+
         return EJBHelper.teacherEntityListConverter(teacherList);
     }
 
     @Override
-    public TeacherTO getById(long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    public int updateTeacher(TeacherTO teacherTO) {
+        try {
 
-    @Override
-    public int updateTeacher(long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+            em.merge(EJBHelper.teacherTOConverter(teacherTO));
 
-    @Override
-    public TeacherTO findTeacher(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        } catch (Exception e) {
+
+            return 0;
+
+        }
+
+        return 1;
     }
 
     @Override
     public int deleteTeacher(long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            em.remove(id);
+        } catch (Exception e) {
+            return 0;
+        }
+        return 1;
     }
-    
 }
