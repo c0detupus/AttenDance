@@ -30,7 +30,7 @@ public class AttendanceEntity implements Serializable
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "course_id")
+    @Column(name = "attendance_id")
     private long id;
 
     @OneToOne(fetch = FetchType.LAZY)
@@ -38,7 +38,7 @@ public class AttendanceEntity implements Serializable
     private StudentEntity studentEntity;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "student_id")
+    @JoinColumn(name = "course_id")
     private CourseEntity courseEntity;
 
     @Temporal(TemporalType.DATE)

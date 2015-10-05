@@ -26,15 +26,20 @@ public class CourseServiceSLSB implements CourseServiceIntf
 
     @Override
     public int createCourse(CourseTO courseTO) {
-        
+
         em.persist(Helper.courseTOConverter(courseTO));
         return 0;
     }
 
     @Override
     public CourseTO getCourse(long id) {
-        return null;
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+        CourseTO courseTO = (CourseTO) em
+                .createQuery("SELECT c FROM CourseEntity AS c WHERE c.id = "
+                        + id).getSingleResult();
+
+        return courseTO;
+
     }
 
     @Override
@@ -49,14 +54,36 @@ public class CourseServiceSLSB implements CourseServiceIntf
 
     @Override
     public int updateCourse(long id) {
-        return 0;
-        // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+        CourseTO courseTO = getCourse(id);
+
+        int successChecker;
+
+        try {
+
+            em.refresh(courseTO);
+            successChecker = 1;
+
+        } catch(Exception e) {
+
+            successChecker = 0;
+
+        }
+
+        return successChecker;
     }
 
     @Override
     public int deleteCourse(long id) {
-        return 0;
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+        int removeCheck;
+        try {
+            em.remove(id);
+            removeCheck = 0;
+        } catch(Exception e) {
+            removeCheck = 1;
+        }
+        return removeCheck;
     }
 
 }
