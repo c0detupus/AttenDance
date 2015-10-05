@@ -14,8 +14,7 @@ import javax.ejb.Local;
  * @author c0detupus
  */
 @Local
-public interface CourseServiceIntf
-{
+public interface CourseServiceIntf {
 
     //Create
     public int createCourse(CourseTO courseTO);

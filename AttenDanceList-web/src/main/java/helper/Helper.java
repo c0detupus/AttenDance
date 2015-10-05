@@ -31,8 +31,6 @@ public class Helper {
 
     private Map<String, String> dayMap;
 
-   
-
     //will populate the map depending on database
     //hardcoded for now
     public Map populateCoursesMap() {
@@ -102,16 +100,21 @@ public class Helper {
 
         List<Student> studentList = new ArrayList<>();
 
-        for (StudentTO sTO : studentTOList) {
+        for (StudentTO sto : studentTOList) {
 
             Student s = new Student();
 
-            s.setFirstName(sTO.getFirstName());
-            s.setLastName(sTO.getLastName());
-            s.setSocialSecurityNumber(sTO.getSocialSecurityNumber());
-            s.setPhoneNumber(sTO.getPhoneNumber());
-            s.setCellPhone(sTO.getCellPhone());
-            s.setAvgAttendance(sTO.getAvgAttendance());
+            s.setId(sto.getId());
+            s.setAddress(sto.getAddress());
+            s.setAvgAttendance(sto.getAvgAttendance());
+            s.setCellPhone(sto.getCellPhone());
+            s.setCity(sto.getCity());
+            s.setEmail(sto.getEmail());
+            s.setFirstName(sto.getFirstName());
+            s.setLastName(sto.getLastName());
+            s.setPhoneNumber(sto.getPhoneNumber());
+            s.setSex(s.getSex());
+            s.setSocialSecurityNumber(sto.getSocialSecurityNumber());
 
             studentList.add(s);
         }
@@ -126,7 +129,7 @@ public class Helper {
 
         for (CourseTO cto : courseTOList) {
             Course c = new Course();
-            
+
             c.setId(cto.getId());
             c.setName(cto.getName());
             c.setCode(cto.getCode());
@@ -165,20 +168,40 @@ public class Helper {
 
         return cto;
     }
-    
-    public static Course courseTOConverter(CourseTO cto){
+
+    public static Course courseTOConverter(CourseTO cto) {
         Course c = new Course();
-        
+
         c.setId(cto.getId());
         c.setName(cto.getName());
         c.setCode(cto.getCode());
         c.setPoints(cto.getPoints());
+
         return c;
+    }
+
+    public static Student studentTOConverter(StudentTO sto) {
+        Student s = new Student();
+
+        s.setId(sto.getId());
+        s.setAddress(sto.getAddress());
+        s.setAvgAttendance(sto.getAvgAttendance());
+        s.setCellPhone(sto.getCellPhone());
+        s.setCity(sto.getCity());
+        s.setEmail(sto.getEmail());
+        s.setFirstName(sto.getFirstName());
+        s.setLastName(sto.getLastName());
+        s.setPhoneNumber(sto.getPhoneNumber());
+        s.setSex(s.getSex());
+        s.setSocialSecurityNumber(sto.getSocialSecurityNumber());
+
+        return s;
     }
 
     public static StudentTO studentConverter(Student s) {
         StudentTO sto = new StudentTO();
 
+        sto.setId(s.getId());
         sto.setAddress(s.getAddress());
         sto.setAvgAttendance(s.getAvgAttendance());
         sto.setCellPhone(s.getCellPhone());
@@ -207,7 +230,7 @@ public class Helper {
         tto.setSex(t.getSex());
         tto.setSocialSecurityNumber(t.getSocialSecurityNumber());
         tto.setZipCode(t.getZipCode());
-        
+
         return tto;
     }
 }

@@ -18,17 +18,24 @@ import javax.persistence.PersistenceContext;
  * @author c0detupus
  */
 @Stateless
-public class StudentServiceSLSB implements StudentServiceIntf
-{
+public class StudentServiceSLSB implements StudentServiceIntf {
 
     @PersistenceContext(unitName = "PU")
     private EntityManager em;
 
-    private int removeCheck;
-
     @Override
-    public void createStudent(StudentTO studentTo) {
-        em.persist(EJBHelper.studentTOConverter(studentTo));
+    public int createStudent(StudentTO studentTo) {
+        try {
+            em.persist(EJBHelper.studentTOConverter(studentTo));
+
+        } catch (Exception ex) {
+
+            return 0;
+
+        }
+
+        return 1;
+
     }
 
     @Override
@@ -41,31 +48,37 @@ public class StudentServiceSLSB implements StudentServiceIntf
     }
 
     @Override
-    public StudentTO getById(long id) {
-        return null;
-        // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public StudentTO getStudent(long id) {
+        StudentTO sTO = EJBHelper.studentEntityConverter((StudentEntity) em
+                .createQuery("SELECT s FROM StudentEntity AS s WHERE s.id = "
+                        + id).getSingleResult());
+
+        return sTO;
     }
 
     @Override
-    public int updateStudent(long id) {
-        return 0;
-        // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    public int updateStudent(StudentTO studentTO) {
+        try {
 
-    @Override
-    public StudentTO findStudent(int id) {
-        return null;//throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            em.merge(EJBHelper.studentTOConverter(studentTO));
+
+        } catch (Exception e) {
+
+            return 0;
+
+        }
+
+        return 1;
     }
 
     @Override
     public int deleteStudent(long id) {
         try {
             em.remove(id);
-            removeCheck = 0;
-        } catch(Exception e) {
-            removeCheck = 1;
+        } catch (Exception e) {
+            return 0;
         }
-        return removeCheck;
+        return 1;
     }
 
 }

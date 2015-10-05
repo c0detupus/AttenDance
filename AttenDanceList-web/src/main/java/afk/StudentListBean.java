@@ -12,7 +12,6 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
-import model.Course;
 import model.Student;
 import org.primefaces.event.SelectEvent;
 

@@ -11,113 +11,117 @@
     <ui:define name="menu_bar">
         <h:body>
             <h:form>
-                <p:panelGrid columns="3">
-                    <p:outputLabel value="First name: "/>
-                    <p:inputText id ="fName" 
-                                 value = "#{studentBean.firstName}"
-                                 validator ="#{studentBean.validateLetters}"
-                                 required="true"
-                                 requiredMessage="Field can't be empty"/>
-                     <p:watermark for="fName" value="#{studentBean.firstName}"/>
-                    <p:message 
-                        style="color: red"
-                        for="fName" />
+                <p:panel header ="Student view">
+                    <p:panelGrid columns="3">
+                        <p:outputLabel value="First name: "/>
+                        <p:inputText id ="fName" 
+                                     value = "#{studentBean.firstName}"
+                                     validator ="#{studentBean.validateLetters}"
+                                     required="true"
+                                     requiredMessage="Field can't be empty"/>
+                        <p:message 
+                            style="color: red"
+                            for="fName" />
 
-                    <p:outputLabel value="Last name: "></p:outputLabel>
-                    <p:inputText id ="lName" 
-                                 value = "#{studentBean.lastName}"
-                                 validator ="#{studentBean.validateLetters}"
-                                 required="true"
-                                 requiredMessage="Field can't be empty"/>
-                    <p:watermark for="lName" value="#{studentBean.lastName}"/>
-                    <p:message
-                        style="color: red"
-                        for="lName" />            
+                        <p:outputLabel value="Last name: "></p:outputLabel>
+                        <p:inputText id ="lName" 
+                                     value = "#{studentBean.lastName}"
+                                     validator ="#{studentBean.validateLetters}"
+                                     required="true"
+                                     requiredMessage="Field can't be empty"/>
+                        <p:message
+                            style="color: red"
+                            for="lName" />            
 
-                    <p:outputLabel value="Social security number: "></p:outputLabel>
-                    <p:inputText id ="socialSecurityNumber" 
-                                 value = "#{studentBean.socialSecurityNumber}"
-                                 validator="#{studentBean.validateSSN}"
-                                 required="true"
-                                 requiredMessage="Field can't be empty"
-                                 />
-                    <p:message 
-                        style="color: red"
-                        for="socialSecurityNumber" />
+                        <p:outputLabel value="Social security number: "></p:outputLabel>
+                        <p:inputText id ="socialSecurityNumber" 
+                                     value = "#{studentBean.socialSecurityNumber}"
+                                     validator="#{studentBean.validateSSN}"
+                                     required="true"
+                                     requiredMessage="Field can't be empty"
+                                     />
+                        <p:message 
+                            style="color: red"
+                            for="socialSecurityNumber" />
 
-                    <p:outputLabel value="Email: "></p:outputLabel>
-                    <p:inputText id ="eMail" 
-                                 value = "#{studentBean.email}"
-                                 validator="#{studentBean.validateEmail}"
-                                 required="true"
-                                 requiredMessage="Field can't be empty"/>
-                    <p:message 
-                        style="color: red"
-                        for="eMail" />
+                        <p:outputLabel value="Email: "></p:outputLabel>
+                        <p:inputText id ="eMail" 
+                                     value = "#{studentBean.email}"
+                                     validator="#{studentBean.validateEmail}"
+                                     required="true"
+                                     requiredMessage="Field can't be empty"/>
+                        <p:message 
+                            style="color: red"
+                            for="eMail" />
 
-                    <p:outputLabel value="Cellphone nr: "></p:outputLabel>
-                    <p:inputText id ="cellPhone" 
-                                 value = "#{studentBean.cellPhone}"
-                                 validator="#{studentBean.validatePhoneNumbers}"
-                                 required="true"
-                                 requiredMessage="Field can't be empty"/>
-                    <p:message 
-                        style="color: red"
-                        for="cellPhone" />
+                        <p:outputLabel value="Cellphone nr: "></p:outputLabel>
+                        <p:inputText id ="cellPhone" 
+                                     value = "#{studentBean.cellPhone}"
+                                     validator="#{studentBean.validatePhoneNumbers}"
+                                     required="true"
+                                     requiredMessage="Field can't be empty"/>
+                        <p:message 
+                            style="color: red"
+                            for="cellPhone" />
 
-                    <p:outputLabel value="Phone number"></p:outputLabel>
-                    <p:inputText id ="phone" 
-                                 value = "#{studentBean.phoneNumber}"
-                                 validator="#{studentBean.validatePhoneNumbers}"
-                                 required="true"
-                                 requiredMessage="Field can't be empty"/>
-                    <p:message 
-                        style="color: red"
-                        for="phone" />
+                        <p:outputLabel value="Phone number"></p:outputLabel>
+                        <p:inputText id ="phone" 
+                                     value = "#{studentBean.phoneNumber}"
+                                     validator="#{studentBean.validatePhoneNumbers}"
+                                     required="true"
+                                     requiredMessage="Field can't be empty"/>
+                        <p:message 
+                            style="color: red"
+                            for="phone" />
 
-                    <p:outputLabel id ="sex" value="Sex: "></p:outputLabel>
+                        <p:outputLabel id ="sex" value="Sex: "></p:outputLabel>
 
-                    <p:selectOneRadio value="#{studentBean.sex}"
-                                      required="true"
-                                      requiredMessage="Choose male or female">
-                        <f:selectItem itemValue="male" itemLabel="Male" />
-                        <f:selectItem itemValue="female" itemLabel="Female" />
+                        <p:selectOneRadio value="#{studentBean.sex}"
+                                          required="true"
+                                          requiredMessage="Choose male or female">
+                            <f:selectItem itemValue="male" itemLabel="Male" />
+                            <f:selectItem itemValue="female" itemLabel="Female" />
 
-                    </p:selectOneRadio>
-                    <p:message 
-                        style="color: red"
-                        for="sex" />
+                        </p:selectOneRadio>
+                        <p:message 
+                            style="color: red"
+                            for="sex" />
 
-                    <p:outputLabel value="Address: "></p:outputLabel>
-                    <p:inputText id ="address" 
-                                 value = "#{studentBean.address}"
-                                 required="true"
-                                 requiredMessage="Field can't be empty"/>
-                    <p:message 
-                        style="color: red"
-                        for="address" />
+                        <p:outputLabel value="Address: "></p:outputLabel>
+                        <p:inputText id ="address" 
+                                     value = "#{studentBean.address}"
+                                     required="true"
+                                     requiredMessage="Field can't be empty"/>
+                        <p:message 
+                            style="color: red"
+                            for="address" />
 
-                    <p:outputLabel  value="City: "></p:outputLabel>
-                    <p:inputText id ="city" 
-                                 value = "#{studentBean.city}"
-                                 validator="#{studentBean.validateLetters}"
-                                 required="true"
-                                 requiredMessage="Field can't be empty"/>
-                    <p:message 
-                        style="color: red"
-                        for="city" />
+                        <p:outputLabel  value="City: "></p:outputLabel>
+                        <p:inputText id ="city" 
+                                     value = "#{studentBean.city}"
+                                     validator="#{studentBean.validateLetters}"
+                                     required="true"
+                                     requiredMessage="Field can't be empty"/>
+                        <p:message 
+                            style="color: red"
+                            for="city" />
 
-                    <p:outputLabel  value= "Zip code" ></p:outputLabel>
-                    <p:inputText id ="zipCode" 
-                                 value = "#{studentBean.zipCode}"
-                                 required="true"
-                                 requiredMessage="Field can't be empty"/>
-                    <p:message 
-                        style="color: red"
-                        for="zipCode" />
-
-                    <p:commandButton value="Submit" action="#{studentBean.submit()}"></p:commandButton>
-                </p:panelGrid>  
+                        <p:outputLabel  value= "Zip code" ></p:outputLabel>
+                        <p:inputText id ="zipCode" 
+                                     value = "#{studentBean.zipCode}"
+                                     required="true"
+                                     requiredMessage="Field can't be empty"/>
+                        <p:message 
+                            style="color: red"
+                            for="zipCode" />
+                    </p:panelGrid>  
+                </p:panel>
+                <p:toolbar>
+                    <f:facet name="left">
+                        <p:commandButton value="Save" action="#{studentBean.add()}" ></p:commandButton>
+                        <p:commandButton value="Delete" action="#{studentBean.delete()}" ></p:commandButton>
+                    </f:facet>
+                </p:toolbar>
             </h:form>
         </h:body>
     </ui:define>
