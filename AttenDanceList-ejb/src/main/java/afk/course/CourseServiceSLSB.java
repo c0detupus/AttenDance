@@ -12,6 +12,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -42,9 +43,11 @@ public class CourseServiceSLSB implements CourseServiceIntf
     @Override
     public CourseTO getCourse(long id) {
 
+//        EJBHelper.courseEntityConverter((CourseEntity) em
+//                .createQuery("SELECT c FROM CourseEntity AS c WHERE c.id = "
+//                        + id).getSingleResult());
         CourseTO courseTO = EJBHelper.courseEntityConverter((CourseEntity) em
-                .createQuery("SELECT c FROM CourseEntity AS c WHERE c.id = "
-                        + id).getSingleResult());
+                .find(CourseEntity.class, id));
 
         return courseTO;
 
@@ -63,6 +66,8 @@ public class CourseServiceSLSB implements CourseServiceIntf
     @Override
     public int updateCourse(CourseTO courseTO) {
 
+        
+        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
         try {
 
             em.merge(EJBHelper.courseTOConverter(courseTO));
@@ -79,24 +84,14 @@ public class CourseServiceSLSB implements CourseServiceIntf
     @Override
     public int deleteCourse(long courseId) {
 
-//        CourseEntity ce = new CourseEntity();
-//        ce.setId(courseId);
         try {
-//            System.out.println("SLSB: " + ce.getId());
-//            em.getTransaction().begin();
-//            em.remove(ce);
-//            em.getTransaction().commit();
 
-            em.getTransaction().begin();
-            CourseEntity ce = em.find(CourseEntity.class, courseId);
-            em.remove(ce);
-            em.getTransaction().commit();
+            Query q = em
+                    .createQuery("DELETE FROM CourseEntity c WHERE c.id = "
+                            + courseId);
 
-//            em.getTransaction().begin();
-//            System.out.println("SLSB: " + courseTO.getId());
-//            System.out.println("SLSB: " + courseTO.getName());
-//            em.remove(EJBHelper.courseTOConverter(courseTO));
-//            em.getTransaction().commit();
+            q.executeUpdate();
+
         } catch(Exception e) {
 
             System.out.println(e);
