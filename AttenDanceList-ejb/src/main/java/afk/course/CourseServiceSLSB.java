@@ -64,10 +64,11 @@ public class CourseServiceSLSB implements CourseServiceIntf
 
     @Override
     public int updateCourse(CourseTO courseTO) {
-
+        
         try {
-
-            em.refresh(EJBHelper.courseTOConverter(courseTO));
+            System.out.println("SLSB: " + courseTO.getId());
+            System.out.println("SLSB: " + courseTO.getName());
+            em.merge(EJBHelper.courseTOConverter(courseTO));
 
         } catch(Exception e) {
 

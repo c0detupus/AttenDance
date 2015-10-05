@@ -27,7 +27,8 @@ public class EJBHelper
     public static CourseEntity courseTOConverter(CourseTO cto) {
 
         CourseEntity ce = new CourseEntity();
-
+        
+        ce.setId(cto.getId());
         ce.setName(cto.getName());
         ce.setCode(cto.getCode());
         ce.setPoints(cto.getPoints());

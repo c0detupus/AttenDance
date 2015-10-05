@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/resources/template/menubar.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <ui:define name="menu_bar">
+        <h:body>
+            <h:form>
+                <p:panelGrid columns="3">
+                <p:outputLabel id="cName" value="Name: "></p:outputLabel>
+                <p:inputText id="iName" value="#{courseBean.currentName}"></p:inputText>
+                <p:watermark for="iName" value="#{courseBean.currentName}"/>
+                                
+                <p:outputLabel id="cCode" value="Code: "></p:outputLabel>
+                <p:inputText id="iCode" value="#{courseBean.currentCode}"></p:inputText>
+                <p:watermark for="iCode" value="#{courseBean.currentCode}"/>
+
+                <p:outputLabel id="cPoints" value="Points: "></p:outputLabel>
+                
+                <p:selectOneMenu id="selectCoursePoints" value="#{courseBean.currentPoints}" >
+                    <f:selectItems value="#{courseBean.coursePointsMap}"/>
+                </p:selectOneMenu>
+                <br/>
+                <p:commandButton value="Save" action="#{courseBean.save()}" ></p:commandButton>
+                <p:commandButton value="Delete" action="#{courseBean.delete()}" ></p:commandButton>
+                </p:panelGrid>
+            </h:form>
+        </h:body>
+    </ui:define>
+</ui:composition>
+

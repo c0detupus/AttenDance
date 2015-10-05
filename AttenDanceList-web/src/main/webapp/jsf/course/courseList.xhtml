@@ -4,13 +4,15 @@
                 template="/resources/template/menubar.xhtml"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
-                xmlns:p="http://primefaces.org/ui">
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
-        <title>Facelet Title</title>
+        <title>Course List</title>
     </h:head>
     <ui:define name="menu_bar">
         <h:body>
-            <p:dataTable id="courseList" value="#{courseListBean.courses}" var="course">
+            <p:dataTable id="courseList" value="#{courseListBean.courses}" var="course" selectionMode="single" selection="#{courseListBean.selectedCourse}" rowKey="#{course.id}" >
+                   <p:ajax event="rowSelect" listener="#{courseListBean.onRowSelect}" process="courseList" />
                 <f:facet name="header">
                     <p:outputLabel value="Course List"/>
                 </f:facet>
@@ -21,11 +23,11 @@
                     <h:outputText value="#{course.code}"/>
                 </p:column>
                 <p:column headerText="Points">
-                    <h:outputText value="#{course.currentPoints}"/>
+                    <h:outputText value="#{course.points}"/>
                 </p:column>
                 <f:facet name="footer">
                     <h:outputText value="Total: #{courseListBean.total}" />
-                    <p:commandButton value="Add" action="courseCreate" style="margin-left: 5%"/>
+                    <p:commandButton value="Add" action="courseCreate?faces-redirect=true" style="margin-left: 5%"/>
                 </f:facet>
             </p:dataTable>
         </h:body>
