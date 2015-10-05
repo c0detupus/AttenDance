@@ -6,7 +6,7 @@
 package afk.student;
 
 import afk.entities.StudentEntity;
-import afk.helper.Helper;
+import afk.helper.EJBHelper;
 import java.util.List;
 import javax.ejb.Stateless;
 import afk.to.StudentTO;
@@ -29,7 +29,7 @@ public class StudentServiceSLSB implements StudentServiceIntf
     @Override
     public void createStudent(StudentTO studentTo) {
         //convert to entity
-        em.persist(Helper.studentTOConverter(studentTo));
+        em.persist(EJBHelper.studentTOConverter(studentTo));
     }
 
     @Override
@@ -38,7 +38,7 @@ public class StudentServiceSLSB implements StudentServiceIntf
         List<StudentEntity> studentList = em
                 .createQuery("SELECT s FROM StudentEntity AS s").getResultList();
 
-        return Helper.studentEntityListConverter(studentList);
+        return EJBHelper.studentEntityListConverter(studentList);
     }
 
     @Override

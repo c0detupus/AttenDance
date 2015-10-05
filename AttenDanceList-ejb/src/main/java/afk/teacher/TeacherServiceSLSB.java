@@ -6,7 +6,7 @@
 package afk.teacher;
 
 import afk.entities.TeacherEntity;
-import afk.helper.Helper;
+import afk.helper.EJBHelper;
 import afk.to.TeacherTO;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -25,7 +25,7 @@ public class TeacherServiceSLSB implements TeacherServiceIntf {
     
     @Override
     public void createTeacher(TeacherTO teacherTo) {
-        em.persist(Helper.teacherTOConverter(teacherTo));
+        em.persist(EJBHelper.teacherTOConverter(teacherTo));
     }
 
     @Override
@@ -34,7 +34,7 @@ public class TeacherServiceSLSB implements TeacherServiceIntf {
         List<TeacherEntity> teacherList = em
                 .createQuery("SELECT t FROM TeacherEntity AS t").getResultList();
         
-        return Helper.teacherEntityListConverter(teacherList);
+        return EJBHelper.teacherEntityListConverter(teacherList);
     }
 
     @Override

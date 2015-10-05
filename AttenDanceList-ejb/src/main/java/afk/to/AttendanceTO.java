@@ -22,7 +22,7 @@ public class AttendanceTO
 
     private CourseEntity courseEntity;
 
-    private Date date_field;
+    private Date dateField;
 
     //SETTERS----->
     public void setId(long id) {
@@ -37,8 +37,8 @@ public class AttendanceTO
         this.courseEntity = courseEntity;
     }
 
-    public void setDate_field(Date date_field) {
-        this.date_field = date_field;
+    public void setDateField(Date dateField) {
+        this.dateField = dateField;
     }
     //<-----SETTERS
 
@@ -55,8 +55,8 @@ public class AttendanceTO
         return courseEntity;
     }
 
-    public Date getDate_field() {
-        return date_field;
+    public Date getDateField() {
+        return dateField;
     }
     //<-----GETTERS
 }

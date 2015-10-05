@@ -43,7 +43,7 @@ public class AttendanceEntity implements Serializable
 
     @Temporal(TemporalType.DATE)
     @Column(name = "date_field")
-    private Date date_field;
+    private Date dateField;
 
     //SETTERS----->
     public void setId(long id) {
@@ -58,9 +58,9 @@ public class AttendanceEntity implements Serializable
         this.courseEntity = courseEntity;
     }
 
-    public void setDate_field() {
+    public void setDateField(Date dateField) {
 
-        this.date_field = new Date();
+        this.dateField = dateField;
     }
     //<------SETTERS
 
@@ -77,8 +77,8 @@ public class AttendanceEntity implements Serializable
         return courseEntity;
     }
 
-    public Date getDate_field() {
-        return date_field;
+    public Date getDateField() {
+        return dateField;
     }
     //<------GETTERS
 

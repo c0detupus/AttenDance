@@ -20,7 +20,7 @@ import java.util.List;
  *
  * @author c0detupus
  */
-public class Helper
+public class EJBHelper
 {
 
     //COURSE----->
@@ -160,11 +160,29 @@ public class Helper
     //<-----TEACHER
 
     //ATTENDANCE----->
-    public static AttendanceTO attendanceTOConverter(AttendanceTO attendanceTO) {
+    public static AttendanceTO attendanceEntityConverter(AttendanceEntity attendanceEntity) {
+
+        AttendanceTO attendanceTO = new AttendanceTO();
+
+        attendanceTO.setId(attendanceEntity.getId());
+        attendanceTO.setStudentEntity(attendanceEntity.getStudentEntity());
+        attendanceTO.setCourseEntity(attendanceEntity.getCourseEntity());
+        attendanceTO.setDateField(attendanceEntity.getDateField());
+
+        return attendanceTO;
+
+    }
+
+    public static Object attendanceTOConverter(AttendanceTO attendanceTO) {
 
         AttendanceEntity attendanceEntity = new AttendanceEntity();
 
-        return null;
+        attendanceEntity.setId(attendanceTO.getId());
+        attendanceEntity.setStudentEntity(attendanceTO.getStudentEntity());
+        attendanceEntity.setCourseEntity(attendanceTO.getCourseEntity());
+        attendanceEntity.setDateField(attendanceTO.getDateField());
+
+        return attendanceEntity;
 
     }
 

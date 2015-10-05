@@ -20,7 +20,7 @@ public interface AttendanceServiceIntf
     public int createAttendance(AttendanceTO attendanceTO);
 
     //READ
-    public AttendanceEntity getAttendance(long id);
+    public AttendanceTO getAttendance(long id);
 
     public List<AttendanceEntity> getAll();
 

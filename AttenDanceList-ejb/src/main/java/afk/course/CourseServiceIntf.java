@@ -26,7 +26,7 @@ public interface CourseServiceIntf
     public List<CourseTO> getAll();
 
     //Update
-    public int updateCourse(long id);
+    public int updateCourse(CourseTO courseTO);
 
     //Delete
     public int deleteCourse(long id);

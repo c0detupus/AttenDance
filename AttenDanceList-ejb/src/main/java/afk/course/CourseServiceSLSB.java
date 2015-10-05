@@ -6,7 +6,7 @@
 package afk.course;
 
 import afk.entities.CourseEntity;
-import afk.helper.Helper;
+import afk.helper.EJBHelper;
 import afk.to.CourseTO;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -30,7 +30,7 @@ public class CourseServiceSLSB implements CourseServiceIntf
         int successChecker;
 
         try {
-            em.persist(Helper.courseTOConverter(courseTO));
+            em.persist(EJBHelper.courseTOConverter(courseTO));
 
         } catch(Exception ex) {
 
@@ -44,7 +44,7 @@ public class CourseServiceSLSB implements CourseServiceIntf
     @Override
     public CourseTO getCourse(long id) {
 
-        CourseTO courseTO = Helper.courseEntityConverter((CourseEntity) em
+        CourseTO courseTO = EJBHelper.courseEntityConverter((CourseEntity) em
                 .createQuery("SELECT c FROM CourseEntity AS c WHERE c.id = "
                         + id).getSingleResult());
 
@@ -58,21 +58,16 @@ public class CourseServiceSLSB implements CourseServiceIntf
         List<CourseEntity> courseEntites = em
                 .createQuery("SELECT c FROM CourseEntity AS c").getResultList();
 
-        return Helper.courseEntityListConverter(courseEntites);
+        return EJBHelper.courseEntityListConverter(courseEntites);
 
     }
 
     @Override
-    public int updateCourse(long id) {
-
-        CourseTO courseTO = getCourse(id);
-
-        int successChecker;
+    public int updateCourse(CourseTO courseTO) {
 
         try {
 
-            em.refresh(courseTO);
-            successChecker = 1;
+            em.refresh(EJBHelper.courseTOConverter(courseTO));
 
         } catch(Exception e) {
 
