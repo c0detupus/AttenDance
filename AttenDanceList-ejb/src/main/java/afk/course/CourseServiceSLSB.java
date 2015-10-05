@@ -27,16 +27,26 @@ public class CourseServiceSLSB implements CourseServiceIntf
     @Override
     public int createCourse(CourseTO courseTO) {
 
-        em.persist(Helper.courseTOConverter(courseTO));
-        return 0;
+        int successChecker;
+
+        try {
+            em.persist(Helper.courseTOConverter(courseTO));
+
+        } catch(Exception ex) {
+
+            return 0;
+
+        }
+
+        return 1;
     }
 
     @Override
     public CourseTO getCourse(long id) {
 
-        CourseTO courseTO = (CourseTO) em
+        CourseTO courseTO = Helper.courseEntityConverter((CourseEntity) em
                 .createQuery("SELECT c FROM CourseEntity AS c WHERE c.id = "
-                        + id).getSingleResult();
+                        + id).getSingleResult());
 
         return courseTO;
 
@@ -66,24 +76,24 @@ public class CourseServiceSLSB implements CourseServiceIntf
 
         } catch(Exception e) {
 
-            successChecker = 0;
+            return 0;
 
         }
 
-        return successChecker;
+        return 1;
     }
 
     @Override
     public int deleteCourse(long id) {
 
-        int removeCheck;
         try {
             em.remove(id);
-            removeCheck = 0;
+
         } catch(Exception e) {
-            removeCheck = 1;
+
+            return 0;
         }
-        return removeCheck;
+        return 1;
     }
 
 }

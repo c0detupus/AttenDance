@@ -5,9 +5,11 @@
  */
 package afk.helper;
 
+import afk.entities.AttendanceEntity;
 import afk.entities.CourseEntity;
 import afk.entities.StudentEntity;
 import afk.entities.TeacherEntity;
+import afk.to.AttendanceTO;
 import afk.to.CourseTO;
 import afk.to.StudentTO;
 import afk.to.TeacherTO;
@@ -18,8 +20,10 @@ import java.util.List;
  *
  * @author c0detupus
  */
-public class Helper {
+public class Helper
+{
 
+    //COURSE----->
     public static CourseEntity courseTOConverter(CourseTO cto) {
 
         CourseEntity ce = new CourseEntity();
@@ -32,6 +36,39 @@ public class Helper {
 
     }
 
+    public static List<CourseTO> courseEntityListConverter(List<CourseEntity> courseEntityList) {
+
+        List<CourseTO> cTOList = new ArrayList<>();
+        for(CourseEntity ce : courseEntityList) {
+
+            CourseTO cTO = new CourseTO();
+
+            cTO.setId(ce.getId());
+            cTO.setName(ce.getName());
+            cTO.setCode(ce.getCode());
+            cTO.setPoints(ce.getPoints());
+
+            cTOList.add(cTO);
+        }
+
+        return cTOList;
+    }
+
+    public static CourseTO courseEntityConverter(CourseEntity courseEntity) {
+
+        CourseTO courseTO = new CourseTO();
+
+        courseTO.setId(courseEntity.getId());
+        courseTO.setName(courseEntity.getName());
+        courseTO.setCode(courseEntity.getCode());
+        courseTO.setPoints(courseEntity.getPoints());
+
+        return courseTO;
+
+    }
+    //<-----COURSE
+
+    //STUDENT----->
     public static StudentEntity studentTOConverter(StudentTO s) {
         StudentEntity se = new StudentEntity();
 
@@ -51,47 +88,11 @@ public class Helper {
         return se;
     }
 
-    public static TeacherEntity teacherTOConverter(TeacherTO t) {
-        TeacherEntity te = new TeacherEntity();
-
-        te.setId(t.getId());
-        te.setAddress(t.getAddress());
-        te.setCellPhone(t.getCellPhone());
-        te.setCity(t.getCity());
-        te.setEmail(t.getEmail());
-        te.setFirstName(t.getFirstName());
-        te.setLastName(t.getLastName());
-        te.setPhoneNumber(t.getPhoneNumber());
-        te.setSex(t.getSex());
-        te.setSocialSecurityNumber(t.getSocialSecurityNumber());
-        te.setZipCode(t.getZipCode());
-
-        return te;
-    }
-
-    public static List<CourseTO> courseEntityListConverter(List<CourseEntity> courseEntityList) {
-
-        List<CourseTO> cTOList = new ArrayList<>();
-        for (CourseEntity ce : courseEntityList) {
-
-            CourseTO cTO = new CourseTO();
-
-            cTO.setId(ce.getId());
-            cTO.setName(ce.getName());
-            cTO.setCode(ce.getCode());
-            cTO.setPoints(ce.getPoints());
-
-            cTOList.add(cTO);
-        }
-
-        return cTOList;
-    }
-
     public static List<StudentTO> studentEntityListConverter(List<StudentEntity> eList) {
 
         List<StudentTO> toList = new ArrayList<>();
 
-        for (StudentEntity s : eList) {
+        for(StudentEntity s : eList) {
             StudentTO sto = new StudentTO();
 
             sto.setId(s.getId());
@@ -112,12 +113,32 @@ public class Helper {
 
         return toList;
     }
+    //<-----STUDENT
+
+    //TEACHER----->
+    public static TeacherEntity teacherTOConverter(TeacherTO t) {
+        TeacherEntity te = new TeacherEntity();
+
+        te.setId(t.getId());
+        te.setAddress(t.getAddress());
+        te.setCellPhone(t.getCellPhone());
+        te.setCity(t.getCity());
+        te.setEmail(t.getEmail());
+        te.setFirstName(t.getFirstName());
+        te.setLastName(t.getLastName());
+        te.setPhoneNumber(t.getPhoneNumber());
+        te.setSex(t.getSex());
+        te.setSocialSecurityNumber(t.getSocialSecurityNumber());
+        te.setZipCode(t.getZipCode());
+
+        return te;
+    }
 
     public static List<TeacherTO> teacherEntityListConverter(List<TeacherEntity> tList) {
 
         List<TeacherTO> toList = new ArrayList<>();
 
-        for (TeacherEntity t : tList) {
+        for(TeacherEntity t : tList) {
             TeacherTO tto = new TeacherTO();
 
             tto.setId(t.getId());
@@ -131,9 +152,21 @@ public class Helper {
             tto.setSex(t.getSex());
             tto.setSocialSecurityNumber(t.getSocialSecurityNumber());
             tto.setZipCode(t.getZipCode());
-            
+
             toList.add(tto);
         }
         return toList;
     }
+    //<-----TEACHER
+
+    //ATTENDANCE----->
+    public static AttendanceTO attendanceTOConverter(AttendanceTO attendanceTO) {
+
+        AttendanceEntity attendanceEntity = new AttendanceEntity();
+
+        return null;
+
+    }
+
+    //<-----ATTENDANCE
 }
