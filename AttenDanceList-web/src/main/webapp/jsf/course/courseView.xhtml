@@ -11,24 +11,27 @@
     <ui:define name="menu_bar">
         <h:body>
             <h:form>
-                <p:panelGrid columns="3">
-                <p:outputLabel id="cName" value="Name: "></p:outputLabel>
-                <p:inputText id="iName" value="#{courseBean.currentName}"></p:inputText>
-                <p:watermark for="iName" value="#{courseBean.currentName}"/>
-                                
-                <p:outputLabel id="cCode" value="Code: "></p:outputLabel>
-                <p:inputText id="iCode" value="#{courseBean.currentCode}"></p:inputText>
-                <p:watermark for="iCode" value="#{courseBean.currentCode}"/>
-
-                <p:outputLabel id="cPoints" value="Points: "></p:outputLabel>
-                
-                <p:selectOneMenu id="selectCoursePoints" value="#{courseBean.currentPoints}" >
-                    <f:selectItems value="#{courseBean.coursePointsMap}"/>
-                </p:selectOneMenu>
-                <br/>
-                <p:commandButton value="Save" action="#{courseBean.save()}" ></p:commandButton>
-                <p:commandButton value="Delete" action="#{courseBean.delete()}" ></p:commandButton>
-                </p:panelGrid>
+                <p:panel header ="Course view">
+                    <p:panelGrid columns="2">
+                        <p:outputLabel id="cName" value="Name: "></p:outputLabel>
+                        <p:inputText id="iName" value="#{courseBean.name}" ></p:inputText>
+                        
+                        <p:outputLabel id="cCode" value="Code: "></p:outputLabel>
+                        <p:inputText id="iCode" value="#{courseBean.code}" ></p:inputText>
+                        
+                        <p:outputLabel id="cPoints" value="Points: "> </p:outputLabel>
+                        <p:selectOneMenu id="selectCoursePoints" value="#{courseBean.points}" >
+                            <f:selectItems value="#{courseBean.coursePointsMap}"/>
+                        </p:selectOneMenu>
+                        
+                    </p:panelGrid>
+                </p:panel>
+                <p:toolbar>
+                    <f:facet name="left">
+                       <p:commandButton value="Save" action="#{courseBean.add()}" ></p:commandButton>
+                        <p:commandButton value="Delete" action="#{courseBean.delete()}" ></p:commandButton>
+                    </f:facet>
+                </p:toolbar>
             </h:form>
         </h:body>
     </ui:define>

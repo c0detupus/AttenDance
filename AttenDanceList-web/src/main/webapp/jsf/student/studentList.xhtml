@@ -6,7 +6,7 @@
                 xmlns:p="http://primefaces.org/ui"  
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <title>Facelet Title</title>
+        <title>Student List</title>
     </h:head>
     <ui:define name="menu_bar">
         <h:body>
@@ -37,7 +37,7 @@
 
                 <f:facet name="footer">
                     <h:outputText value="Total: #{studentListBean.studentAmount}" />
-                    <p:commandButton value="Add" action="studentCreate" style="margin-left: 5%"/>
+                    <p:commandButton value="Add" action="studentCreate?faces-redirect=true" style="margin-left: 5%"/>
                 </f:facet>
             </p:dataTable>
         </h:body>

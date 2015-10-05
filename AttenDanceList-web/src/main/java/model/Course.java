@@ -11,7 +11,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-import javax.faces.event.ActionEvent;
+import org.primefaces.context.RequestContext;
 
 /**
  *
@@ -29,71 +29,50 @@ public class Course implements Serializable {
 
     private Map<Integer, Integer> coursePointsMap;
 
-    private Helper pop;
-
-    private long currentId;
-
-    private String currentName;
-
-    private String currentPoints;
-    private String currentCode;
-
     private Course course;
 
     @EJB
-    ServicesIntf services;
+    private ServicesIntf services;
 
     @PostConstruct
     public void init() {
-
+        System.out.println("Course init()");
         Map<String, String> params = FacesContext.getCurrentInstance().
                 getExternalContext().getRequestParameterMap();
         if (!params.isEmpty()) {
-            System.out.println("Course param: " + params.size());
-            currentId = Long.valueOf(params.get("id"));
-            course = Helper.courseTOConverter(services.getCourseService().getCourse(currentId));
+            System.out.println("Course id init");
+            id = Long.valueOf(params.get("id"));
+            course = Helper.courseTOConverter(services.getCourseService().getCourse(id));
+            initialize();
         }
 
         coursePointsMap = Helper.populateCoursePointsMap();
     }
-
-    public void submit() {
-        services.getCourseService().createCourse(Helper.courseConverter(this));
-        int i = services.getCourseService().updateCourse(Helper.courseConverter(this));
+    public void initialize() {
+        name = course.getName();
+        code = course.getCode();
+        points = course.getPoints();
+    }
+    public void add() {
+        System.out.println("Course name: " + name);
+        int i = services.getCourseService().createCourse(Helper.courseConverter(this));
         Messages.showMessage(i);
+        clear();
     }
 
-    public void save() {
-        setCurrentFields();
+    public void update() {
         int i = services.getCourseService().updateCourse(Helper.courseConverter(this));
         Messages.showMessage(i);
     }
 
     public void delete() {
-        setCurrentFields();
-        services.getCourseService().deleteCourse(currentId);
-        int i = services.getCourseService().updateCourse(Helper.courseConverter(this));
+        int i = services.getCourseService().deleteCourse(id);
         Messages.showMessage(i);
     }
-
-    public void setCurrentFields() {
-        id = currentId;
-        name = currentName;
-        code = currentCode;
-        points = currentPoints;
-    }
-
-    public void setCurrentName(String currentName) {
-        this.currentName = currentName;
-    }
-
-    public void setCurrentCode(String currentCode) {
-        this.currentCode = currentCode;
-    }
-
-    public String getCurrentCode() {
-        currentCode = course.getCode();
-        return currentCode;
+    
+    public void clear() {
+        name = null;
+        code = null;
     }
 
     public String getPoints() {
@@ -102,15 +81,6 @@ public class Course implements Serializable {
 
     public void setPoints(String points) {
         this.points = points;
-    }
-
-    public long getCurrentId() {
-        return currentId;
-    }
-
-    public String getCurrentName() {
-        currentName = course.getName();
-        return currentName;
     }
 
     public long getId() {
@@ -135,15 +105,6 @@ public class Course implements Serializable {
 
     public void setCode(String code) {
         this.code = code;
-    }
-
-    public String getCurrentPoints() {
-        currentPoints = course.getPoints();
-        return currentPoints;
-    }
-
-    public void setCurrentPoints(String currentPoints) {
-        this.currentPoints = currentPoints;
     }
 
     public Map<Integer, Integer> getCoursePointsMap() {

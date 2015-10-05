@@ -15,21 +15,18 @@ import javax.ejb.Local;
  * @author c0detupus
  */
 @Local
-public interface StudentServiceIntf
-{
+public interface StudentServiceIntf {
 
     //Create
-    public void createStudent(StudentTO studentTo);
+    public int createStudent(StudentTO studentTo);
 
     //Read
     public List<StudentTO> getAll();
 
-    public StudentTO getById(long id);
+    public StudentTO getStudent(long id);
 
     //Update
-    public int updateStudent(long id);
-
-    public StudentTO findStudent(int id);
+    public int updateStudent(StudentTO studentTO);
 
     //Delete
     public int deleteStudent(long id);

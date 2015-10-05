@@ -4,28 +4,35 @@
                 template="/resources/template/menubar.xhtml"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
-                xmlns:p="http://primefaces.org/ui">
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
         <title>Create Course</title>
     </h:head>
     <ui:define name="menu_bar">
         <h:body>
-            <h:form>
-                <p:panelGrid columns="2">
-                <p:outputLabel id="cName" value="Course name: "></p:outputLabel>
-                <p:inputText id="iName" value="#{courseBean.name}"></p:inputText>
+            <h:form id="form">
+                <p:panel id="panel" header="Add a new course" >
+                    <p:panelGrid columns="2">
+                        <p:outputLabel id="cName" value="Course name: "></p:outputLabel>
+                        <p:inputText id="iName" value="#{courseBean.name}"></p:inputText>
 
-                <p:outputLabel id="cCode" value="Course code: "></p:outputLabel>
-                <p:inputText id="iCode" value="#{courseBean.code}"></p:inputText>
+                        <p:outputLabel id="cCode" value="Course code: "></p:outputLabel>
+                        <p:inputText id="iCode" value="#{courseBean.code}"></p:inputText>
 
-                <p:outputLabel id="cPoints" value="Course points: "></p:outputLabel>
+                        <p:outputLabel id="cPoints" value="Course points: "></p:outputLabel>
 
-                <p:selectOneMenu id="selectCoursePoints" value="#{courseBean.points}" >
-                    <f:selectItems value="#{courseBean.coursePointsMap}"/>
-                </p:selectOneMenu>
-
-                <p:commandButton value="Submit" action="#{courseBean.submit()}" ></p:commandButton>
-                </p:panelGrid>
+                        <p:selectOneMenu id="selectCoursePoints" value="#{courseBean.points}" >
+                            <f:selectItems value="#{courseBean.coursePointsMap}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                </p:panel>
+                <p:toolbar>
+                    <f:facet name="left">
+                        <p:commandButton value="Add" update="panel" action="#{courseBean.add()}"></p:commandButton>
+                        <p:commandButton id="reset" value="Clear" update="panel" process="@this" action="#{courseBean.clear()}" ></p:commandButton>
+                    </f:facet>
+                </p:toolbar>
             </h:form>
         </h:body>
     </ui:define>
