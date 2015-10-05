@@ -173,7 +173,7 @@ public class EJBHelper
 
     }
 
-    public static Object attendanceTOConverter(AttendanceTO attendanceTO) {
+    public static AttendanceEntity attendanceTOConverter(AttendanceTO attendanceTO) {
 
         AttendanceEntity attendanceEntity = new AttendanceEntity();
 
@@ -186,5 +186,25 @@ public class EJBHelper
 
     }
 
+    public static List<AttendanceTO> attendanceEntityListConverter(List<AttendanceEntity> attendanceEntitys) {
+
+        List<AttendanceTO> attendanceTOs = new ArrayList<>();
+
+        for(AttendanceEntity attendanceEntity : attendanceEntitys) {
+
+            AttendanceTO attendanceTO = new AttendanceTO();
+
+            attendanceTO.setId(attendanceEntity.getId());
+            attendanceTO.setStudentEntity(attendanceEntity.getStudentEntity());
+            attendanceTO.setCourseEntity(attendanceEntity.getCourseEntity());
+            attendanceTO.setDateField(attendanceEntity.getDateField());
+
+            attendanceTOs.add(attendanceTO);
+
+        }
+
+        return attendanceTOs;
+
+    }
     //<-----ATTENDANCE
 }

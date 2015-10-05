@@ -27,7 +27,7 @@ public class CourseServiceSLSB implements CourseServiceIntf
     @Override
     public int createCourse(CourseTO courseTO) {
 
-        int successChecker;
+        
 
         try {
             em.persist(EJBHelper.courseTOConverter(courseTO));
@@ -79,10 +79,10 @@ public class CourseServiceSLSB implements CourseServiceIntf
     }
 
     @Override
-    public int deleteCourse(long id) {
+    public int deleteCourse(CourseTO courseTO) {
 
         try {
-            em.remove(id);
+            em.remove(EJBHelper.courseTOConverter(courseTO));
 
         } catch(Exception e) {
 

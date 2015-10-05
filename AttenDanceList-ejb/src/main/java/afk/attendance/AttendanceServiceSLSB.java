@@ -1,6 +1,7 @@
 package afk.attendance;
 
 import afk.entities.AttendanceEntity;
+import afk.entities.CourseEntity;
 import afk.helper.EJBHelper;
 import afk.to.AttendanceTO;
 import afk.to.CourseTO;
@@ -47,18 +48,41 @@ public class AttendanceServiceSLSB implements AttendanceServiceIntf
     }
 
     @Override
-    public List<AttendanceEntity> getAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<AttendanceTO> getAll() {
+
+        List<AttendanceEntity> attendanceEntitys = em
+                .createQuery("SELECT a FROM AttendanceEntity AS a")
+                .getResultList();
+
+        return EJBHelper.attendanceEntityListConverter(attendanceEntitys);
+
     }
 
     @Override
-    public int updateAttendance(long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public int updateAttendance(AttendanceTO attendanceTO) {
+
+        try {
+            em.refresh(EJBHelper.attendanceTOConverter(attendanceTO));
+
+        } catch(Exception ex) {
+            return 0;
+        }
+
+        return 1;
     }
 
     @Override
-    public int deleteAttendance(long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public int deleteAttendance(AttendanceTO attendanceTO) {
+
+        try {
+            em.remove(EJBHelper.attendanceTOConverter(attendanceTO));
+        } catch(Exception ex) {
+
+            return 0;
+        }
+
+        return 1;
+
     }
 
 }

@@ -22,12 +22,12 @@ public interface AttendanceServiceIntf
     //READ
     public AttendanceTO getAttendance(long id);
 
-    public List<AttendanceEntity> getAll();
+    public List<AttendanceTO> getAll();
 
     //UPDATE
-    public int updateAttendance(long id);
+    public int updateAttendance(AttendanceTO attendanceTO);
 
     //DELETE
-    public int deleteAttendance(long id);
+    public int deleteAttendance(AttendanceTO attendanceTO);
 
 }
