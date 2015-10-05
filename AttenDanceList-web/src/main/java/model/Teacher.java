@@ -14,7 +14,7 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
@@ -24,7 +24,7 @@ import javax.faces.validator.ValidatorException;
  * @author valance
  */
 @ManagedBean(name = "teacherBean")
-@SessionScoped
+@ViewScoped
 public class Teacher implements Serializable {
 
     @EJB
@@ -52,6 +52,7 @@ public class Teacher implements Serializable {
                 getExternalContext().getRequestParameterMap();
         if (!params.isEmpty()) {
             id = Long.valueOf(params.get("id"));
+            System.out.println("Teacher id " + id);
             teacher = Helper.teacherTOConverter(services.getTeacherService().getTeacher(id));
             initialize();
         }
@@ -77,6 +78,7 @@ public class Teacher implements Serializable {
     }
 
     public void update() {
+        System.out.println("Teacher update()");
         int i = services.getTeacherService().updateTeacher(Helper.teacherConverter(this));
         Messages.showMessage(i);
     }

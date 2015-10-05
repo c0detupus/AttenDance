@@ -227,6 +227,7 @@ public class Helper {
     public static TeacherTO teacherConverter(Teacher t) {
         TeacherTO tto = new TeacherTO();
 
+        tto.setId(t.getId());
         tto.setAddress(t.getAddress());
         tto.setCellPhone(t.getCellPhone());
         tto.setCity(t.getCity());
