@@ -29,6 +29,6 @@ public interface CourseServiceIntf
     public int updateCourse(CourseTO courseTO);
 
     //Delete
-    public int deleteCourse(CourseTO courseTO);
+    public int deleteCourse(long courseId);
 
 }

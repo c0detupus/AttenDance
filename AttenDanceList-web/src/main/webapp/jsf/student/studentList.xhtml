@@ -10,7 +10,8 @@
     </h:head>
     <ui:define name="menu_bar">
         <h:body>
-            <p:dataTable var="student" value="#{studentListBean.students}">
+            <p:dataTable id="studentList" var="student" value="#{studentListBean.students}" selectionMode="single" rowKey="#{student.id}" >
+                   <p:ajax event="rowSelect" listener="#{studentListBean.onRowSelect}" process="studentList" />
                 <f:facet name="header">
                     <p:outputLabel value="Student List"/>
                 </f:facet>

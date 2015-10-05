@@ -11,7 +11,7 @@ import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
@@ -21,12 +21,14 @@ import javax.faces.validator.ValidatorException;
  * @author c0detupus
  */
 @ManagedBean(name = "studentBean")
-@SessionScoped
+@ViewScoped
 public class Student implements Serializable
 {
     @EJB
     ServicesIntf services;
     
+    private long id;
+
     private String firstName,
             lastName,
             socialSecurityNumber,
@@ -38,10 +40,25 @@ public class Student implements Serializable
             city,
             zipCode,
             avgAttendance;
-
+    
+    private String currentFirstName,
+            currentLastName,
+            currentsocialSecurityNumber,
+            currentEmail;
+    
     public void submit() {
         services.getStudentService().createStudent(Helper.studentConverter(this));
     }
+    
+    
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+    
     //******* SETTERS--->
     public void setFirstName(String firstName) {
         this.firstName = firstName;

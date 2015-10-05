@@ -6,11 +6,15 @@
 package afk;
 
 import helper.Helper;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.context.FacesContext;
+import model.Course;
 import model.Student;
+import org.primefaces.event.SelectEvent;
 
 /**
  *
@@ -24,12 +28,20 @@ public class StudentListBean implements Serializable {
 
     private List<Student> students;
     private int studentAmount;
-
+    
+    private Student student;
+    
     public List<Student> getStudents() {
 
         students = Helper.studentTOListConverter(services.getStudentService().getAll());
 
         return students;
+    }
+
+    public void onRowSelect(SelectEvent event) throws IOException {
+        student = (Student) event.getObject();
+
+        FacesContext.getCurrentInstance().getExternalContext().redirect("studentView.xhtml?id=" + student.getId());
     }
 
     public int getStudentAmount() {

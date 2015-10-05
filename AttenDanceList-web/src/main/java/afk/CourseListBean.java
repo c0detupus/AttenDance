@@ -28,7 +28,6 @@ public class CourseListBean implements Serializable {
     private ServicesIntf services;
 
     private List<Course> courses;
-    private List<Course> selectedCourse;
     
     private Course course;
     
@@ -50,13 +49,4 @@ public class CourseListBean implements Serializable {
         total = courses.size();
         return total;
     }
-
-    public List<Course> getSelectedCourse() {
-        return selectedCourse;
-    }
-
-    public void setSelectedCourse(List<Course> selectedCourse) {
-        this.selectedCourse = selectedCourse;
-    }
-
 }

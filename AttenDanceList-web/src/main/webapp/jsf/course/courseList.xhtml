@@ -11,7 +11,7 @@
     </h:head>
     <ui:define name="menu_bar">
         <h:body>
-            <p:dataTable id="courseList" value="#{courseListBean.courses}" var="course" selectionMode="single" selection="#{courseListBean.selectedCourse}" rowKey="#{course.id}" >
+            <p:dataTable id="courseList" value="#{courseListBean.courses}" var="course" selectionMode="single" rowKey="#{course.id}" >
                    <p:ajax event="rowSelect" listener="#{courseListBean.onRowSelect}" process="courseList" />
                 <f:facet name="header">
                     <p:outputLabel value="Course List"/>

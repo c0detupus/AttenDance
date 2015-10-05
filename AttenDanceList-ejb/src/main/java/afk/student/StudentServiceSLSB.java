@@ -28,7 +28,6 @@ public class StudentServiceSLSB implements StudentServiceIntf
 
     @Override
     public void createStudent(StudentTO studentTo) {
-        //convert to entity
         em.persist(EJBHelper.studentTOConverter(studentTo));
     }
 
