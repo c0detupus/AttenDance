@@ -6,11 +6,16 @@
 package afk;
 
 import helper.Helper;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
+import javax.faces.application.ConfigurableNavigationHandler;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 import model.Course;
+import org.primefaces.event.SelectEvent;
 
 /**
  *
@@ -20,22 +25,38 @@ import model.Course;
 public class CourseListBean implements Serializable {
 
     @EJB
-    ServicesIntf services;
-    
+    private ServicesIntf services;
+
     private List<Course> courses;
+    private List<Course> selectedCourse;
+    
+    private Course course;
+    
     private int total;
 
-    //hardcoded, replace with db queries or helper class
     public List<Course> getCourses() {
-//        courses = new ArrayList<>();
-
         courses = Helper.courseTOListConverter(services.getCourseService().getAll());
-//       
+
         return courses;
+    }
+
+    public void onRowSelect(SelectEvent event) throws IOException {
+        course = (Course) event.getObject();
+        
+        FacesContext.getCurrentInstance().getExternalContext().redirect("courseView.xhtml?id=" + course.getId());
     }
 
     public int getTotal() {
         total = courses.size();
         return total;
     }
+
+    public List<Course> getSelectedCourse() {
+        return selectedCourse;
+    }
+
+    public void setSelectedCourse(List<Course> selectedCourse) {
+        this.selectedCourse = selectedCourse;
+    }
+
 }

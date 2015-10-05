@@ -6,7 +6,7 @@
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
                 xmlns:p="http://primefaces.org/ui">
     <h:head>
-        <title>Facelet Title</title>
+        <title>Create Course</title>
     </h:head>
     <ui:define name="menu_bar">
         <h:body>
@@ -20,7 +20,7 @@
 
                 <p:outputLabel id="cPoints" value="Course points: "></p:outputLabel>
 
-                <p:selectOneMenu id="selectCoursePoints" value="#{courseBean.currentPoints}" >
+                <p:selectOneMenu id="selectCoursePoints" value="#{courseBean.points}" >
                     <f:selectItems value="#{courseBean.coursePointsMap}"/>
                 </p:selectOneMenu>
 

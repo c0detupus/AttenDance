@@ -31,7 +31,7 @@ public class Helper {
 
     private Map<String, String> dayMap;
 
-    private Map<Integer, Integer> coursePointsMap;
+   
 
     //will populate the map depending on database
     //hardcoded for now
@@ -91,8 +91,8 @@ public class Helper {
         return dayMap;
     }
 
-    public Map populateCoursePointsMap() {
-        coursePointsMap = new LinkedHashMap<>();
+    public static Map populateCoursePointsMap() {
+        Map<Integer, Integer> coursePointsMap = new LinkedHashMap<>();
         coursePointsMap.put(50, 50);
         coursePointsMap.put(100, 100);
         return coursePointsMap;
@@ -126,10 +126,11 @@ public class Helper {
 
         for (CourseTO cto : courseTOList) {
             Course c = new Course();
-
+            
+            c.setId(cto.getId());
             c.setName(cto.getName());
             c.setCode(cto.getCode());
-            c.setCurrentPoints(cto.getPoints());
+            c.setPoints(cto.getPoints());
 
             courseList.add(c);
         }
@@ -157,11 +158,22 @@ public class Helper {
     public static CourseTO courseConverter(Course c) {
         CourseTO cto = new CourseTO();
 
+        cto.setId(c.getId());
         cto.setName(c.getName());
         cto.setCode(c.getCode());
-        cto.setPoints(c.getCurrentPoints());
+        cto.setPoints(c.getPoints());
 
         return cto;
+    }
+    
+    public static Course courseTOConverter(CourseTO cto){
+        Course c = new Course();
+        
+        c.setId(cto.getId());
+        c.setName(cto.getName());
+        c.setCode(cto.getCode());
+        c.setPoints(cto.getPoints());
+        return c;
     }
 
     public static StudentTO studentConverter(Student s) {
