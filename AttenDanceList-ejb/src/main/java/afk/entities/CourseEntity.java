@@ -6,6 +6,7 @@
 package afk.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -52,7 +53,10 @@ public class CourseEntity implements Serializable
                inverseJoinColumns = @JoinColumn(name = "student_id")
     )
     private List<StudentEntity> students;
-
+    
+    public CourseEntity() {
+        students = new ArrayList<>();
+    }
 //    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 //    @JoinColumn(name = "id")
 //    private TeacherEntity teacher;

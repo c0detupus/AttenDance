@@ -69,6 +69,7 @@ public class Student implements Serializable {
             id = Long.valueOf(params.get("id"));
             student = Helper.studentTOConverter(services.getStudentService()
                     .getStudent(id));
+            courses = student.getCourses();
             initialize();
         }
 

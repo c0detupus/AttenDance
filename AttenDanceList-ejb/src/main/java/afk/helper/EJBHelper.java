@@ -115,7 +115,7 @@ public class EJBHelper
         se.setSex(s.getSex());
         se.setSocialSecurityNumber(s.getSocialSecurityNumber());
         se.setZipCode(s.getZipCode());
-
+        se.setCourses(courseTOListConverter(s.getCourses()));
         return se;
     }
 
