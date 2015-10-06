@@ -1,10 +1,8 @@
 package afk.attendance;
 
 import afk.entities.AttendanceEntity;
-import afk.entities.CourseEntity;
 import afk.helper.EJBHelper;
 import afk.to.AttendanceTO;
-import afk.to.CourseTO;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
