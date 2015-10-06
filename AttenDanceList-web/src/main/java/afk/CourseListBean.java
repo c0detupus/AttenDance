@@ -32,8 +32,11 @@ public class CourseListBean implements Serializable {
     private int total;
 
     public List<Course> getCourses() {
+        System.out.println("CourseListBean()");
+        
         courses = Helper.courseTOListConverter(services.getCourseService().getAll());
-
+//        System.out.println("CourseList" + courses.get(0).getName());
+//        System.out.println("CourseList" + courses.get(0).getTeacher().getFirstName());
         return courses;
     }
 

@@ -20,8 +20,6 @@ public class CourseTO
             code,
             points;
 
-    private List<StudentTO> students;
-
     private TeacherTO teacher;
 
     public TeacherTO getTeacher() {
@@ -30,14 +28,6 @@ public class CourseTO
 
     public void setTeacher(TeacherTO teacher) {
         this.teacher = teacher;
-    }
-
-    public List<StudentTO> getStudents() {
-        return students;
-    }
-
-    public void setStudents(List<StudentTO> students) {
-        this.students = students;
     }
 
     public long getId() {

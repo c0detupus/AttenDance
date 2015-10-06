@@ -26,7 +26,8 @@ public class EJBHelper {
     public static CourseEntity courseTOConverter(CourseTO cto) {
 
         CourseEntity ce = new CourseEntity();
-
+        
+        ce.setTeacher(teacherTOConverter(cto.getTeacher()));
         ce.setId(cto.getId());
         ce.setName(cto.getName());
         ce.setCode(cto.getCode());
@@ -42,7 +43,8 @@ public class EJBHelper {
         for (CourseEntity ce : courseEntityList) {
 
             CourseTO cTO = new CourseTO();
-
+            
+            cTO.setTeacher(teacherEntityConverter(ce.getTeacher()));
             cTO.setId(ce.getId());
             cTO.setName(ce.getName());
             cTO.setCode(ce.getCode());
@@ -57,7 +59,8 @@ public class EJBHelper {
     public static CourseTO courseEntityConverter(CourseEntity courseEntity) {
 
         CourseTO courseTO = new CourseTO();
-
+        
+        courseTO.setTeacher(teacherEntityConverter(courseEntity.getTeacher()));
         courseTO.setId(courseEntity.getId());
         courseTO.setName(courseEntity.getName());
         courseTO.setCode(courseEntity.getCode());
@@ -72,7 +75,8 @@ public class EJBHelper {
     public static StudentTO studentEntityConverter(StudentEntity s) {
 
         StudentTO sto = new StudentTO();
-
+        
+        sto.setCourse(courseEntityConverter(s.getCourse()));
         sto.setId(s.getId());
         sto.setAddress(s.getAddress());
         sto.setAvgAttendance(s.getAvgAttendance());
@@ -92,7 +96,8 @@ public class EJBHelper {
 
     public static StudentEntity studentTOConverter(StudentTO s) {
         StudentEntity se = new StudentEntity();
-
+        
+        se.setCourse(courseTOConverter(s.getCourse()));
         se.setId(s.getId());
         se.setAddress(s.getAddress());
         se.setAvgAttendance(s.getAvgAttendance());
@@ -115,7 +120,8 @@ public class EJBHelper {
 
         for (StudentEntity s : eList) {
             StudentTO sto = new StudentTO();
-
+            
+            sto.setCourse(courseEntityConverter(s.getCourse()));
             sto.setId(s.getId());
             sto.setAddress(s.getAddress());
             sto.setAvgAttendance(s.getAvgAttendance());

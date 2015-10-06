@@ -12,7 +12,7 @@
     <ui:define name="menu_bar">
         <h:body>
             <p:dataTable id="courseList" value="#{courseListBean.courses}" var="course" selectionMode="single" rowKey="#{course.id}" >
-                   <p:ajax event="rowSelect" listener="#{courseListBean.onRowSelect}" process="courseList" />
+                <p:ajax event="rowSelect" listener="#{courseListBean.onRowSelect}" process="courseList" />
                 <f:facet name="header">
                     <p:outputLabel value="Course List"/>
                 </f:facet>
@@ -24,6 +24,12 @@
                 </p:column>
                 <p:column headerText="Points">
                     <h:outputText value="#{course.points}"/>
+                </p:column>
+                <p:column headerText="Teacher">
+                    <h:outputText value="#{course.teacher.firstName}"/>
+                </p:column>
+                <p:column headerText="Teacher Id">
+                    <h:outputText value="#{course.teacherId}"/>
                 </p:column>
                 <f:facet name="footer">
                     <h:outputText value="Total: #{courseListBean.total}" />

@@ -51,27 +51,6 @@ public class TeacherEntity implements Serializable
     @Column(name = "zip_code")
     private String zipCode;
 
-    @ManyToMany(targetEntity = afk.entities.StudentEntity.class, mappedBy = "teachers")
-    private List<StudentEntity> students;
-    @OneToOne
-    private CourseEntity course;
-
-    public List<StudentEntity> getStudents() {
-        return students;
-    }
-
-    public void setStudents(List<StudentEntity> students) {
-        this.students = students;
-    }
-
-    public CourseEntity getCourse() {
-        return course;
-    }
-
-    public void setCourse(CourseEntity course) {
-        this.course = course;
-    }
-
     public long getId() {
         return id;
     }

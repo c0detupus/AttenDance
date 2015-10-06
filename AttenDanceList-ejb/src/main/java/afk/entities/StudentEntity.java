@@ -7,7 +7,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -16,8 +18,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "Student")
-public class StudentEntity implements Serializable
-{
+public class StudentEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -46,13 +47,21 @@ public class StudentEntity implements Serializable
     private String zipCode;
     @Column(name = "avg_attendance")
     private String avgAttendance;
-    @ManyToMany(targetEntity = afk.entities.CourseEntity.class)
-    private List<CourseEntity> courses;
 
-    @ManyToMany(targetEntity = afk.entities.TeacherEntity.class)
-    private List<TeacherEntity> teachers;
+    @OneToOne
+    @JoinColumn(name = "course_id")
+    private CourseEntity course;
+
+    public CourseEntity getCourse() {
+        return course;
+    }
+
+    public void setCourse(CourseEntity course) {
+        this.course = course;
+    }
 
     //SETTERS----->
+
     public void setId(long id) {
         this.id = id;
     }
@@ -101,15 +110,7 @@ public class StudentEntity implements Serializable
         this.avgAttendance = avgAttendance;
     }
 
-    public void setCourses(List<CourseEntity> courses) {
-        this.courses = courses;
-    }
-
-    public void setTeachers(List<TeacherEntity> teachers) {
-        this.teachers = teachers;
-    }
     //<-----SETTERS
-
     //GETTERS----->
     public long getId() {
         return id;
@@ -159,12 +160,5 @@ public class StudentEntity implements Serializable
         return avgAttendance;
     }
 
-    public List<CourseEntity> getCourses() {
-        return courses;
-    }
-
-    public List<TeacherEntity> getTeachers() {
-        return teachers;
-    }
     //<-----GETTERS
 }

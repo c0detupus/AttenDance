@@ -27,25 +27,15 @@ public class StudentTO
             city,
             zipCode,
             avgAttendance;
+    
+    private CourseTO course;
 
-    private List<CourseTO> courses;
-
-    private List<TeacherTO> teachers;
-
-    public List<CourseTO> getCourses() {
-        return courses;
+    public CourseTO getCourse() {
+        return course;
     }
 
-    public List<TeacherTO> getTeachers() {
-        return teachers;
-    }
-
-    public void setTeachers(List<TeacherTO> teachers) {
-        this.teachers = teachers;
-    }
-
-    public void setCourses(List<CourseTO> courses) {
-        this.courses = courses;
+    public void setCourse(CourseTO course) {
+        this.course = course;
     }
 
     public long getId() {

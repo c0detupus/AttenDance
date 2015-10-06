@@ -23,7 +23,10 @@
                         <p:selectOneMenu id="selectCoursePoints" value="#{courseBean.points}" >
                             <f:selectItems value="#{courseBean.coursePointsMap}"/>
                         </p:selectOneMenu>
-
+                        <p:selectOneMenu id="selectTeacher" value="#{courseBean.teacher}">
+                            <f:selectItems value="#{courseBean.teachersList}" var="teacher"
+                                           itemLabel="#{teacher.firstName} #{teacher.lastName}"/>
+                        </p:selectOneMenu>
                     </p:panelGrid>
                 </p:panel>
                 <p:toolbar>

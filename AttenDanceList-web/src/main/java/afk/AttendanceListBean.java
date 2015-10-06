@@ -23,7 +23,7 @@ public class AttendanceListBean implements Serializable
 
     private List<Student> student;
     private List<Student> selectedStudent;
-    private List<Course> course;
+    private List<Course> courseList;
     
     private String selectedCourse;
     
@@ -38,9 +38,9 @@ public class AttendanceListBean implements Serializable
         return student;
     }
     
-    public List<Course> getCourses() {
-        course = Helper.courseTOListConverter(services.getCourseService().getAll());
-        return course;
+    public List<Course> getCourseList() {
+        courseList = Helper.courseTOListConverter(services.getCourseService().getAll());
+        return courseList;
     }
 
     public void getSelectedItems() {

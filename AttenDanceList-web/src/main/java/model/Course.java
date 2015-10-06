@@ -18,18 +18,42 @@ import javax.faces.context.FacesContext;
  */
 @ManagedBean(name = "courseBean")
 @ViewScoped
-public class Course implements Serializable
-{
+public class Course implements Serializable {
 
     private long id;
 
     private String name;
     private String code;
     private String points;
-
+    
     private List<Student> students;
-    private Teacher teacher;
+    private List<Teacher> teachersList;
 
+    public List<Teacher> getTeachersList() {
+        return teachersList;
+    }
+    
+    private String teacherId;
+
+    public String getTeacherId() {
+        return teacherId;
+    }
+
+    public void setTeacherId(String teacherId) {
+        this.teacherId = teacherId;
+    }
+
+    private List<Teacher> selectedTeacher;
+
+    public List<Teacher> getSelectedTeacher() {
+        return selectedTeacher;
+    }
+
+    public void setSelectedTeacher(List<Teacher> selectedTeacher) {
+        this.selectedTeacher = selectedTeacher;
+    }
+
+    private Teacher teacher;
     private Map<Integer, Integer> coursePointsMap;
 
     private Course course;
@@ -40,15 +64,17 @@ public class Course implements Serializable
     @PostConstruct
     public void init() {
 
+        System.out.println("Course init()");
         Map<String, String> params = FacesContext.getCurrentInstance().
                 getExternalContext().getRequestParameterMap();
-        if(!params.isEmpty()) {
+        if (!params.isEmpty()) {
             id = Long.valueOf(params.get("id"));
             course = Helper.courseTOConverter(services.getCourseService()
                     .getCourse(id));
             initialize();
         }
 
+        teachersList = Helper.teacherTOListConverter(services.getTeacherService().getAll());
         coursePointsMap = Helper.populateCoursePointsMap();
     }
 
@@ -58,12 +84,28 @@ public class Course implements Serializable
         points = course.getPoints();
     }
 
-    public void add() {
+    public void test() {
+        System.out.println("Course teacher: " + teacherId);
+//        System.out.println("Course name: " + name);
+//        System.out.println("Course select pts: " + points);
+//        System.out.println("Course selected teacher: " + selectedTeacher);
+    }
 
-        int i = services.getCourseService().createCourse(Helper
-                .courseConverter(this));
-        Messages.showMessage(i);
-        clear();
+    public void add() {
+        System.out.println("Course teacher: " + teacherId);
+        long tId = Long.valueOf(teacherId);
+        teacher = Helper.teacherTOConverter(services.getTeacherService().getTeacher(tId));
+        System.out.println("Course teacher name: " + teacher.getFirstName());
+        try {
+
+            int i = services.getCourseService().createCourse(Helper
+                    .courseConverter(this));
+            Messages.showMessage(i);
+            clear();
+        } catch (Exception e) {
+            System.out.println("Course exception: " + e);
+        }
+
     }
 
     public void update() {

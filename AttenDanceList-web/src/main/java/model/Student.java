@@ -26,8 +26,7 @@ import javax.faces.validator.ValidatorException;
  */
 @ManagedBean(name = "studentBean")
 @ViewScoped
-public class Student implements Serializable
-{
+public class Student implements Serializable {
 
     @EJB
     ServicesIntf services;
@@ -47,6 +46,7 @@ public class Student implements Serializable
             avgAttendance;
 
     private List<Course> courses;
+    private Course course;
 
     private List<Teacher> teachers;
 
@@ -60,7 +60,7 @@ public class Student implements Serializable
 
         Map<String, String> params = FacesContext.getCurrentInstance().
                 getExternalContext().getRequestParameterMap();
-        if(!params.isEmpty()) {
+        if (!params.isEmpty()) {
             id = Long.valueOf(params.get("id"));
             student = Helper.studentTOConverter(services.getStudentService()
                     .getStudent(id));
@@ -114,6 +114,14 @@ public class Student implements Serializable
         city = null;
         zipCode = null;
         avgAttendance = null;
+    }
+
+    public Course getCourse() {
+        return course;
+    }
+
+    public void setCourse(Course course) {
+        this.course = course;
     }
 
     public List<Course> getSelectedCourses() {
@@ -246,41 +254,41 @@ public class Student implements Serializable
 
     //******VALIDATORS--->
     public void validateLetters(FacesContext context,
-                                UIComponent toValidate,
-                                Object value) throws ValidatorException {
+            UIComponent toValidate,
+            Object value) throws ValidatorException {
 
         String str = (String) value;
 
-        if(!onlyLettersSC(str)) {
+        if (!onlyLettersSC(str)) {
             throw new ValidatorException(new FacesMessage("Can only have letters"));
         }
     }
 
     public void validateEmail(FacesContext context,
-                              UIComponent toValidate,
-                              Object value) throws ValidatorException {
+            UIComponent toValidate,
+            Object value) throws ValidatorException {
         String str = (String) value;
-        if(-1 == value.toString().indexOf("@")) {
+        if (-1 == value.toString().indexOf("@")) {
             FacesMessage message = new FacesMessage("Invalid email address");
             throw new ValidatorException(message);
         }
     }
 
     public void validateSSN(FacesContext context,
-                            UIComponent toValidate,
-                            Object value) throws ValidatorException {
+            UIComponent toValidate,
+            Object value) throws ValidatorException {
         String str = (String) value;
 
         //Replaces first ocurrence of '-' not all occurences cause 
         //ssn can be erroneously bli written with more than one '-'
         String cleaned = str.replaceFirst("[-]", "");
 
-        if(!onlyNumbers(cleaned)) {
+        if (!onlyNumbers(cleaned)) {
             throw new ValidatorException(
                     new FacesMessage("Only numbers preffered format YYMMDDXXXX or YYMMDD-XXXX"));
         }
 
-        if(cleaned.length() != 10) {
+        if (cleaned.length() != 10) {
 
             throw new ValidatorException(new FacesMessage("Use format YYMMDDXXXX or YYMMDD-XXXX"));
         }
@@ -288,14 +296,14 @@ public class Student implements Serializable
     }
 
     public void validatePhoneNumbers(FacesContext context,
-                                     UIComponent toValidate,
-                                     Object value) throws ValidatorException {
+            UIComponent toValidate,
+            Object value) throws ValidatorException {
 
         String str = (String) value;
 
         String cleaned = str.replaceFirst("\\s", "");
 
-        if(!onlyNumbers(str)) {
+        if (!onlyNumbers(str)) {
             throw new ValidatorException(
                     new FacesMessage("Only numbers"));
         }
@@ -303,16 +311,16 @@ public class Student implements Serializable
     }
 
     public void validateZipCode(FacesContext context,
-                                UIComponent toValidate,
-                                Object value) throws ValidatorException {
+            UIComponent toValidate,
+            Object value) throws ValidatorException {
 
         String str = (String) value;
-        if(!onlyNumbers(str)) {
+        if (!onlyNumbers(str)) {
             throw new ValidatorException(
                     new FacesMessage("Only numbers"));
         }
 
-        if(str.length() != 10) {
+        if (str.length() != 10) {
             throw new ValidatorException(
                     new FacesMessage("Invalid postal code"));
 

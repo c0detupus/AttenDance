@@ -103,7 +103,8 @@ public class Helper {
         for (StudentTO sto : studentTOList) {
 
             Student s = new Student();
-
+            
+            s.setCourse(courseTOConverter(sto.getCourse()));
             s.setId(sto.getId());
             s.setAddress(sto.getAddress());
             s.setAvgAttendance(sto.getAvgAttendance());
@@ -129,7 +130,8 @@ public class Helper {
 
         for (CourseTO cto : courseTOList) {
             Course c = new Course();
-
+            
+            c.setTeacher(teacherTOConverter(cto.getTeacher()));
             c.setId(cto.getId());
             c.setName(cto.getName());
             c.setCode(cto.getCode());
@@ -166,18 +168,20 @@ public class Helper {
 
     public static CourseTO courseConverter(Course c) {
         CourseTO cto = new CourseTO();
-
+        
+        cto.setTeacher(teacherConverter(c.getTeacher()));
         cto.setId(c.getId());
         cto.setName(c.getName());
         cto.setCode(c.getCode());
         cto.setPoints(c.getPoints());
-
+    
         return cto;
     }
 
     public static Course courseTOConverter(CourseTO cto) {
         Course c = new Course();
-
+        
+        c.setTeacher(teacherTOConverter(cto.getTeacher()));
         c.setId(cto.getId());
         c.setName(cto.getName());
         c.setCode(cto.getCode());
@@ -188,7 +192,8 @@ public class Helper {
 
     public static Student studentTOConverter(StudentTO sto) {
         Student s = new Student();
-
+        
+        s.setCourse(courseTOConverter(sto.getCourse()));
         s.setId(sto.getId());
         s.setAddress(sto.getAddress());
         s.setAvgAttendance(sto.getAvgAttendance());
@@ -208,6 +213,7 @@ public class Helper {
     public static StudentTO studentConverter(Student s) {
         StudentTO sto = new StudentTO();
 
+        sto.setCourse(courseConverter(s.getCourse()));
         sto.setId(s.getId());
         sto.setAddress(s.getAddress());
         sto.setAvgAttendance(s.getAvgAttendance());
