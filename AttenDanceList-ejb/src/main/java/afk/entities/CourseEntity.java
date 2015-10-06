@@ -42,25 +42,19 @@ public class CourseEntity implements Serializable
     @Column(name = "points")
     private String points;
 
-
     @OneToOne
     @JoinColumn(name = "teacher_id")
     private TeacherEntity teacher;
 
-    @ManyToMany
-    @JoinTable(name = "course_student_JoinTable",
-               joinColumns = @JoinColumn(name = "course_id"),
-               inverseJoinColumns = @JoinColumn(name = "student_id")
-    )
+    @ManyToMany(mappedBy = "courses")
     private List<StudentEntity> students;
-    
+
     public CourseEntity() {
         students = new ArrayList<>();
     }
 //    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 //    @JoinColumn(name = "id")
 //    private TeacherEntity teacher;
-
 
     //SETTERS----->
     public void setId(long id) {
@@ -79,7 +73,6 @@ public class CourseEntity implements Serializable
         this.points = points;
     }
 
-
     public void setTeacher(TeacherEntity teacher) {
         this.teacher = teacher;
     }
@@ -93,7 +86,6 @@ public class CourseEntity implements Serializable
 //    }
 
     //<-----SETTERS
-
     //GETTERS----->
     public long getId() {
         return id;
@@ -111,11 +103,9 @@ public class CourseEntity implements Serializable
         return points;
     }
 
-    
     public TeacherEntity getTeacher() {
         return teacher;
     }
-
 
     public List<StudentEntity> getStudents() {
         return students;
@@ -126,5 +116,4 @@ public class CourseEntity implements Serializable
 //    }
 
     //<-----GETTERS
-
 }

@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -49,7 +50,11 @@ public class StudentEntity implements Serializable
     @Column(name = "avg_attendance")
     private String avgAttendance;
 
-    @ManyToMany(mappedBy = "students")
+    @ManyToMany
+    @JoinTable(name = "course_student_JoinTable",
+               joinColumns = @JoinColumn(name = "student_id"),
+               inverseJoinColumns = @JoinColumn(name = "course_id")
+    )
     private List<CourseEntity> courses;
 
 //    @ManyToMany(targetEntity = afk.entities.TeacherEntity.class)
