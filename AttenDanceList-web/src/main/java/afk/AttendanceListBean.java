@@ -1,11 +1,14 @@
 package afk;
 
+import helper.Helper;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import model.Course;
 import model.Student;
 
 /**
@@ -14,22 +17,30 @@ import model.Student;
  */
 @ManagedBean(name = "attendanceListBean")
 public class AttendanceListBean implements Serializable
-{
+{   
+    @EJB
+    private ServicesIntf services;
 
     private List<Student> student;
     private List<Student> selectedStudent;
-
+    private List<Course> course;
+    
+    private String selectedCourse;
+    
     //String in Map is used to check First name, should be replaced to Long/Integer to check id/ssn
     private final Map<String, Boolean> selectedSSN = new HashMap<>();
 
     //hardcoded, replace with db queries or helper class
     public List<Student> getStudent() {
-        student = new ArrayList<>();
-//        student.add(new Student("Alexander", "Mehtälä", "076527771", "23"));
-//        student.add(new Student("Felicia", "Zhu", "076527771", "23"));
-//        student.add(new Student("Kajri", "Qu", "076527771", "23"));
-
+        
+        //should fetch students depending on course
+        
         return student;
+    }
+    
+    public List<Course> getCourses() {
+        course = Helper.courseTOListConverter(services.getCourseService().getAll());
+        return course;
     }
 
     public void getSelectedItems() {

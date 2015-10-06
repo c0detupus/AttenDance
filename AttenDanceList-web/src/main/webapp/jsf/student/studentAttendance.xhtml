@@ -12,6 +12,11 @@
     <ui:define name="menu_bar">
         <h:body>
             <h:form>
+                <p:outputLabel value="Course: " ></p:outputLabel>
+                    <p:selectOneMenu id="selectCourseStats" value="#{statsCourseBean.currentCourse}" >
+                        <f:selectItems value="#{statsCourseBean.coursesMap}"/>
+                    </p:selectOneMenu>
+                <p:separator/>
                 <p:dataTable id="attendanceList" value="#{attendanceListBean.student}" var="student">
                     <f:facet name="header">
                         <h:outputText value="Attendance List"/>

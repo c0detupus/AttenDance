@@ -6,13 +6,13 @@ import afk.to.AttendanceTO;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
  * @author c0detupus
  */
-public class AttendanceServiceSLSB implements AttendanceServiceIntf
-{
+public class AttendanceServiceSLSB implements AttendanceServiceIntf {
 
     @PersistenceContext(unitName = "PU")
     EntityManager em;
@@ -24,7 +24,7 @@ public class AttendanceServiceSLSB implements AttendanceServiceIntf
 
             em.persist(EJBHelper.attendanceTOConverter(attendanceTO));
 
-        } catch(Exception ex) {
+        } catch (Exception ex) {
 
             return 0;
         }
@@ -62,7 +62,7 @@ public class AttendanceServiceSLSB implements AttendanceServiceIntf
         try {
             em.refresh(EJBHelper.attendanceTOConverter(attendanceTO));
 
-        } catch(Exception ex) {
+        } catch (Exception ex) {
             return 0;
         }
 
@@ -70,17 +70,22 @@ public class AttendanceServiceSLSB implements AttendanceServiceIntf
     }
 
     @Override
-    public int deleteAttendance(AttendanceTO attendanceTO) {
+    public int deleteAttendance(long id) {
 
         try {
-            em.remove(EJBHelper.attendanceTOConverter(attendanceTO));
-        } catch(Exception ex) {
 
+            Query q = em
+                    .createQuery("DELETE FROM AttendanceEntity a WHERE a.id = "
+                            + id);
+
+            q.executeUpdate();
+
+        } catch (Exception e) {
+
+            System.out.println(e);
             return 0;
         }
-
         return 1;
-
     }
 
 }

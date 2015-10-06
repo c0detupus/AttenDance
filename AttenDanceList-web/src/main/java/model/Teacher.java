@@ -52,7 +52,6 @@ public class Teacher implements Serializable {
                 getExternalContext().getRequestParameterMap();
         if (!params.isEmpty()) {
             id = Long.valueOf(params.get("id"));
-            System.out.println("Teacher id " + id);
             teacher = Helper.teacherTOConverter(services.getTeacherService().getTeacher(id));
             initialize();
         }
@@ -78,7 +77,6 @@ public class Teacher implements Serializable {
     }
 
     public void update() {
-        System.out.println("Teacher update()");
         int i = services.getTeacherService().updateTeacher(Helper.teacherConverter(this));
         Messages.showMessage(i);
     }

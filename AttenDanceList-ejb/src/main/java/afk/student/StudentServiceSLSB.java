@@ -12,6 +12,7 @@ import javax.ejb.Stateless;
 import afk.to.StudentTO;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -74,11 +75,18 @@ public class StudentServiceSLSB implements StudentServiceIntf {
     @Override
     public int deleteStudent(long id) {
         try {
-            em.remove(id);
+
+            Query q = em
+                    .createQuery("DELETE FROM StudentEntity s WHERE s.id = "
+                            + id);
+
+            q.executeUpdate();
+
         } catch (Exception e) {
+
+            System.out.println(e);
             return 0;
         }
         return 1;
     }
-
 }

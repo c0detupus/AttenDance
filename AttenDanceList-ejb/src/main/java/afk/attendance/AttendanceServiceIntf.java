@@ -28,6 +28,6 @@ public interface AttendanceServiceIntf
     public int updateAttendance(AttendanceTO attendanceTO);
 
     //DELETE
-    public int deleteAttendance(AttendanceTO attendanceTO);
+    public int deleteAttendance(long id);
 
 }

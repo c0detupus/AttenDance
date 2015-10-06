@@ -9,6 +9,7 @@ import afk.ServicesIntf;
 import helper.Helper;
 import helper.Messages;
 import java.io.Serializable;
+import java.util.List;
 import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -45,6 +46,9 @@ public class Student implements Serializable {
             avgAttendance;
 
     private Student student;
+    private List<Course> courseList;
+
+    private List<Course> selectedCourses;
 
     @PostConstruct
     public void init() {
@@ -56,6 +60,8 @@ public class Student implements Serializable {
             student = Helper.studentTOConverter(services.getStudentService().getStudent(id));
             initialize();
         }
+
+        courseList = Helper.courseTOListConverter(services.getCourseService().getAll());
     }
 
     private void initialize() {
@@ -100,6 +106,18 @@ public class Student implements Serializable {
         city = null;
         zipCode = null;
         avgAttendance = null;
+    }
+
+    public List<Course> getSelectedCourses() {
+        return selectedCourses;
+    }
+
+    public void setSelectedCourses(List<Course> selectedCourses) {
+        this.selectedCourses = selectedCourses;
+    }
+
+    public List<Course> getCourseList() {
+        return courseList;
     }
 
     public long getId() {
