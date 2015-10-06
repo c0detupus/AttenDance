@@ -26,7 +26,8 @@ import javax.faces.validator.ValidatorException;
  */
 @ManagedBean(name = "studentBean")
 @ViewScoped
-public class Student implements Serializable {
+public class Student implements Serializable
+{
 
     @EJB
     ServicesIntf services;
@@ -45,6 +46,10 @@ public class Student implements Serializable {
             zipCode,
             avgAttendance;
 
+    private List<Course> courses;
+
+    private List<Teacher> teachers;
+
     private Student student;
     private List<Course> courseList;
 
@@ -55,9 +60,10 @@ public class Student implements Serializable {
 
         Map<String, String> params = FacesContext.getCurrentInstance().
                 getExternalContext().getRequestParameterMap();
-        if (!params.isEmpty()) {
+        if(!params.isEmpty()) {
             id = Long.valueOf(params.get("id"));
-            student = Helper.studentTOConverter(services.getStudentService().getStudent(id));
+            student = Helper.studentTOConverter(services.getStudentService()
+                    .getStudent(id));
             initialize();
         }
 
@@ -79,13 +85,15 @@ public class Student implements Serializable {
     }
 
     public void add() {
-        int i = services.getStudentService().createStudent(Helper.studentConverter(this));
+        int i = services.getStudentService().createStudent(Helper
+                .studentConverter(this));
         Messages.showMessage(i);
         clear();
     }
 
     public void update() {
-        int i = services.getStudentService().updateStudent(Helper.studentConverter(this));
+        int i = services.getStudentService().updateStudent(Helper
+                .studentConverter(this));
         Messages.showMessage(i);
     }
 
@@ -172,6 +180,14 @@ public class Student implements Serializable {
     public void setAvgAttendance(String avgAttendance) {
         this.avgAttendance = avgAttendance;
     }
+
+    public void setCourses(List<Course> courses) {
+        this.courses = courses;
+    }
+
+    public void setTeachers(List<Teacher> teachers) {
+        this.teachers = teachers;
+    }
     //<---SETTERS ******
 
     //******GETTERS--->
@@ -218,45 +234,53 @@ public class Student implements Serializable {
     public String getAvgAttendance() {
         return avgAttendance;
     }
+
+    public List<Course> getCourses() {
+        return courses;
+    }
+
+    public List<Teacher> getTeachers() {
+        return teachers;
+    }
     //<---GETTERS******
 
     //******VALIDATORS--->
     public void validateLetters(FacesContext context,
-            UIComponent toValidate,
-            Object value) throws ValidatorException {
+                                UIComponent toValidate,
+                                Object value) throws ValidatorException {
 
         String str = (String) value;
 
-        if (!onlyLettersSC(str)) {
+        if(!onlyLettersSC(str)) {
             throw new ValidatorException(new FacesMessage("Can only have letters"));
         }
     }
 
     public void validateEmail(FacesContext context,
-            UIComponent toValidate,
-            Object value) throws ValidatorException {
+                              UIComponent toValidate,
+                              Object value) throws ValidatorException {
         String str = (String) value;
-        if (-1 == value.toString().indexOf("@")) {
+        if(-1 == value.toString().indexOf("@")) {
             FacesMessage message = new FacesMessage("Invalid email address");
             throw new ValidatorException(message);
         }
     }
 
     public void validateSSN(FacesContext context,
-            UIComponent toValidate,
-            Object value) throws ValidatorException {
+                            UIComponent toValidate,
+                            Object value) throws ValidatorException {
         String str = (String) value;
 
         //Replaces first ocurrence of '-' not all occurences cause 
         //ssn can be erroneously bli written with more than one '-'
         String cleaned = str.replaceFirst("[-]", "");
 
-        if (!onlyNumbers(cleaned)) {
+        if(!onlyNumbers(cleaned)) {
             throw new ValidatorException(
                     new FacesMessage("Only numbers preffered format YYMMDDXXXX or YYMMDD-XXXX"));
         }
 
-        if (cleaned.length() != 10) {
+        if(cleaned.length() != 10) {
 
             throw new ValidatorException(new FacesMessage("Use format YYMMDDXXXX or YYMMDD-XXXX"));
         }
@@ -264,14 +288,14 @@ public class Student implements Serializable {
     }
 
     public void validatePhoneNumbers(FacesContext context,
-            UIComponent toValidate,
-            Object value) throws ValidatorException {
+                                     UIComponent toValidate,
+                                     Object value) throws ValidatorException {
 
         String str = (String) value;
 
         String cleaned = str.replaceFirst("\\s", "");
 
-        if (!onlyNumbers(str)) {
+        if(!onlyNumbers(str)) {
             throw new ValidatorException(
                     new FacesMessage("Only numbers"));
         }
@@ -279,16 +303,16 @@ public class Student implements Serializable {
     }
 
     public void validateZipCode(FacesContext context,
-            UIComponent toValidate,
-            Object value) throws ValidatorException {
+                                UIComponent toValidate,
+                                Object value) throws ValidatorException {
 
         String str = (String) value;
-        if (!onlyNumbers(str)) {
+        if(!onlyNumbers(str)) {
             throw new ValidatorException(
                     new FacesMessage("Only numbers"));
         }
 
-        if (str.length() != 10) {
+        if(str.length() != 10) {
             throw new ValidatorException(
                     new FacesMessage("Invalid postal code"));
 

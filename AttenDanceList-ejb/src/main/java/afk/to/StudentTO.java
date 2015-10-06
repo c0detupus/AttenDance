@@ -5,11 +5,14 @@
  */
 package afk.to;
 
+import java.util.List;
+
 /**
  *
  * @author c0detupus
  */
-public class StudentTO {
+public class StudentTO
+{
 
     private long id;
 
@@ -24,7 +27,27 @@ public class StudentTO {
             city,
             zipCode,
             avgAttendance;
-    
+
+    private List<CourseTO> courses;
+
+    private List<TeacherTO> teachers;
+
+    public List<CourseTO> getCourses() {
+        return courses;
+    }
+
+    public List<TeacherTO> getTeachers() {
+        return teachers;
+    }
+
+    public void setTeachers(List<TeacherTO> teachers) {
+        this.teachers = teachers;
+    }
+
+    public void setCourses(List<CourseTO> courses) {
+        this.courses = courses;
+    }
+
     public long getId() {
         return id;
     }

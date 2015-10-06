@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package afk.entities;
 
 import java.io.Serializable;
@@ -36,11 +31,15 @@ public class AttendanceEntity implements Serializable
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "student_id")
-    private StudentEntity studentEntity;
+//    @OneToOne
+//    @MapsId
+    private StudentEntity students;
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "course_id")
-    private CourseEntity courseEntity;
+//    @OneToOne
+//    @MapsId
+    private CourseEntity courses;
 
     @Temporal(TemporalType.DATE)
     @Column(name = "date_field")
@@ -51,12 +50,12 @@ public class AttendanceEntity implements Serializable
         this.id = id;
     }
 
-    public void setStudentEntity(StudentEntity studentEntity) {
-        this.studentEntity = studentEntity;
+    public void setStudents(StudentEntity students) {
+        this.students = students;
     }
 
     public void setCourseEntity(CourseEntity courseEntity) {
-        this.courseEntity = courseEntity;
+        this.courses = courseEntity;
     }
 
     public void setDateField(Date dateField) {
@@ -70,12 +69,12 @@ public class AttendanceEntity implements Serializable
         return id;
     }
 
-    public StudentEntity getStudentEntity() {
-        return studentEntity;
+    public StudentEntity getStudents() {
+        return students;
     }
 
     public CourseEntity getCourseEntity() {
-        return courseEntity;
+        return courses;
     }
 
     public Date getDateField() {
