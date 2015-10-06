@@ -46,16 +46,12 @@ public class Student implements Serializable {
             zipCode,
             avgAttendance;
 
-
     private List<Course> courses;
-
 
     private List<Teacher> teachers;
 
-
-
     private Student student;
-    
+
     private List<Course> existingCourses;
 
     private List<String> selectedCourses;
@@ -69,12 +65,20 @@ public class Student implements Serializable {
             id = Long.valueOf(params.get("id"));
             student = Helper.studentTOConverter(services.getStudentService()
                     .getStudent(id));
+
             courses = student.getCourses();
+            selectedCourses = new ArrayList<>();
+            for (Course c : courses) {
+                String s = String.valueOf(c.getId());
+                selectedCourses.add(s);
+                System.out.println("Init() s : " + s);
+            }
+
+            System.out.println("Student courses: " + courses);
             initialize();
         }
 
         existingCourses = Helper.courseTOListConverter(services.getCourseService().getAll());
-        System.out.println("STUDENT EXISTING_COURSES" + existingCourses);
     }
 
     private void initialize() {
@@ -92,31 +96,15 @@ public class Student implements Serializable {
     }
 
     public void add() {
-        //selectedCourse = (String) course_id
-        
-        //parse to long
-        
-        //get course with id
-        
-        //add course object to setCourses()
-        
-        
-        System.out.println("Student add()");
-        
-        System.out.println("SELECTED COURSES BEFORE" + selectedCourses);
-//        setCourses(selectedCourses);
+
         courses = new ArrayList<>();
-        Course asdqwe = new Course();
-        for(String s : selectedCourses){
-             asdqwe = Helper.courseTOConverter(services.getCourseService()
+        Course course;
+        for (String s : selectedCourses) {
+            course = Helper.courseTOConverter(services.getCourseService()
                     .getCourse(Long.valueOf(s)));
-             System.out.println("add loop 1: "+ asdqwe);
-             courses.add(asdqwe);
-             System.out.println("add loop: " + asdqwe.getId() + " "+ asdqwe.getName());
+            courses.add(course);
         }
-        System.out.println("SELECTED COURSES AFTER" + courses);
-        
-        
+
         int i = services.getStudentService().createStudent(Helper
                 .studentConverter(this));
         Messages.showMessage(i);
@@ -124,6 +112,14 @@ public class Student implements Serializable {
     }
 
     public void update() {
+        courses = new ArrayList<>();
+        Course course;
+        System.out.println("Student update: " + selectedCourses);
+        for (String s : selectedCourses) {
+            course = Helper.courseTOConverter(services.getCourseService()
+                    .getCourse(Long.valueOf(s)));
+            courses.add(course);
+        }
         int i = services.getStudentService().updateStudent(Helper
                 .studentConverter(this));
         Messages.showMessage(i);
@@ -148,7 +144,6 @@ public class Student implements Serializable {
         avgAttendance = null;
     }
 
-
     public List<String> getSelectedCourses() {
         return selectedCourses;
     }
@@ -157,7 +152,7 @@ public class Student implements Serializable {
         this.selectedCourses = selectedCourses;
     }
 
-    public List<Course> getCourseList() {
+    public List<Course> getExistingCourses() {
         return existingCourses;
     }
 

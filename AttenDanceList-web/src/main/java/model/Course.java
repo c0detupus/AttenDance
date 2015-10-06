@@ -26,14 +26,13 @@ public class Course implements Serializable {
     private String code;
     private String points;
 
-    
     private List<Student> students;
     private List<Teacher> teachersList;
 
     public List<Teacher> getTeachersList() {
         return teachersList;
     }
-    
+
     private String teacherId;
 
     public String getTeacherId() {
@@ -44,11 +43,8 @@ public class Course implements Serializable {
         this.teacherId = teacherId;
     }
 
-
 //    private List<Student> students;
 //    private Teacher teacher;
-
-
     private List<Teacher> selectedTeacher;
 
     public List<Teacher> getSelectedTeacher() {
@@ -98,12 +94,9 @@ public class Course implements Serializable {
     }
 
     public void add() {
-        System.out.println("Course teacher: " + teacherId);
         long tId = Long.valueOf(teacherId);
         teacher = Helper.teacherTOConverter(services.getTeacherService().getTeacher(tId));
-        System.out.println("Course teacher name: " + teacher.getFirstName());
         try {
-
             int i = services.getCourseService().createCourse(Helper
                     .courseConverter(this));
             Messages.showMessage(i);
@@ -115,6 +108,8 @@ public class Course implements Serializable {
     }
 
     public void update() {
+        long tId = Long.valueOf(teacherId);
+        teacher = Helper.teacherTOConverter(services.getTeacherService().getTeacher(tId));
         int i = services.getCourseService().updateCourse(Helper
                 .courseConverter(this));
         Messages.showMessage(i);
@@ -181,7 +176,6 @@ public class Course implements Serializable {
 //    public void setStudents(List<Student> students) {
 //        this.students = students;
 //    }
-
     public Course getCourse() {
         return course;
     }

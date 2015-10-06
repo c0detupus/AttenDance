@@ -117,24 +117,19 @@
                     </p:panelGrid>  
                 </p:panel>
                 <p:separator />
-                <p:dataTable id="courseList" value="#{studentBean.courses}" var="course" selectionMode="single" rowKey="#{course.id}" >
-                    <p:ajax event="rowSelect" listener="#{courseListBean.onRowSelect}" process="courseList" />
-                    <f:facet name="header">
-                        <p:outputLabel value="Course List"/>
-                    </f:facet>
-                    <p:column headerText="Name">
-                        <h:outputText value="#{course.name}"/>
-                    </p:column>
-                    <p:column headerText="Code">
-                        <h:outputText value="#{course.code}"/>
-                    </p:column>
-                    <p:column headerText="Points">
-                        <h:outputText value="#{course.points}"/>
-                    </p:column>
-                    <p:column headerText="Teacher">
-                        <h:outputText value="#{course.teacher.firstName}"/>
-                    </p:column>
-                </p:dataTable>
+                <h:outputLabel value="Course: " />
+                <p:selectCheckboxMenu id="course2" value="#{studentBean.selectedCourses}" label="Select courses"
+                                      filter="true" filterMatchMode="startsWith" >
+                    <f:selectItems value="#{studentBean.existingCourses}" var="course"
+                                   itemLabel="#{course.name} - #{course.code}"
+                                   itemValue="#{course.id}"/>
+                </p:selectCheckboxMenu>
+                <p:commandButton value="Add courses" update="display panel" process="@form"/>
+                <p:outputPanel id="display" style="width:250px;padding-left:5px;margin-top:10px">
+                    <p:dataList value="#{studentBean.selectedCourses}" var="course" emptyMessage="No course selected">
+                        #{course}
+                    </p:dataList>
+                </p:outputPanel>
                 <p:toolbar>
                     <f:facet name="left">
                         <p:commandButton value="Save" update="panel" action="#{studentBean.update()}" ></p:commandButton>

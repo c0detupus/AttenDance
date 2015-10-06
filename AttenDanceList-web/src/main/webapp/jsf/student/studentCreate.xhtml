@@ -123,11 +123,11 @@
                         <h:outputLabel value="Course: " />
                         <p:selectCheckboxMenu id="course2" value="#{studentBean.selectedCourses}" label="Select courses"
                                               filter="true" filterMatchMode="startsWith" >
-                            <f:selectItems value="#{studentBean.courseList}" var="course"
+                            <f:selectItems value="#{studentBean.existingCourses}" var="course"
                                            itemLabel="#{course.name} - #{course.code}"
                                            itemValue="#{course.id}"/>
                         </p:selectCheckboxMenu>
-                        <p:commandButton value="Add courses" update="display" process="@form"/>
+                        <p:commandButton value="Add courses" update="display panel" process="@form"/>
                         <p:outputPanel id="display" style="width:250px;padding-left:5px;margin-top:10px">
                             <p:dataList value="#{studentBean.selectedCourses}" var="course" emptyMessage="No course selected">
                                 #{course}

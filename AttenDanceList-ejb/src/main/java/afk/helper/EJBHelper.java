@@ -95,7 +95,7 @@ public class EJBHelper
         sto.setSex(s.getSex());
         sto.setSocialSecurityNumber(s.getSocialSecurityNumber());
         sto.setZipCode(s.getZipCode());
-
+        sto.setCourses(courseEntityListConverter(s.getCourses()));
         return sto;
 
     }
@@ -138,7 +138,7 @@ public class EJBHelper
             sto.setSex(s.getSex());
             sto.setSocialSecurityNumber(s.getSocialSecurityNumber());
             sto.setZipCode(s.getZipCode());
-
+            sto.setCourses(courseEntityListConverter(s.getCourses()));
             toList.add(sto);
         }
 

@@ -23,9 +23,13 @@
                         <p:selectOneMenu id="selectCoursePoints" value="#{courseBean.points}" >
                             <f:selectItems value="#{courseBean.coursePointsMap}"/>
                         </p:selectOneMenu>
-                        <p:selectOneMenu id="selectTeacher" value="#{courseBean.teacher}">
+                        
+                        <p:outputLabel id="cTeacher" value="Teacher: "></p:outputLabel>
+                        
+                        <p:selectOneMenu id="selectTeacher" value="#{courseBean.teacherId}">
                             <f:selectItems value="#{courseBean.teachersList}" var="teacher"
-                                           itemLabel="#{teacher.firstName} #{teacher.lastName}"/>
+                                           itemLabel="#{teacher.firstName} #{teacher.lastName}"
+                                           itemValue="#{teacher.id}"/>
                         </p:selectOneMenu>
                     </p:panelGrid>
                 </p:panel>
