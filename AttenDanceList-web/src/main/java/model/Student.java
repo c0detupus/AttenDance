@@ -27,7 +27,8 @@ import javax.faces.validator.ValidatorException;
  */
 @ManagedBean(name = "studentBean")
 @ViewScoped
-public class Student implements Serializable {
+public class Student implements Serializable
+{
 
     @EJB
     ServicesIntf services;
@@ -54,31 +55,65 @@ public class Student implements Serializable {
 
     private List<Course> existingCourses;
 
-    private List<String> selectedCourses;
+    private List<String> selectedCourseIDs;
+
+    private List<String> selectedCourseNames;
+
+    public Student() {
+        this.selectedCourseNames = new ArrayList<>();
+    }
 
     @PostConstruct
     public void init() {
 
         Map<String, String> params = FacesContext.getCurrentInstance().
                 getExternalContext().getRequestParameterMap();
-        if (!params.isEmpty()) {
+
+        if(!params.isEmpty()) {
             id = Long.valueOf(params.get("id"));
             student = Helper.studentTOConverter(services.getStudentService()
                     .getStudent(id));
 
             courses = student.getCourses();
-            selectedCourses = new ArrayList<>();
-            for (Course c : courses) {
+            selectedCourseIDs = new ArrayList<>();
+            for(Course c : courses) {
                 String s = String.valueOf(c.getId());
-                selectedCourses.add(s);
+                selectedCourseIDs.add(s);
                 System.out.println("Init() s : " + s);
             }
 
-            System.out.println("Student courses: " + courses);
             initialize();
         }
 
-        existingCourses = Helper.courseTOListConverter(services.getCourseService().getAll());
+        existingCourses = Helper.courseTOListConverter(services
+                .getCourseService().getAll());
+
+        if(selectedCourseIDs != null) {
+            updateSelectedCoursePanel();
+
+        }
+    }
+
+    public void updateSelectedCoursePanel() {
+
+        List<String> nameHolder = new ArrayList<>();
+
+        for(String s : selectedCourseIDs) {
+
+            for(Course currentCourse : existingCourses) {
+
+                if(currentCourse.getId() == Long.parseLong(s)) {
+
+                    nameHolder.add(currentCourse.getName());
+
+                }
+
+            }
+
+        }
+
+        selectedCourseNames = nameHolder;
+
     }
 
     private void initialize() {
@@ -99,7 +134,7 @@ public class Student implements Serializable {
 
         courses = new ArrayList<>();
         Course course;
-        for (String s : selectedCourses) {
+        for(String s : selectedCourseIDs) {
             course = Helper.courseTOConverter(services.getCourseService()
                     .getCourse(Long.valueOf(s)));
             courses.add(course);
@@ -114,8 +149,8 @@ public class Student implements Serializable {
     public void update() {
         courses = new ArrayList<>();
         Course course;
-        System.out.println("Student update: " + selectedCourses);
-        for (String s : selectedCourses) {
+        System.out.println("Student update: " + selectedCourseIDs);
+        for(String s : selectedCourseIDs) {
             course = Helper.courseTOConverter(services.getCourseService()
                     .getCourse(Long.valueOf(s)));
             courses.add(course);
@@ -144,12 +179,12 @@ public class Student implements Serializable {
         avgAttendance = null;
     }
 
-    public List<String> getSelectedCourses() {
-        return selectedCourses;
+    public List<String> getSelectedCourseIDs() {
+        return selectedCourseIDs;
     }
 
-    public void setSelectedCourses(List<String> selectedCourses) {
-        this.selectedCourses = selectedCourses;
+    public void setSelectedCourseIDs(List<String> selectedCourseIDs) {
+        this.selectedCourseIDs = selectedCourseIDs;
     }
 
     public List<Course> getExistingCourses() {
@@ -216,8 +251,12 @@ public class Student implements Serializable {
 //    public void setTeachers(List<Teacher> teachers) {
 //        this.teachers = teachers;
 //    }
-    //<---SETTERS ******
 
+    public void setSelectedCourseNames(List<String> selectedCourseNames) {
+        this.selectedCourseNames = selectedCourseNames;
+    }
+
+    //<---SETTERS ******
     //******GETTERS--->
     public String getFirstName() {
         return firstName;
@@ -270,45 +309,49 @@ public class Student implements Serializable {
 //    public List<Teacher> getTeachers() {
 //        return teachers;
 //    }
+
+    public List<String> getSelectedCourseNames() {
+        return selectedCourseNames;
+    }
     //<---GETTERS******
 
     //******VALIDATORS--->
     public void validateLetters(FacesContext context,
-            UIComponent toValidate,
-            Object value) throws ValidatorException {
+                                UIComponent toValidate,
+                                Object value) throws ValidatorException {
 
         String str = (String) value;
 
-        if (!onlyLettersSC(str)) {
+        if(!onlyLettersSC(str)) {
             throw new ValidatorException(new FacesMessage("Can only have letters"));
         }
     }
 
     public void validateEmail(FacesContext context,
-            UIComponent toValidate,
-            Object value) throws ValidatorException {
+                              UIComponent toValidate,
+                              Object value) throws ValidatorException {
         String str = (String) value;
-        if (-1 == value.toString().indexOf("@")) {
+        if(-1 == value.toString().indexOf("@")) {
             FacesMessage message = new FacesMessage("Invalid email address");
             throw new ValidatorException(message);
         }
     }
 
     public void validateSSN(FacesContext context,
-            UIComponent toValidate,
-            Object value) throws ValidatorException {
+                            UIComponent toValidate,
+                            Object value) throws ValidatorException {
         String str = (String) value;
 
         //Replaces first ocurrence of '-' not all occurences cause 
         //ssn can be erroneously bli written with more than one '-'
         String cleaned = str.replaceFirst("[-]", "");
 
-        if (!onlyNumbers(cleaned)) {
+        if(!onlyNumbers(cleaned)) {
             throw new ValidatorException(
                     new FacesMessage("Only numbers preffered format YYMMDDXXXX or YYMMDD-XXXX"));
         }
 
-        if (cleaned.length() != 10) {
+        if(cleaned.length() != 10) {
 
             throw new ValidatorException(new FacesMessage("Use format YYMMDDXXXX or YYMMDD-XXXX"));
         }
@@ -316,14 +359,14 @@ public class Student implements Serializable {
     }
 
     public void validatePhoneNumbers(FacesContext context,
-            UIComponent toValidate,
-            Object value) throws ValidatorException {
+                                     UIComponent toValidate,
+                                     Object value) throws ValidatorException {
 
         String str = (String) value;
 
         String cleaned = str.replaceFirst("\\s", "");
 
-        if (!onlyNumbers(str)) {
+        if(!onlyNumbers(str)) {
             throw new ValidatorException(
                     new FacesMessage("Only numbers"));
         }
@@ -331,16 +374,16 @@ public class Student implements Serializable {
     }
 
     public void validateZipCode(FacesContext context,
-            UIComponent toValidate,
-            Object value) throws ValidatorException {
+                                UIComponent toValidate,
+                                Object value) throws ValidatorException {
 
         String str = (String) value;
-        if (!onlyNumbers(str)) {
+        if(!onlyNumbers(str)) {
             throw new ValidatorException(
                     new FacesMessage("Only numbers"));
         }
 
-        if (str.length() != 10) {
+        if(str.length() != 10) {
             throw new ValidatorException(
                     new FacesMessage("Invalid postal code"));
 
