@@ -28,9 +28,6 @@
                 <p:column headerText="Teacher">
                     <h:outputText value="#{course.teacher.firstName}"/>
                 </p:column>
-                <p:column headerText="Teacher Id">
-                    <h:outputText value="#{course.teacherId}"/>
-                </p:column>
                 <f:facet name="footer">
                     <h:outputText value="Total: #{courseListBean.total}" />
                     <p:commandButton value="Add" action="courseCreate?faces-redirect=true" style="margin-left: 5%"/>

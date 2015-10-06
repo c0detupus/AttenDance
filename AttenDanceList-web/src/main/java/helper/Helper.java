@@ -22,7 +22,8 @@ import model.Teacher;
  *
  * @author valance
  */
-public class Helper {
+public class Helper
+{
 
     private Map<String, String> courseMap;
     private Map<String, String> studentMap;
@@ -82,7 +83,7 @@ public class Helper {
         int daysInMonth = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
         dayMap = new LinkedHashMap<>();
 
-        for (int i = 1; i <= daysInMonth; i++) {
+        for(int i = 1; i <= daysInMonth; i++) {
             String day = Integer.toString(i);
             dayMap.put(day, day);
         }
@@ -100,7 +101,7 @@ public class Helper {
 
         List<Student> studentList = new ArrayList<>();
 
-        for (StudentTO sto : studentTOList) {
+        for(StudentTO sto : studentTOList) {
 
             Student s = new Student();
             
@@ -128,7 +129,7 @@ public class Helper {
 
         List<Course> courseList = new ArrayList<>();
 
-        for (CourseTO cto : courseTOList) {
+        for(CourseTO cto : courseTOList) {
             Course c = new Course();
             
             c.setTeacher(teacherTOConverter(cto.getTeacher()));
@@ -146,7 +147,7 @@ public class Helper {
 
         List<Teacher> teacherList = new ArrayList<>();
 
-        for (TeacherTO tto : teacherTOList) {
+        for(TeacherTO tto : teacherTOList) {
             Teacher t = new Teacher();
 
             t.setId(tto.getId());

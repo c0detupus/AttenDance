@@ -48,6 +48,7 @@ public class StudentEntity implements Serializable {
     @Column(name = "avg_attendance")
     private String avgAttendance;
 
+
     @OneToOne
     @JoinColumn(name = "course_id")
     private CourseEntity course;
@@ -59,6 +60,13 @@ public class StudentEntity implements Serializable {
     public void setCourse(CourseEntity course) {
         this.course = course;
     }
+
+//    @ManyToMany(targetEntity = afk.entities.CourseEntity.class)
+//    private List<CourseEntity> courses;
+
+//    @ManyToMany(targetEntity = afk.entities.TeacherEntity.class)
+//    private List<TeacherEntity> teachers;
+
 
     //SETTERS----->
 
@@ -110,6 +118,15 @@ public class StudentEntity implements Serializable {
         this.avgAttendance = avgAttendance;
     }
 
+
+//    public void setCourses(List<CourseEntity> courses) {
+//        this.courses = courses;
+//    }
+//
+//    public void setTeachers(List<TeacherEntity> teachers) {
+//        this.teachers = teachers;
+//    }
+
     //<-----SETTERS
     //GETTERS----->
     public long getId() {
@@ -159,6 +176,16 @@ public class StudentEntity implements Serializable {
     public String getAvgAttendance() {
         return avgAttendance;
     }
+
+
+
+//    public List<CourseEntity> getCourses() {
+//        return courses;
+//    }
+//
+//    public List<TeacherEntity> getTeachers() {
+//        return teachers;
+//    }
 
     //<-----GETTERS
 }

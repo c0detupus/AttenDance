@@ -120,8 +120,7 @@ public class EJBHelper {
 
         for (StudentEntity s : eList) {
             StudentTO sto = new StudentTO();
-            
-            sto.setCourse(courseEntityConverter(s.getCourse()));
+
             sto.setId(s.getId());
             sto.setAddress(s.getAddress());
             sto.setAvgAttendance(s.getAvgAttendance());

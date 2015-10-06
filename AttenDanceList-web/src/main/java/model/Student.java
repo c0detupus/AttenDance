@@ -45,10 +45,16 @@ public class Student implements Serializable {
             zipCode,
             avgAttendance;
 
+
     private List<Course> courses;
     private Course course;
 
     private List<Teacher> teachers;
+
+//    private List<Course> courses;
+//
+//    private List<Teacher> teachers;
+
 
     private Student student;
     private List<Course> courseList;
@@ -189,13 +195,13 @@ public class Student implements Serializable {
         this.avgAttendance = avgAttendance;
     }
 
-    public void setCourses(List<Course> courses) {
-        this.courses = courses;
-    }
-
-    public void setTeachers(List<Teacher> teachers) {
-        this.teachers = teachers;
-    }
+//    public void setCourses(List<Course> courses) {
+//        this.courses = courses;
+//    }
+//
+//    public void setTeachers(List<Teacher> teachers) {
+//        this.teachers = teachers;
+//    }
     //<---SETTERS ******
 
     //******GETTERS--->
@@ -243,13 +249,13 @@ public class Student implements Serializable {
         return avgAttendance;
     }
 
-    public List<Course> getCourses() {
-        return courses;
-    }
-
-    public List<Teacher> getTeachers() {
-        return teachers;
-    }
+//    public List<Course> getCourses() {
+//        return courses;
+//    }
+//
+//    public List<Teacher> getTeachers() {
+//        return teachers;
+//    }
     //<---GETTERS******
 
     //******VALIDATORS--->

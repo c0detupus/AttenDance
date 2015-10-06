@@ -33,6 +33,7 @@ public class CourseServiceSLSB implements CourseServiceIntf
 
         } catch(Exception ex) {
 
+            System.out.println(ex);
             return 0;
 
         }

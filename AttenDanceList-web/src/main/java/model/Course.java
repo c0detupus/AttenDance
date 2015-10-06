@@ -25,6 +25,7 @@ public class Course implements Serializable {
     private String name;
     private String code;
     private String points;
+
     
     private List<Student> students;
     private List<Teacher> teachersList;
@@ -42,6 +43,11 @@ public class Course implements Serializable {
     public void setTeacherId(String teacherId) {
         this.teacherId = teacherId;
     }
+
+
+//    private List<Student> students;
+//    private Teacher teacher;
+
 
     private List<Teacher> selectedTeacher;
 
@@ -168,13 +174,13 @@ public class Course implements Serializable {
         return coursePointsMap;
     }
 
-    public List<Student> getStudents() {
-        return students;
-    }
-
-    public void setStudents(List<Student> students) {
-        this.students = students;
-    }
+//    public List<Student> getStudents() {
+//        return students;
+//    }
+//
+//    public void setStudents(List<Student> students) {
+//        this.students = students;
+//    }
 
     public Course getCourse() {
         return course;
