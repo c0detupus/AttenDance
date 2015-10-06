@@ -12,10 +12,13 @@
     <ui:define name="menu_bar">
         <h:body>
             <h:form>
+                <p:panelGrid columns="2" >
                 <p:outputLabel value="Course: " ></p:outputLabel>
-                    <p:selectOneMenu id="selectCourseStats" value="#{statsCourseBean.currentCourse}" >
-                        <f:selectItems value="#{statsCourseBean.coursesMap}"/>
-                    </p:selectOneMenu>
+                <p:selectOneMenu id="selectCourse" value="#{attendanceListBean.selectedCourse}" >
+                    <f:selectItems value="#{attendanceListBean.courseList}" var="course"
+                                   itemLabel="#{course.name}"/>
+                </p:selectOneMenu>
+                </p:panelGrid>
                 <p:separator/>
                 <p:dataTable id="attendanceList" value="#{attendanceListBean.student}" var="student">
                     <f:facet name="header">
