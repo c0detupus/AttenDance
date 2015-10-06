@@ -46,11 +46,11 @@ public class StudentEntity implements Serializable
     private String zipCode;
     @Column(name = "avg_attendance")
     private String avgAttendance;
-    @ManyToMany(targetEntity = afk.entities.CourseEntity.class)
-    private List<CourseEntity> courses;
+//    @ManyToMany(targetEntity = afk.entities.CourseEntity.class)
+//    private List<CourseEntity> courses;
 
-    @ManyToMany(targetEntity = afk.entities.TeacherEntity.class)
-    private List<TeacherEntity> teachers;
+//    @ManyToMany(targetEntity = afk.entities.TeacherEntity.class)
+//    private List<TeacherEntity> teachers;
 
     //SETTERS----->
     public void setId(long id) {
@@ -101,13 +101,13 @@ public class StudentEntity implements Serializable
         this.avgAttendance = avgAttendance;
     }
 
-    public void setCourses(List<CourseEntity> courses) {
-        this.courses = courses;
-    }
-
-    public void setTeachers(List<TeacherEntity> teachers) {
-        this.teachers = teachers;
-    }
+//    public void setCourses(List<CourseEntity> courses) {
+//        this.courses = courses;
+//    }
+//
+//    public void setTeachers(List<TeacherEntity> teachers) {
+//        this.teachers = teachers;
+//    }
     //<-----SETTERS
 
     //GETTERS----->
@@ -159,12 +159,12 @@ public class StudentEntity implements Serializable
         return avgAttendance;
     }
 
-    public List<CourseEntity> getCourses() {
-        return courses;
-    }
-
-    public List<TeacherEntity> getTeachers() {
-        return teachers;
-    }
+//    public List<CourseEntity> getCourses() {
+//        return courses;
+//    }
+//
+//    public List<TeacherEntity> getTeachers() {
+//        return teachers;
+//    }
     //<-----GETTERS
 }

@@ -45,8 +45,8 @@ public class Teacher implements Serializable
             city,
             zipCode;
 
-    private List<Student> students;
-    private Course course;
+//    private List<Student> students;
+//    private Course course;
 
     private Teacher teacher;
 
@@ -288,20 +288,20 @@ public class Teacher implements Serializable
         this.zipCode = zipCode;
     }
 
-    public List<Student> getStudents() {
-        return students;
-    }
-
-    public void setStudents(List<Student> students) {
-        this.students = students;
-    }
-
-    public Course getCourse() {
-        return course;
-    }
-
-    public void setCourse(Course course) {
-        this.course = course;
-    }
+//    public List<Student> getStudents() {
+//        return students;
+//    }
+//
+//    public void setStudents(List<Student> students) {
+//        this.students = students;
+//    }
+//
+//    public Course getCourse() {
+//        return course;
+//    }
+//
+//    public void setCourse(Course course) {
+//        this.course = course;
+//    }
 
 }

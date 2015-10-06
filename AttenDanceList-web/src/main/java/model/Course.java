@@ -27,8 +27,8 @@ public class Course implements Serializable
     private String code;
     private String points;
 
-    private List<Student> students;
-    private Teacher teacher;
+//    private List<Student> students;
+//    private Teacher teacher;
 
     private Map<Integer, Integer> coursePointsMap;
 
@@ -114,25 +114,25 @@ public class Course implements Serializable
         this.code = code;
     }
 
-    public Teacher getTeacher() {
-        return teacher;
-    }
-
-    public void setTeacher(Teacher teacher) {
-        this.teacher = teacher;
-    }
+//    public Teacher getTeacher() {
+//        return teacher;
+//    }
+//
+//    public void setTeacher(Teacher teacher) {
+//        this.teacher = teacher;
+//    }
 
     public Map<Integer, Integer> getCoursePointsMap() {
         return coursePointsMap;
     }
 
-    public List<Student> getStudents() {
-        return students;
-    }
-
-    public void setStudents(List<Student> students) {
-        this.students = students;
-    }
+//    public List<Student> getStudents() {
+//        return students;
+//    }
+//
+//    public void setStudents(List<Student> students) {
+//        this.students = students;
+//    }
 
     public Course getCourse() {
         return course;

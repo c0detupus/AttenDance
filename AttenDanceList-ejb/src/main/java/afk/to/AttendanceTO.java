@@ -18,9 +18,9 @@ public class AttendanceTO
 
     private long id;
 
-    private StudentEntity students;
-
-    private CourseEntity courses;
+//    private StudentEntity students;
+//
+//    private CourseEntity courses;
 
     private Date dateField;
 
@@ -28,14 +28,14 @@ public class AttendanceTO
     public void setId(long id) {
         this.id = id;
     }
-
-    public void setStudentEntity(StudentEntity studentEntity) {
-        this.students = studentEntity;
-    }
-
-    public void setCourseEntity(CourseEntity courseEntity) {
-        this.courses = courseEntity;
-    }
+//
+//    public void setStudentEntity(StudentEntity studentEntity) {
+//        this.students = studentEntity;
+//    }
+//
+//    public void setCourseEntity(CourseEntity courseEntity) {
+//        this.courses = courseEntity;
+//    }
 
     public void setDateField(Date dateField) {
         this.dateField = dateField;
@@ -47,13 +47,13 @@ public class AttendanceTO
         return id;
     }
 
-    public StudentEntity getStudentEntity() {
-        return students;
-    }
-
-    public CourseEntity getCourseEntity() {
-        return courses;
-    }
+//    public StudentEntity getStudentEntity() {
+//        return students;
+//    }
+//
+//    public CourseEntity getCourseEntity() {
+//        return courses;
+//    }
 
     public Date getDateField() {
         return dateField;

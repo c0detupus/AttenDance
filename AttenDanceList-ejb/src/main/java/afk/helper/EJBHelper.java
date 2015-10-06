@@ -20,7 +20,8 @@ import java.util.List;
  *
  * @author c0detupus
  */
-public class EJBHelper {
+public class EJBHelper
+{
 
     //COURSE----->
     public static CourseEntity courseTOConverter(CourseTO cto) {
@@ -31,6 +32,8 @@ public class EJBHelper {
         ce.setName(cto.getName());
         ce.setCode(cto.getCode());
         ce.setPoints(cto.getPoints());
+//        ce.setStudents(studentTOListConverter(cto.getStudents()));
+//        ce.setTeacher(teacherTOConverter(cto.getTeacher()));
 
         return ce;
 
@@ -39,16 +42,9 @@ public class EJBHelper {
     public static List<CourseTO> courseEntityListConverter(List<CourseEntity> courseEntityList) {
 
         List<CourseTO> cTOList = new ArrayList<>();
-        for (CourseEntity ce : courseEntityList) {
+        for(CourseEntity ce : courseEntityList) {
 
-            CourseTO cTO = new CourseTO();
-
-            cTO.setId(ce.getId());
-            cTO.setName(ce.getName());
-            cTO.setCode(ce.getCode());
-            cTO.setPoints(ce.getPoints());
-
-            cTOList.add(cTO);
+            cTOList.add(courseEntityConverter(ce));
         }
 
         return cTOList;
@@ -62,9 +58,23 @@ public class EJBHelper {
         courseTO.setName(courseEntity.getName());
         courseTO.setCode(courseEntity.getCode());
         courseTO.setPoints(courseEntity.getPoints());
-
+//        courseTO.setStudents(studentEntityListConverter(courseEntity
+//                .getStudents()));
+//        courseTO.setTeacher(teacherEntityConverter(courseEntity.getTeacher()));
         return courseTO;
 
+    }
+
+    public static List<CourseEntity> courseTOListConverter(List<CourseTO> courseTOs) {
+
+        List<CourseEntity> courseEntitys = new ArrayList<>();
+
+        for(CourseTO courseTO : courseTOs) {
+
+            courseEntitys.add(courseTOConverter(courseTO));
+        }
+
+        return courseEntitys;
     }
     //<-----COURSE
 
@@ -113,7 +123,7 @@ public class EJBHelper {
 
         List<StudentTO> toList = new ArrayList<>();
 
-        for (StudentEntity s : eList) {
+        for(StudentEntity s : eList) {
             StudentTO sto = new StudentTO();
 
             sto.setId(s.getId());
@@ -134,10 +144,41 @@ public class EJBHelper {
 
         return toList;
     }
+
+    public static List<StudentEntity> studentTOListConverter(List<StudentTO> studentTOs) {
+
+        List<StudentEntity> studentEntitys = new ArrayList<>();
+
+        for(StudentTO s : studentTOs) {
+            StudentEntity studentEntity = new StudentEntity();
+
+            studentEntity.setId(s.getId());
+            studentEntity.setAddress(s.getAddress());
+            studentEntity.setAvgAttendance(s.getAvgAttendance());
+            studentEntity.setCellPhone(s.getCellPhone());
+            studentEntity.setCity(s.getCity());
+            studentEntity.setEmail(s.getEmail());
+            studentEntity.setFirstName(s.getFirstName());
+            studentEntity.setLastName(s.getLastName());
+            studentEntity.setPhoneNumber(s.getPhoneNumber());
+            studentEntity.setSex(s.getSex());
+            studentEntity.setSocialSecurityNumber(s.getSocialSecurityNumber());
+            studentEntity.setZipCode(s.getZipCode());
+
+            studentEntitys.add(studentEntity);
+        }
+
+        return studentEntitys;
+    }
     //<-----STUDENT
 
     //TEACHER----->
     public static TeacherEntity teacherTOConverter(TeacherTO t) {
+
+        if(t == null) {
+            return null;
+        }
+
         TeacherEntity te = new TeacherEntity();
 
         te.setId(t.getId());
@@ -154,7 +195,8 @@ public class EJBHelper {
 
         return te;
     }
-        public static TeacherTO teacherEntityConverter(TeacherEntity t) {
+
+    public static TeacherTO teacherEntityConverter(TeacherEntity t) {
 
         TeacherTO tto = new TeacherTO();
 
@@ -178,7 +220,7 @@ public class EJBHelper {
 
         List<TeacherTO> toList = new ArrayList<>();
 
-        for (TeacherEntity t : tList) {
+        for(TeacherEntity t : tList) {
             TeacherTO tto = new TeacherTO();
 
             tto.setId(t.getId());
@@ -205,8 +247,8 @@ public class EJBHelper {
         AttendanceTO attendanceTO = new AttendanceTO();
 
         attendanceTO.setId(attendanceEntity.getId());
-        attendanceTO.setStudentEntity(attendanceEntity.getStudents());
-        attendanceTO.setCourseEntity(attendanceEntity.getCourseEntity());
+//        attendanceTO.setStudentEntity(attendanceEntity.getStudents());
+//        attendanceTO.setCourseEntity(attendanceEntity.getCourseEntity());
         attendanceTO.setDateField(attendanceEntity.getDateField());
 
         return attendanceTO;
@@ -218,8 +260,8 @@ public class EJBHelper {
         AttendanceEntity attendanceEntity = new AttendanceEntity();
 
         attendanceEntity.setId(attendanceTO.getId());
-        attendanceEntity.setStudents(attendanceTO.getStudentEntity());
-        attendanceEntity.setCourseEntity(attendanceTO.getCourseEntity());
+//        attendanceEntity.setStudents(attendanceTO.getStudentEntity());
+//        attendanceEntity.setCourseEntity(attendanceTO.getCourseEntity());
         attendanceEntity.setDateField(attendanceTO.getDateField());
 
         return attendanceEntity;
@@ -230,13 +272,13 @@ public class EJBHelper {
 
         List<AttendanceTO> attendanceTOs = new ArrayList<>();
 
-        for (AttendanceEntity attendanceEntity : attendanceEntitys) {
+        for(AttendanceEntity attendanceEntity : attendanceEntitys) {
 
             AttendanceTO attendanceTO = new AttendanceTO();
 
             attendanceTO.setId(attendanceEntity.getId());
-            attendanceTO.setStudentEntity(attendanceEntity.getStudents());
-            attendanceTO.setCourseEntity(attendanceEntity.getCourseEntity());
+//            attendanceTO.setStudentEntity(attendanceEntity.getStudents());
+//            attendanceTO.setCourseEntity(attendanceEntity.getCourseEntity());
             attendanceTO.setDateField(attendanceEntity.getDateField());
 
             attendanceTOs.add(attendanceTO);
