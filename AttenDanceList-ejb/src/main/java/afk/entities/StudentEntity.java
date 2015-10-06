@@ -1,11 +1,13 @@
 package afk.entities;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 /**
@@ -14,7 +16,8 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "Student")
-public class StudentEntity implements Serializable {
+public class StudentEntity implements Serializable
+{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -43,101 +46,125 @@ public class StudentEntity implements Serializable {
     private String zipCode;
     @Column(name = "avg_attendance")
     private String avgAttendance;
+    @ManyToMany(targetEntity = afk.entities.CourseEntity.class)
+    private List<CourseEntity> courses;
 
-    public long getId() {
-        return id;
-    }
+    @ManyToMany(targetEntity = afk.entities.TeacherEntity.class)
+    private List<TeacherEntity> teachers;
 
+    //SETTERS----->
     public void setId(long id) {
         this.id = id;
-    }
-
-    public String getFirstName() {
-        return firstName;
     }
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
-    public String getLastName() {
-        return lastName;
-    }
-
     public void setLastName(String lastName) {
         this.lastName = lastName;
-    }
-
-    public String getSocialSecurityNumber() {
-        return socialSecurityNumber;
     }
 
     public void setSocialSecurityNumber(String socialSecurityNumber) {
         this.socialSecurityNumber = socialSecurityNumber;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getCellPhone() {
-        return cellPhone;
     }
 
     public void setCellPhone(String cellPhone) {
         this.cellPhone = cellPhone;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
-    }
-
-    public String getSex() {
-        return sex;
     }
 
     public void setSex(String sex) {
         this.sex = sex;
     }
 
-    public String getAddress() {
-        return address;
-    }
-
     public void setAddress(String address) {
         this.address = address;
-    }
-
-    public String getCity() {
-        return city;
     }
 
     public void setCity(String city) {
         this.city = city;
     }
 
-    public String getZipCode() {
-        return zipCode;
-    }
-
     public void setZipCode(String zipCode) {
         this.zipCode = zipCode;
-    }
-
-    public String getAvgAttendance() {
-        return avgAttendance;
     }
 
     public void setAvgAttendance(String avgAttendance) {
         this.avgAttendance = avgAttendance;
     }
 
+    public void setCourses(List<CourseEntity> courses) {
+        this.courses = courses;
+    }
+
+    public void setTeachers(List<TeacherEntity> teachers) {
+        this.teachers = teachers;
+    }
+    //<-----SETTERS
+
+    //GETTERS----->
+    public long getId() {
+        return id;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getSocialSecurityNumber() {
+        return socialSecurityNumber;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getCellPhone() {
+        return cellPhone;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public String getZipCode() {
+        return zipCode;
+    }
+
+    public String getAvgAttendance() {
+        return avgAttendance;
+    }
+
+    public List<CourseEntity> getCourses() {
+        return courses;
+    }
+
+    public List<TeacherEntity> getTeachers() {
+        return teachers;
+    }
+    //<-----GETTERS
 }

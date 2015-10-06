@@ -205,7 +205,7 @@ public class EJBHelper {
         AttendanceTO attendanceTO = new AttendanceTO();
 
         attendanceTO.setId(attendanceEntity.getId());
-        attendanceTO.setStudentEntity(attendanceEntity.getStudentEntity());
+        attendanceTO.setStudentEntity(attendanceEntity.getStudents());
         attendanceTO.setCourseEntity(attendanceEntity.getCourseEntity());
         attendanceTO.setDateField(attendanceEntity.getDateField());
 
@@ -218,7 +218,7 @@ public class EJBHelper {
         AttendanceEntity attendanceEntity = new AttendanceEntity();
 
         attendanceEntity.setId(attendanceTO.getId());
-        attendanceEntity.setStudentEntity(attendanceTO.getStudentEntity());
+        attendanceEntity.setStudents(attendanceTO.getStudentEntity());
         attendanceEntity.setCourseEntity(attendanceTO.getCourseEntity());
         attendanceEntity.setDateField(attendanceTO.getDateField());
 
@@ -235,7 +235,7 @@ public class EJBHelper {
             AttendanceTO attendanceTO = new AttendanceTO();
 
             attendanceTO.setId(attendanceEntity.getId());
-            attendanceTO.setStudentEntity(attendanceEntity.getStudentEntity());
+            attendanceTO.setStudentEntity(attendanceEntity.getStudents());
             attendanceTO.setCourseEntity(attendanceEntity.getCourseEntity());
             attendanceTO.setDateField(attendanceEntity.getDateField());
 

@@ -5,6 +5,8 @@
  */
 package afk.to;
 
+import java.util.List;
+
 /**
  *
  * @author kajri.qu
@@ -17,6 +19,26 @@ public class CourseTO
     private String name,
             code,
             points;
+
+    private List<StudentTO> students;
+
+    private TeacherTO teacher;
+
+    public TeacherTO getTeacher() {
+        return teacher;
+    }
+
+    public void setTeacher(TeacherTO teacher) {
+        this.teacher = teacher;
+    }
+
+    public List<StudentTO> getStudents() {
+        return students;
+    }
+
+    public void setStudents(List<StudentTO> students) {
+        this.students = students;
+    }
 
     public long getId() {
         return id;

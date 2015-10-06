@@ -1,20 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package afk.entities;
 
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
+import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -34,13 +27,17 @@ public class AttendanceEntity implements Serializable
     @Column(name = "attendance_id")
     private long id;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "student_id")
-    private StudentEntity studentEntity;
+//    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+//    @JoinColumn(name = "student_id")
+    @OneToOne
+    @MapsId
+    private StudentEntity students;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "course_id")
-    private CourseEntity courseEntity;
+//    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+//    @JoinColumn(name = "course_id")
+    @OneToOne
+    @MapsId
+    private CourseEntity courses;
 
     @Temporal(TemporalType.DATE)
     @Column(name = "date_field")
@@ -51,12 +48,12 @@ public class AttendanceEntity implements Serializable
         this.id = id;
     }
 
-    public void setStudentEntity(StudentEntity studentEntity) {
-        this.studentEntity = studentEntity;
+    public void setStudents(StudentEntity students) {
+        this.students = students;
     }
 
     public void setCourseEntity(CourseEntity courseEntity) {
-        this.courseEntity = courseEntity;
+        this.courses = courseEntity;
     }
 
     public void setDateField(Date dateField) {
@@ -70,12 +67,12 @@ public class AttendanceEntity implements Serializable
         return id;
     }
 
-    public StudentEntity getStudentEntity() {
-        return studentEntity;
+    public StudentEntity getStudents() {
+        return students;
     }
 
     public CourseEntity getCourseEntity() {
-        return courseEntity;
+        return courses;
     }
 
     public Date getDateField() {

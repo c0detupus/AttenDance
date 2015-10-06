@@ -6,11 +6,14 @@
 package afk.entities;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -30,12 +33,19 @@ public class CourseEntity implements Serializable
 
     @Column(name = "name")
     private String name;
-    
+
     @Column(name = "code")
     private String code;
-    
+
     @Column(name = "points")
     private String points;
+
+    @ManyToMany(targetEntity = afk.entities.StudentEntity.class, mappedBy = "courses")
+    private List<StudentEntity> students;
+
+    @OneToOne
+    @MapsId
+    private TeacherEntity teacher;
 
     public CourseEntity() {
 
@@ -57,6 +67,14 @@ public class CourseEntity implements Serializable
     public void setPoints(String points) {
         this.points = points;
     }
+
+    public void setStudents(List<StudentEntity> students) {
+        this.students = students;
+    }
+
+    public void setTeacher(TeacherEntity teacher) {
+        this.teacher = teacher;
+    }
     //<-----SETTERS
 
     //GETTERS----->
@@ -74,6 +92,14 @@ public class CourseEntity implements Serializable
 
     public String getPoints() {
         return points;
+    }
+
+    public List<StudentEntity> getStudents() {
+        return students;
+    }
+
+    public TeacherEntity getTeacher() {
+        return teacher;
     }
     //<-----GETTERS
 
