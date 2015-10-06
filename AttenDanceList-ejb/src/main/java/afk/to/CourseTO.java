@@ -31,8 +31,8 @@ public class CourseTO
         this.teacher = teacher;
     }
 
-//    private List<StudentTO> students;
-//
+    private List<StudentTO> students;
+
 //    private TeacherTO teacher;
 
 //    public TeacherTO getTeacher() {
@@ -43,13 +43,13 @@ public class CourseTO
 //        this.teacher = teacher;
 //    }
 //
-//    public List<StudentTO> getStudents() {
-//        return students;
-//    }
-//
-//    public void setStudents(List<StudentTO> students) {
-//        this.students = students;
-//    }
+    public List<StudentTO> getStudents() {
+        return students;
+    }
+
+    public void setStudents(List<StudentTO> students) {
+        this.students = students;
+    }
 
 
     public long getId() {

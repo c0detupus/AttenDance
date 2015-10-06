@@ -25,30 +25,10 @@ import model.Teacher;
 public class Helper
 {
 
-    private Map<String, String> courseMap;
-    private Map<String, String> studentMap;
     private Map<String, Integer> yearMap;
     private Map<String, Integer> monthMap;
 
     private Map<String, String> dayMap;
-
-    //will populate the map depending on database
-    //hardcoded for now
-    public Map populateCoursesMap() {
-        courseMap = new LinkedHashMap<>();
-        courseMap.put("Java EE", "Java EE"); //label, value
-        courseMap.put("JavaScript", "JavaScript");
-        courseMap.put("CSS", "CSS");
-        return courseMap;
-    }
-
-    public Map populateStudentMap() {
-        studentMap = new LinkedHashMap<>();
-        studentMap.put("AM", "Alexander Mehtälä");
-        studentMap.put("FZ", "Felicia Zhu");
-        studentMap.put("KQ", "Kajri Qu");
-        return studentMap;
-    }
 
     public Map populateYearMap() {
         yearMap = new LinkedHashMap<>();
@@ -103,25 +83,23 @@ public class Helper
 
         for(StudentTO sto : studentTOList) {
 
-            Student s = new Student();
-            
-            s.setCourse(courseTOConverter(sto.getCourse()));
-            s.setId(sto.getId());
-            s.setAddress(sto.getAddress());
-            s.setAvgAttendance(sto.getAvgAttendance());
-            s.setCellPhone(sto.getCellPhone());
-            s.setCity(sto.getCity());
-            s.setEmail(sto.getEmail());
-            s.setFirstName(sto.getFirstName());
-            s.setLastName(sto.getLastName());
-            s.setPhoneNumber(sto.getPhoneNumber());
-            s.setSex(s.getSex());
-            s.setSocialSecurityNumber(sto.getSocialSecurityNumber());
-
-            studentList.add(s);
+            studentList.add(studentTOConverter(sto));
         }
 
         return studentList;
+
+    }
+
+    public static List<StudentTO> studentListConverter(List<Student> students) {
+
+        List<StudentTO> studentTOs = new ArrayList<>();
+
+        for(Student s : students) {
+
+            studentTOs.add(studentConverter(s));
+        }
+
+        return studentTOs;
 
     }
 
@@ -130,17 +108,21 @@ public class Helper
         List<Course> courseList = new ArrayList<>();
 
         for(CourseTO cto : courseTOList) {
-            Course c = new Course();
-            
-            c.setTeacher(teacherTOConverter(cto.getTeacher()));
-            c.setId(cto.getId());
-            c.setName(cto.getName());
-            c.setCode(cto.getCode());
-            c.setPoints(cto.getPoints());
 
-            courseList.add(c);
+            courseList.add(courseTOConverter(cto));
         }
         return courseList;
+    }
+
+    public static List<CourseTO> courseListConverter(List<Course> courses) {
+
+        List<CourseTO> courseTOs = new ArrayList<>();
+
+        for(Course c : courses) {
+
+            courseTOs.add(courseConverter(c));
+        }
+        return courseTOs;
     }
 
     public static List<Teacher> teacherTOListConverter(List<TeacherTO> teacherTOList) {
@@ -148,40 +130,26 @@ public class Helper
         List<Teacher> teacherList = new ArrayList<>();
 
         for(TeacherTO tto : teacherTOList) {
-            Teacher t = new Teacher();
-
-            t.setId(tto.getId());
-            t.setAddress(tto.getAddress());
-            t.setCity(tto.getCity());
-            t.setEmail(tto.getEmail());
-            t.setSex(tto.getSex());
-            t.setZipCode(tto.getZipCode());
-            t.setFirstName(tto.getFirstName());
-            t.setLastName(tto.getLastName());
-            t.setSocialSecurityNumber(tto.getSocialSecurityNumber());
-            t.setPhoneNumber(tto.getPhoneNumber());
-            t.setCellPhone(tto.getCellPhone());
-
-            teacherList.add(t);
+            teacherList.add(teacherTOConverter(tto));
         }
         return teacherList;
     }
 
     public static CourseTO courseConverter(Course c) {
         CourseTO cto = new CourseTO();
-        
+
         cto.setTeacher(teacherConverter(c.getTeacher()));
         cto.setId(c.getId());
         cto.setName(c.getName());
         cto.setCode(c.getCode());
         cto.setPoints(c.getPoints());
-    
+
         return cto;
     }
 
     public static Course courseTOConverter(CourseTO cto) {
         Course c = new Course();
-        
+
         c.setTeacher(teacherTOConverter(cto.getTeacher()));
         c.setId(cto.getId());
         c.setName(cto.getName());
@@ -193,8 +161,7 @@ public class Helper
 
     public static Student studentTOConverter(StudentTO sto) {
         Student s = new Student();
-        
-        s.setCourse(courseTOConverter(sto.getCourse()));
+
         s.setId(sto.getId());
         s.setAddress(sto.getAddress());
         s.setAvgAttendance(sto.getAvgAttendance());
@@ -207,6 +174,7 @@ public class Helper
         s.setSex(sto.getSex());
         s.setSocialSecurityNumber(sto.getSocialSecurityNumber());
         s.setZipCode(sto.getZipCode());
+        s.setCourses(courseTOListConverter(sto.getCourses()));
 
         return s;
     }
@@ -214,7 +182,6 @@ public class Helper
     public static StudentTO studentConverter(Student s) {
         StudentTO sto = new StudentTO();
 
-        sto.setCourse(courseConverter(s.getCourse()));
         sto.setId(s.getId());
         sto.setAddress(s.getAddress());
         sto.setAvgAttendance(s.getAvgAttendance());
@@ -227,6 +194,7 @@ public class Helper
         sto.setSex(s.getSex());
         sto.setSocialSecurityNumber(s.getSocialSecurityNumber());
         sto.setZipCode(s.getZipCode());
+        sto.setCourses(courseListConverter(s.getCourses()));
 
         return sto;
     }

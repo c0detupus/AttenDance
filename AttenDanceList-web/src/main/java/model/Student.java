@@ -47,17 +47,14 @@ public class Student implements Serializable {
 
 
     private List<Course> courses;
-    private Course course;
+
 
     private List<Teacher> teachers;
 
-//    private List<Course> courses;
-//
-//    private List<Teacher> teachers;
 
 
     private Student student;
-    private List<Course> courseList;
+    private List<Course> existingCourses;
 
     private List<Course> selectedCourses;
 
@@ -73,7 +70,8 @@ public class Student implements Serializable {
             initialize();
         }
 
-        courseList = Helper.courseTOListConverter(services.getCourseService().getAll());
+        existingCourses = Helper.courseTOListConverter(services.getCourseService().getAll());
+        System.out.println("STUDENT EXISTING_COURSES" + existingCourses);
     }
 
     private void initialize() {
@@ -91,6 +89,11 @@ public class Student implements Serializable {
     }
 
     public void add() {
+        
+        System.out.println("SELECTED COURSES BEFORE" + selectedCourses);
+        setCourses(selectedCourses);
+        System.out.println("SELECTED COURSES AFTER" + courses);
+        
         int i = services.getStudentService().createStudent(Helper
                 .studentConverter(this));
         Messages.showMessage(i);
@@ -122,13 +125,6 @@ public class Student implements Serializable {
         avgAttendance = null;
     }
 
-    public Course getCourse() {
-        return course;
-    }
-
-    public void setCourse(Course course) {
-        this.course = course;
-    }
 
     public List<Course> getSelectedCourses() {
         return selectedCourses;
@@ -139,7 +135,7 @@ public class Student implements Serializable {
     }
 
     public List<Course> getCourseList() {
-        return courseList;
+        return existingCourses;
     }
 
     public long getId() {
@@ -195,9 +191,9 @@ public class Student implements Serializable {
         this.avgAttendance = avgAttendance;
     }
 
-//    public void setCourses(List<Course> courses) {
-//        this.courses = courses;
-//    }
+    public void setCourses(List<Course> courses) {
+        this.courses = courses;
+    }
 //
 //    public void setTeachers(List<Teacher> teachers) {
 //        this.teachers = teachers;
@@ -249,9 +245,9 @@ public class Student implements Serializable {
         return avgAttendance;
     }
 
-//    public List<Course> getCourses() {
-//        return courses;
-//    }
+    public List<Course> getCourses() {
+        return courses;
+    }
 //
 //    public List<Teacher> getTeachers() {
 //        return teachers;

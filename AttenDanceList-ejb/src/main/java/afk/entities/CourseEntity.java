@@ -7,14 +7,13 @@ package afk.entities;
 
 import java.io.Serializable;
 import java.util.List;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -47,8 +46,12 @@ public class CourseEntity implements Serializable
     @JoinColumn(name = "teacher_id")
     private TeacherEntity teacher;
 
-//    @ManyToMany(targetEntity = afk.entities.StudentEntity.class, mappedBy = "courses")
-//    private List<StudentEntity> students;
+    @ManyToMany
+    @JoinTable(name = "course_student_JoinTable",
+               joinColumns = @JoinColumn(name = "course_id"),
+               inverseJoinColumns = @JoinColumn(name = "student_id")
+    )
+    private List<StudentEntity> students;
 
 //    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 //    @JoinColumn(name = "id")
@@ -77,9 +80,9 @@ public class CourseEntity implements Serializable
         this.teacher = teacher;
     }
 
-//    public void setStudents(List<StudentEntity> students) {
-//        this.students = students;
-//    }
+    public void setStudents(List<StudentEntity> students) {
+        this.students = students;
+    }
 //
 //    public void setTeacher(TeacherEntity teacher) {
 //        this.teacher = teacher;
@@ -110,9 +113,9 @@ public class CourseEntity implements Serializable
     }
 
 
-//    public List<StudentEntity> getStudents() {
-//        return students;
-//    }
+    public List<StudentEntity> getStudents() {
+        return students;
+    }
 //
 //    public TeacherEntity getTeacher() {
 //        return teacher;

@@ -18,7 +18,8 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "Student")
-public class StudentEntity implements Serializable {
+public class StudentEntity implements Serializable
+{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -48,28 +49,12 @@ public class StudentEntity implements Serializable {
     @Column(name = "avg_attendance")
     private String avgAttendance;
 
-
-    @OneToOne
-    @JoinColumn(name = "course_id")
-    private CourseEntity course;
-
-    public CourseEntity getCourse() {
-        return course;
-    }
-
-    public void setCourse(CourseEntity course) {
-        this.course = course;
-    }
-
-//    @ManyToMany(targetEntity = afk.entities.CourseEntity.class)
-//    private List<CourseEntity> courses;
+    @ManyToMany(mappedBy = "students")
+    private List<CourseEntity> courses;
 
 //    @ManyToMany(targetEntity = afk.entities.TeacherEntity.class)
 //    private List<TeacherEntity> teachers;
-
-
     //SETTERS----->
-
     public void setId(long id) {
         this.id = id;
     }
@@ -118,10 +103,9 @@ public class StudentEntity implements Serializable {
         this.avgAttendance = avgAttendance;
     }
 
-
-//    public void setCourses(List<CourseEntity> courses) {
-//        this.courses = courses;
-//    }
+    public void setCourses(List<CourseEntity> courses) {
+        this.courses = courses;
+    }
 //
 //    public void setTeachers(List<TeacherEntity> teachers) {
 //        this.teachers = teachers;
@@ -177,15 +161,12 @@ public class StudentEntity implements Serializable {
         return avgAttendance;
     }
 
+    public List<CourseEntity> getCourses() {
+        return courses;
+    }
 
-
-//    public List<CourseEntity> getCourses() {
-//        return courses;
-//    }
-//
 //    public List<TeacherEntity> getTeachers() {
 //        return teachers;
 //    }
-
     //<-----GETTERS
 }

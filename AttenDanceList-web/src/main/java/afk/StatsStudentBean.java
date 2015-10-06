@@ -38,7 +38,7 @@ public class StatsStudentBean implements Serializable {
     public void init() {
         pop = new Helper();
 
-        courseMap = pop.populateCoursesMap();
+
         yearMap = pop.populateYearMap();
         monthMap = pop.populateMonthMap();
         dayMap = pop.populateDayMap(currentMonth, currentYear);
