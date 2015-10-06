@@ -19,3 +19,4 @@ hs_err_pid*
 #target/*
 AttenDanceList-ejb/src/main/resources/META-INF/persistence.xml
 AttenDanceList-ejb/src/main/resources/META-INF/persistence.xml
+AttenDanceList-ejb/src/main/resources/META-INF/persistence.xml

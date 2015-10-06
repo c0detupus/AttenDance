@@ -9,6 +9,7 @@ import afk.ServicesIntf;
 import helper.Helper;
 import helper.Messages;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import javax.annotation.PostConstruct;
@@ -54,9 +55,10 @@ public class Student implements Serializable {
 
 
     private Student student;
+    
     private List<Course> existingCourses;
 
-    private List<Course> selectedCourses;
+    private List<String> selectedCourses;
 
     @PostConstruct
     public void init() {
@@ -89,10 +91,30 @@ public class Student implements Serializable {
     }
 
     public void add() {
+        //selectedCourse = (String) course_id
+        
+        //parse to long
+        
+        //get course with id
+        
+        //add course object to setCourses()
+        
+        
+        System.out.println("Student add()");
         
         System.out.println("SELECTED COURSES BEFORE" + selectedCourses);
-        setCourses(selectedCourses);
+//        setCourses(selectedCourses);
+        courses = new ArrayList<>();
+        Course asdqwe = new Course();
+        for(String s : selectedCourses){
+             asdqwe = Helper.courseTOConverter(services.getCourseService()
+                    .getCourse(Long.valueOf(s)));
+             System.out.println("add loop 1: "+ asdqwe);
+             courses.add(asdqwe);
+             System.out.println("add loop: " + asdqwe.getId() + " "+ asdqwe.getName());
+        }
         System.out.println("SELECTED COURSES AFTER" + courses);
+        
         
         int i = services.getStudentService().createStudent(Helper
                 .studentConverter(this));
@@ -126,11 +148,11 @@ public class Student implements Serializable {
     }
 
 
-    public List<Course> getSelectedCourses() {
+    public List<String> getSelectedCourses() {
         return selectedCourses;
     }
 
-    public void setSelectedCourses(List<Course> selectedCourses) {
+    public void setSelectedCourses(List<String> selectedCourses) {
         this.selectedCourses = selectedCourses;
     }
 

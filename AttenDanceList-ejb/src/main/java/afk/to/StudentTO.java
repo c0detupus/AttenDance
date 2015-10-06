@@ -5,6 +5,7 @@
  */
 package afk.to;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -31,6 +32,10 @@ public class StudentTO
 
 
     private List<CourseTO> courses;
+    
+    public StudentTO() {
+        courses = new ArrayList<>();
+    }
 //
 //    private List<TeacherTO> teachers;
 

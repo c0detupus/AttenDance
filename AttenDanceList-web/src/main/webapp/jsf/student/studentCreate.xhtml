@@ -119,13 +119,13 @@
                     </p:panelGrid>
                     <p:separator/>
 
-                    <h:form id = "form2">
-                        <h:outputLabel for="course" value="Course: " />
+                    <!--<h:form id = "form2">-->
+                        <h:outputLabel value="Course: " />
                         <p:selectCheckboxMenu id="course2" value="#{studentBean.selectedCourses}" label="Select courses"
                                               filter="true" filterMatchMode="startsWith" >
                             <f:selectItems value="#{studentBean.courseList}" var="course"
                                            itemLabel="#{course.name} - #{course.code}"
-                                           itemValue="#{course}"/>
+                                           itemValue="#{course.id}"/>
                         </p:selectCheckboxMenu>
                         <p:commandButton value="Add courses" update="display" process="@form"/>
                         <p:outputPanel id="display" style="width:250px;padding-left:5px;margin-top:10px">
@@ -133,12 +133,12 @@
                                 #{course}
                             </p:dataList>
                         </p:outputPanel>
-                    </h:form>
+                    <!--</h:form>-->
 
                 </p:panel>
                 <p:toolbar>
                     <f:facet name="left">
-                        <p:commandButton value="Add" update="panel" action="#{studentBean.add()}"></p:commandButton>
+                        <p:commandButton value="Add" update="panel" process="form" action="#{studentBean.add()}"></p:commandButton>
                         <p:commandButton id="reset" value="Clear" update="panel" process="@this" action="#{studentBean.clear()}" ></p:commandButton>
                     </f:facet>
                 </p:toolbar>
