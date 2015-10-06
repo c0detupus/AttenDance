@@ -38,7 +38,7 @@ public class AttendanceServiceSLSB implements AttendanceServiceIntf
 
         AttendanceTO attendanceTO = EJBHelper
                 .attendanceEntityConverter((AttendanceEntity) em
-                        .createQuery("SELECT c FROM CourseEntity AS c WHERE c.id = "
+                        .createQuery("SELECT a FROM AttendanceEntity AS a WHERE a.id = "
                                 + id).getSingleResult());
 
         return attendanceTO;

@@ -23,7 +23,7 @@ public class Messages {
         if (i == 1) {
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Success", "Success!");
             RequestContext.getCurrentInstance().showMessageInDialog(message);
-        } else if (i == 2) {
+        } else if (i == 0) {
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Failure", "Failed. Please try again.");
             RequestContext.getCurrentInstance().showMessageInDialog(message);
         }
