@@ -5,8 +5,9 @@
  */
 package afk.attendance;
 
-import afk.entities.AttendanceEntity;
 import afk.to.AttendanceTO;
+import afk.to.CourseTO;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -23,6 +24,8 @@ public interface AttendanceServiceIntf
     public AttendanceTO getAttendance(long id);
 
     public List<AttendanceTO> getAll();
+    
+    public List<AttendanceTO> getAttendanceByDay(Date date, CourseTO courseTO);
 
     //UPDATE
     public int updateAttendance(AttendanceTO attendanceTO);
