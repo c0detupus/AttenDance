@@ -44,10 +44,6 @@ public class CourseServiceSLSB implements CourseServiceIntf
     @Override
     public CourseTO getCourse(long id, boolean getStudents) {
 
-        CourseEntity ent = (CourseEntity) em.find(CourseEntity.class, id);
-        System.out.println("SLSB getCourse: " + ent.getStudents());
-//        System.out.println("SLSB getCourse: " + ent.getStudents().get(0).getFirstName());
-        
         CourseTO courseTO = EJBHelper.courseEntityConverter((CourseEntity) em
                 .find(CourseEntity.class, id), getStudents);
 

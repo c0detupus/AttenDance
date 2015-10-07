@@ -314,6 +314,11 @@ public class Helper {
         
         List<Attendance> as = new ArrayList<>();
         
+        for (AttendanceTO ato : atos) {
+
+                as.add(attendanceTOConverter(ato));
+            
+        }
         return as;
     }
     //<-----ATTENDANCE CONVERTERS
