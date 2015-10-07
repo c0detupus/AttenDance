@@ -274,9 +274,9 @@ public class Helper
 
         attendanceEntity.setId(attendanceTO.getId());
         attendanceEntity.setStudent(studentTOConverter(attendanceTO
-                .getStudent(), true));
+                .getStudent(), false));
         attendanceEntity
-                .setCourse(courseTOConverter(attendanceTO.getCourse(), true));
+                .setCourse(courseTOConverter(attendanceTO.getCourse(), false));
         attendanceEntity.setDateField(attendanceTO.getDateField());
         attendanceEntity.setPresent(attendanceTO.getPresent());
         return attendanceEntity;
@@ -289,9 +289,9 @@ public class Helper
 
         attendanceTO.setId(attendance.getId());
         attendanceTO.setStudent(studentConverter(attendance
-                .getStudent(), true));
+                .getStudent(), false));
         attendanceTO
-                .setCourse(courseConverter(attendance.getCourse(), true));
+                .setCourse(courseConverter(attendance.getCourse(), false));
         attendanceTO.setDateField(attendance.getDateField());
         attendanceTO.setPresent(attendance.getPresent());
         return attendanceTO;

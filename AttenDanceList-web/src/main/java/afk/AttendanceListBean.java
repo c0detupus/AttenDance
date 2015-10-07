@@ -102,6 +102,8 @@ public class AttendanceListBean implements Serializable
 
         Date d = new Date();
 
+        
+        System.out.println(course.getName());
         for(Student s : students) {
 
             for(Student selected : selectedStudents) {
