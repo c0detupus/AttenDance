@@ -1,5 +1,6 @@
 package afk;
 
+import afk.to.AttendanceTO;
 import afk.to.CourseTO;
 import helper.Helper;
 import helper.Messages;
@@ -43,7 +44,6 @@ public class AttendanceListBean implements Serializable
 
     @PostConstruct
     public void init() {
-        
 
     }
 
@@ -55,16 +55,16 @@ public class AttendanceListBean implements Serializable
     }
 
     public void renderList() {
-        
+
         if(selectedCourse == null) {
             return;
         }
         course = Helper.courseTOConverter(services.getCourseService()
                 .getCourse(Long.valueOf(selectedCourse), true), true);
 //        System.out.println("renderList courseName: " + course.getName());
-        
-        
-        CourseTO cto = services.getCourseService().getCourse(Long.valueOf(selectedCourse), true);
+
+        CourseTO cto = services.getCourseService().getCourse(Long
+                .valueOf(selectedCourse), true);
 //        System.out.println("renderList CourseTO name: " + cto.getStudents().get(0).getFirstName());
         students = course.getStudents();
 //        System.out.println("renderList studentsName: " + students);
@@ -72,7 +72,6 @@ public class AttendanceListBean implements Serializable
 
     public List<Course> getCourseList() {
 
-        
         courseList = Helper.courseTOListConverter(services.getCourseService()
                 .getAll(), false);
         return courseList;
@@ -112,39 +111,65 @@ public class AttendanceListBean implements Serializable
 
         Date d = new Date();
 
-        
         System.out.println(course.getName());
-        for(Student s : students) {
 
+        for(Student s : students) {
+            boolean check = false;
             for(Student selected : selectedStudents) {
 
-                if(selected.equals(s)) {
-
-                    Attendance attendance = new Attendance();
-                    attendance.setStudent(selected);
-                    attendance.setCourse(course);
-                    attendance.setDateField(d);
-                    attendance.setPresent(false);
-
-                    attendancelist.add(attendance);
-                } else {
-                    Attendance attendance = new Attendance();
-                    attendance.setStudent(s);
-                    attendance.setCourse(course);
-                    attendance.setDateField(d);
-                    attendance.setPresent(true);
-
-                    attendancelist.add(attendance);
+                if(s.getId() == selected.getId()) {
+                    check = true;
+                    break;
                 }
 
+            }
+
+            if(check) {
+
+                Attendance attendance = new Attendance();
+                attendance.setStudent(s);
+                attendance.setCourse(course);
+                attendance.setDateField(d);
+                attendance.setPresent(true);
+
+                attendancelist.add(attendance);
+
+            } else {
+                Attendance attendance = new Attendance();
+                attendance.setStudent(s);
+                attendance.setCourse(course);
+                attendance.setDateField(d);
+                attendance.setPresent(false);
+
+                attendancelist.add(attendance);
             }
 
         }
 
         int i = services.getAttendanceService().createAttendance(Helper
                 .attendanceListConverter(attendancelist));
+
+
         Messages.showMessage(i);
 
+//             if(selected.equals(s)) {
+//
+//                    Attendance attendance = new Attendance();
+//                    attendance.setStudent(selected);
+//                    attendance.setCourse(course);
+//                    attendance.setDateField(d);
+//                    attendance.setPresent(false);
+//
+//                    attendancelist.add(attendance);
+//                } else {
+//                    Attendance attendance = new Attendance();
+//                    attendance.setStudent(s);
+//                    attendance.setCourse(course);
+//                    attendance.setDateField(d);
+//                    attendance.setPresent(true);
+//
+//                    attendancelist.add(attendance);
+//                }
     }
 
     public List<Student> getSelectedStudents() {

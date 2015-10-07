@@ -103,7 +103,7 @@ public class AttendanceServiceSLSB implements AttendanceServiceIntf
         CourseEntity courseEntity = EJBHelper.courseTOConverter(courseTO, true);
 
         List<AttendanceEntity> attendanceEntitys = em
-                .createQuery("SELECT a FROM AttendanceEntity AS a WHERE a.dateField = :selectedDate AND a.courses = :selectedCourse")
+                .createQuery("SELECT a FROM AttendanceEntity AS a WHERE a.dateField = :selectedDate AND a.course = :selectedCourse")
                 .setParameter("selectedDate", date, TemporalType.DATE)
                 .setParameter("selectedCourse", courseEntity).getResultList();
 
