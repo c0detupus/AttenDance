@@ -6,6 +6,7 @@
 package afk.course;
 
 import afk.to.CourseTO;
+import afk.to.StudentTO;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -21,6 +22,8 @@ public interface CourseServiceIntf {
 
     //Read
     public CourseTO getCourse(long id, boolean getStudents);
+    
+    public List<StudentTO> getAllStudentsInCourse(long id);
 
     public List<CourseTO> getAll();
 

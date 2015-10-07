@@ -8,6 +8,8 @@ package afk.course;
 import afk.entities.CourseEntity;
 import afk.helper.EJBHelper;
 import afk.to.CourseTO;
+import afk.to.StudentTO;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -94,6 +96,19 @@ public class CourseServiceSLSB implements CourseServiceIntf
             return 0;
         }
         return 1;
+    }
+
+    @Override
+    public List<StudentTO> getAllStudentsInCourse(long id) {
+
+//        List<StudentTO> studentTOs = em.createQuery("SELECT s FROM CourseEntity AS c")
+//        
+        CourseEntity c = (CourseEntity) em
+                .createQuery("SELECT c FROM CourseEntity AS c WHERE c.id = :idParam")
+                .setParameter("idParam", id).getSingleResult();
+
+        return EJBHelper.studentEntityListConverter(c.getStudents(), false);
+
     }
 
 }

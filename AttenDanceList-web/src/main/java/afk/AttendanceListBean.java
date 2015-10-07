@@ -1,7 +1,7 @@
 package afk;
 
-import afk.to.AttendanceTO;
 import afk.to.CourseTO;
+import afk.to.StudentTO;
 import helper.Helper;
 import helper.Messages;
 import java.io.Serializable;
@@ -59,15 +59,17 @@ public class AttendanceListBean implements Serializable
         if(selectedCourse == null) {
             return;
         }
+
+        List<StudentTO> fool = services.getCourseService()
+                .getAllStudentsInCourse((long) 351);
+
+        students = Helper.studentTOListConverter(fool, false);
+
+        System.out.println(fool);
+
         course = Helper.courseTOConverter(services.getCourseService()
                 .getCourse(Long.valueOf(selectedCourse), true), true);
-//        System.out.println("renderList courseName: " + course.getName());
 
-        CourseTO cto = services.getCourseService().getCourse(Long
-                .valueOf(selectedCourse), true);
-//        System.out.println("renderList CourseTO name: " + cto.getStudents().get(0).getFirstName());
-        students = course.getStudents();
-//        System.out.println("renderList studentsName: " + students);
     }
 
     public List<Course> getCourseList() {
@@ -148,7 +150,6 @@ public class AttendanceListBean implements Serializable
 
         int i = services.getAttendanceService().createAttendance(Helper
                 .attendanceListConverter(attendancelist));
-
 
         Messages.showMessage(i);
 
