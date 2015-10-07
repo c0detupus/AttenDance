@@ -21,28 +21,29 @@ import model.Course;
 @ManagedBean(name = "attendanceHistoryBean")
 @RequestScoped
 public class AttendanceHistoryBean {
-    
+
     private Date date;
     private String selectedCourse;
     private Course course;
     private List<Attendance> atten;
-    
+
     @EJB
     private ServicesIntf services;
-    
+
     public void renderList() {
-        
-        if(selectedCourse == null) {
+
+        if (selectedCourse == null) {
             return;
         }
         course = Helper.courseTOConverter(services.getCourseService()
                 .getCourse(Long.valueOf(selectedCourse), false), false);
-        
-//        atten = Helper.attendanceListConverter(services.getAttendanceService().getAttendanceByDayAndCourse(date, Helper.courseConverter(course, false)));
-        
-        
-        
+
+        atten = Helper.attendanceTOListConverter(
+                services.getAttendanceService().getAttendanceByDayAndCourse(
+                        date, Helper.courseConverter(course, false)));
+
     }
+
     public String getSelectedCourse() {
         return selectedCourse;
     }
@@ -57,5 +58,9 @@ public class AttendanceHistoryBean {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public List<Attendance> getAtten() {
+        return atten;
     }
 }
