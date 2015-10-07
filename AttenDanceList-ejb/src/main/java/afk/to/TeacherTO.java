@@ -5,8 +5,6 @@
  */
 package afk.to;
 
-import java.util.List;
-
 /**
  *
  * @author valance
@@ -27,27 +25,6 @@ public class TeacherTO
             city,
             zipCode;
 
-//    private List<StudentTO> students;
-//    private CourseTO course;
-
-//    public List<StudentTO> getStudents() {
-//        return students;
-//    }
-//
-//    public void setStudents(List<StudentTO> students) {
-//        this.students = students;
-//    }
-//
-//    public CourseTO getCourse() {
-//        return course;
-//    }
-//
-//    public void setCourse(CourseTO course) {
-//        this.course = course;
-//    }
-
-    
-    
     public long getId() {
         return id;
     }

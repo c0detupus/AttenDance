@@ -49,8 +49,6 @@ public class Student implements Serializable
 
     private List<Course> courses;
 
-    private List<Teacher> teachers;
-
     private Student student;
 
     private List<Course> existingCourses;
@@ -105,13 +103,9 @@ public class Student implements Serializable
                 if(currentCourse.getId() == Long.parseLong(s)) {
 
                     nameHolder.add(currentCourse.getName());
-
                 }
-
             }
-
         }
-
         selectedCourseNames = nameHolder;
 
     }
@@ -131,7 +125,6 @@ public class Student implements Serializable
     }
 
     public void add() {
-
         courses = new ArrayList<>();
         Course course;
         for(String s : selectedCourseIDs) {
@@ -149,7 +142,6 @@ public class Student implements Serializable
     public void update() {
         courses = new ArrayList<>();
         Course course;
-        System.out.println("Student update: " + selectedCourseIDs);
         for(String s : selectedCourseIDs) {
             course = Helper.courseTOConverter(services.getCourseService()
                     .getCourse(Long.valueOf(s), false), false);

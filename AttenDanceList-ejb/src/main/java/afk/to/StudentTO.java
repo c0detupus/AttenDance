@@ -36,21 +36,11 @@ public class StudentTO
     public StudentTO() {
         courses = new ArrayList<>();
     }
-//
-//    private List<TeacherTO> teachers;
 
     public List<CourseTO> getCourses() {
         return courses;
     }
-//
-//    public List<TeacherTO> getTeachers() {
-//        return teachers;
-//    }
-//
-//    public void setTeachers(List<TeacherTO> teachers) {
-//        this.teachers = teachers;
-//    }
-//
+
     public void setCourses(List<CourseTO> courses) {
         this.courses = courses;
     }

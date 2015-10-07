@@ -90,8 +90,7 @@ public class AttendanceServiceSLSB implements AttendanceServiceIntf
             q.executeUpdate();
 
         } catch(Exception e) {
-
-            System.out.println(e);
+            
             return 0;
         }
         return 1;

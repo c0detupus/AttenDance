@@ -64,8 +64,6 @@ public class Course implements Serializable {
 
     @PostConstruct
     public void init() {
-
-        System.out.println("Course init()");
         Map<String, String> params = FacesContext.getCurrentInstance().
                 getExternalContext().getRequestParameterMap();
         if (!params.isEmpty()) {
@@ -98,7 +96,6 @@ public class Course implements Serializable {
             Messages.showMessage(i);
             clear();
         } catch (Exception e) {
-            System.out.println("Course exception: " + e);
         }
 
     }

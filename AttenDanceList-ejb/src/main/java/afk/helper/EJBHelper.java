@@ -43,8 +43,7 @@ public class EJBHelper
 
     public static CourseTO courseEntityConverter(CourseEntity courseEntity, boolean getStudents) {
 
-        CourseTO courseTO = new CourseTO(); //1. TRUE
-
+        CourseTO courseTO = new CourseTO();
         courseTO.setTeacher(teacherEntityConverter(courseEntity.getTeacher()));
         courseTO.setId(courseEntity.getId());
         courseTO.setName(courseEntity.getName());

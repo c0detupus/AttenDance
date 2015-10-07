@@ -16,8 +16,6 @@ import javax.faces.event.AjaxBehaviorEvent;
 @SessionScoped
 public class StatsCourseBean implements Serializable {
 
-//    private Courses courses;
-//    private List<Courses> coursesList;
     private String currentCourse;
 
     private int currentYear;
@@ -33,10 +31,6 @@ public class StatsCourseBean implements Serializable {
     private Map<String, String> courseMap;
     private Map<String, Integer> yearMap;
     private Map<String, Integer> monthMap;
-    
-//    private Map<String, Integer> toYearMap;
-//    private Map<String, Integer> toMonthMap;
-
     private Map<String, String> dayMap;
     private Map<String, String> toDayMap;
 
@@ -58,8 +52,7 @@ public class StatsCourseBean implements Serializable {
     public void onMonthOrYearSelect(AjaxBehaviorEvent e) {
         dayMap = pop.populateDayMap(currentMonth, currentYear);
         if (currentOneRadioValue == true) {
-//            toMonthMap = monthMap;
-//            toYearMap = yearMap;
+
             toDayMap = pop.populateDayMap(toMonth, toYear);
         }
     }

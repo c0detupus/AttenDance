@@ -5,8 +5,6 @@
  */
 package afk.to;
 
-import afk.entities.CourseEntity;
-import afk.entities.StudentEntity;
 import java.util.Date;
 
 /**

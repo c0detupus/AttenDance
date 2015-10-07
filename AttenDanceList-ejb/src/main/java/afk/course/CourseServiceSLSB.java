@@ -9,7 +9,6 @@ import afk.entities.CourseEntity;
 import afk.helper.EJBHelper;
 import afk.to.CourseTO;
 import afk.to.StudentTO;
-import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -21,8 +20,7 @@ import javax.persistence.Query;
  * @author c0detupus
  */
 @Stateless
-public class CourseServiceSLSB implements CourseServiceIntf
-{
+public class CourseServiceSLSB implements CourseServiceIntf {
 
     @PersistenceContext(unitName = "PU")
     EntityManager em;
@@ -33,9 +31,8 @@ public class CourseServiceSLSB implements CourseServiceIntf
         try {
             em.persist(EJBHelper.courseTOConverter(courseTO, false));
 
-        } catch(Exception ex) {
+        } catch (Exception ex) {
 
-            System.out.println(ex);
             return 0;
 
         }
@@ -70,7 +67,7 @@ public class CourseServiceSLSB implements CourseServiceIntf
 
             em.merge(EJBHelper.courseTOConverter(courseTO, false));
 
-        } catch(Exception e) {
+        } catch (Exception e) {
 
             return 0;
 
@@ -90,9 +87,8 @@ public class CourseServiceSLSB implements CourseServiceIntf
 
             q.executeUpdate();
 
-        } catch(Exception e) {
-
-            System.out.println(e);
+        } catch (Exception e) {
+            
             return 0;
         }
         return 1;
@@ -101,8 +97,6 @@ public class CourseServiceSLSB implements CourseServiceIntf
     @Override
     public List<StudentTO> getAllStudentsInCourse(long id) {
 
-//        List<StudentTO> studentTOs = em.createQuery("SELECT s FROM CourseEntity AS c")
-//        
         CourseEntity c = (CourseEntity) em
                 .createQuery("SELECT c FROM CourseEntity AS c WHERE c.id = :idParam")
                 .setParameter("idParam", id).getSingleResult();

@@ -1,16 +1,12 @@
 package afk;
 
-import afk.to.CourseTO;
 import afk.to.StudentTO;
 import helper.Helper;
 import helper.Messages;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -39,34 +35,16 @@ public class AttendanceListBean implements Serializable
 
     private Course course;
 
-    //String in Map is used to check First name, should be replaced to Long/Integer to check id/ssn
-    private final Map<String, Boolean> selectedSSN = new HashMap<>();
-
-    @PostConstruct
-    public void init() {
-
-    }
-
-    public List<Student> getStudents() {
-        if(selectedCourse != null) {
-            renderList();
-        }
-        return students;
-    }
 
     public void renderList() {
-
         if(selectedCourse == null) {
             return;
         }
-
         List<StudentTO> fool = services.getCourseService()
-                .getAllStudentsInCourse((long) 351);
+                .getAllStudentsInCourse(Long.valueOf(selectedCourse));
 
         students = Helper.studentTOListConverter(fool, false);
-
-        System.out.println(fool);
-
+       
         course = Helper.courseTOConverter(services.getCourseService()
                 .getCourse(Long.valueOf(selectedCourse), true), true);
 
@@ -79,36 +57,7 @@ public class AttendanceListBean implements Serializable
         return courseList;
     }
 
-    //ignore for now
-    public void getSelectedItems() {
-        // Get selected items.
-        renderList();
-        selectedStudents = new ArrayList<>();
-        System.out.println("Att selectedItems: " + students);
-        for(Student s : students) {
-            //replace firstname to id/ssn
-            System.out.println("selectedItems map: " + selectedSSN.toString());
-            if(selectedSSN.get(s.getFirstName())) {
-                System.out.println("selectedItems id: " + s.getId());
-                System.out.println("selectedItems name: " + s.getFirstName());
-                selectedStudents.add(s);
-            }
-        }
-        //do things with selectedStudents??
-    }
-
     public void submit() {
-
-        System.out.println("Submit called()");
-//        getSelectedItems();
-//        for (Student s : selectedStudents) {
-//            System.out.println("selectedStudents: " + s.getFirstName());
-//        }
-        //do things with selectedStudents???
-        System.out.println("selected Student: " + selectedStudents);
-        System.out.println("selected Student size: " + selectedStudents.size());
-//        System.out.println("selected datatable: " + datatable);
-
         List<Attendance> attendancelist = new ArrayList<>();
 
         Date d = new Date();
@@ -123,9 +72,7 @@ public class AttendanceListBean implements Serializable
                     check = true;
                     break;
                 }
-
             }
-
             if(check) {
 
                 Attendance attendance = new Attendance();
@@ -133,7 +80,6 @@ public class AttendanceListBean implements Serializable
                 attendance.setCourse(course);
                 attendance.setDateField(d);
                 attendance.setPresent(true);
-
                 attendancelist.add(attendance);
 
             } else {
@@ -142,7 +88,6 @@ public class AttendanceListBean implements Serializable
                 attendance.setCourse(course);
                 attendance.setDateField(d);
                 attendance.setPresent(false);
-
                 attendancelist.add(attendance);
             }
 
@@ -152,25 +97,10 @@ public class AttendanceListBean implements Serializable
                 .attendanceListConverter(attendancelist));
 
         Messages.showMessage(i);
-
-//             if(selected.equals(s)) {
-//
-//                    Attendance attendance = new Attendance();
-//                    attendance.setStudent(selected);
-//                    attendance.setCourse(course);
-//                    attendance.setDateField(d);
-//                    attendance.setPresent(false);
-//
-//                    attendancelist.add(attendance);
-//                } else {
-//                    Attendance attendance = new Attendance();
-//                    attendance.setStudent(s);
-//                    attendance.setCourse(course);
-//                    attendance.setDateField(d);
-//                    attendance.setPresent(true);
-//
-//                    attendancelist.add(attendance);
-//                }
+    }
+    
+    public List<Student> getStudents() {
+        return students;
     }
 
     public List<Student> getSelectedStudents() {
@@ -179,10 +109,6 @@ public class AttendanceListBean implements Serializable
 
     public void setSelectedStudents(List<Student> selectedStudents) {
         this.selectedStudents = selectedStudents;
-    }
-
-    public Map<String, Boolean> getSelectedSSN() {
-        return selectedSSN;
     }
 
     public String getSelectedCourse() {

@@ -6,6 +6,7 @@
 package afk;
 
 import helper.Helper;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
@@ -20,7 +21,7 @@ import model.Course;
  */
 @ManagedBean(name = "attendanceHistoryBean")
 @ViewScoped
-public class AttendanceHistoryBean {
+public class AttendanceHistoryBean implements Serializable{
 
     private Date date;
     private String selectedCourse;
@@ -32,25 +33,18 @@ public class AttendanceHistoryBean {
     private ServicesIntf services;
 
     public void renderList() {
-        System.out.println("atten renderList");
-        System.out.println("date: " + date);
-        System.out.println("selectedCourse " + selectedCourse);
         if (selectedCourse == null) {
             return;
         }
         if (date == null){
             return;
         }
-        System.out.println("atten do methods");
         course = Helper.courseTOConverter(services.getCourseService()
                 .getCourse(Long.valueOf(selectedCourse), false), false);
 
         atten = Helper.attendanceTOListConverter(
                 services.getAttendanceService().getAttendanceByDayAndCourse(
                         date, Helper.courseConverter(course, false)));
-        
-        System.out.println("renderList " + atten);
-        System.out.println("renderList" + date);
 
     }
 
