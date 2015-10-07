@@ -29,7 +29,7 @@ public class CourseServiceSLSB implements CourseServiceIntf
     public int createCourse(CourseTO courseTO) {
 
         try {
-            em.persist(EJBHelper.courseTOConverter(courseTO));
+            em.persist(EJBHelper.courseTOConverter(courseTO, false));
 
         } catch(Exception ex) {
 
@@ -66,7 +66,7 @@ public class CourseServiceSLSB implements CourseServiceIntf
 
         try {
 
-            em.merge(EJBHelper.courseTOConverter(courseTO));
+            em.merge(EJBHelper.courseTOConverter(courseTO, false));
 
         } catch(Exception e) {
 

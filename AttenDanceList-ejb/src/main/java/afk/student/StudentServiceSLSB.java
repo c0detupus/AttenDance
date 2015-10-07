@@ -22,7 +22,7 @@ public class StudentServiceSLSB implements StudentServiceIntf {
     @Override
     public int createStudent(StudentTO studentTo) {
         try {
-            em.persist(EJBHelper.studentTOConverter(studentTo));
+            em.persist(EJBHelper.studentTOConverter(studentTo, true));
 
         } catch (Exception ex) {
 
@@ -59,7 +59,7 @@ public class StudentServiceSLSB implements StudentServiceIntf {
     public int updateStudent(StudentTO studentTO) {
         try {
 
-            em.merge(EJBHelper.studentTOConverter(studentTO));
+            em.merge(EJBHelper.studentTOConverter(studentTO, true));
 
         } catch (Exception e) {
 

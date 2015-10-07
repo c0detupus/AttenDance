@@ -29,34 +29,50 @@ public class AttendanceEntity implements Serializable
     @Column(name = "attendance_id")
     private long id;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "student_id")
-    private StudentEntity students;
+    private StudentEntity student;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "course_id")
-    private CourseEntity courses;
+    private CourseEntity course;
 
     @Temporal(TemporalType.DATE)
     @Column(name = "date_field")
     private Date dateField;
+
+    //The only place where "present" will be stored as a String
+    //all other places will get stored as booleans
+    //that is why setters and getters return boolean values
+    @Column(name = "present")
+    private String present;
 
     //SETTERS----->
     public void setId(long id) {
         this.id = id;
     }
 
-    public void setStudents(StudentEntity students) {
-        this.students = students;
+    public void setStudent(StudentEntity students) {
+        this.student = students;
     }
 
-    public void setCourseEntity(CourseEntity courseEntity) {
-        this.courses = courseEntity;
+    public void setCourse(CourseEntity courseEntity) {
+        this.course = courseEntity;
     }
 
     public void setDateField(Date dateField) {
 
         this.dateField = dateField;
+    }
+
+    public void setPresent(boolean present) {
+
+        if(present == true) {
+            this.present = "Y";
+        } else {
+            this.present = "N";
+        }
+
     }
     //<------SETTERS
 
@@ -65,16 +81,21 @@ public class AttendanceEntity implements Serializable
         return id;
     }
 
-    public StudentEntity getStudents() {
-        return students;
+    public StudentEntity getStudent() {
+        return student;
     }
 
-    public CourseEntity getCourseEntity() {
-        return courses;
+    public CourseEntity getCourse() {
+        return course;
     }
 
     public Date getDateField() {
         return dateField;
+    }
+
+    public boolean getPresent() {
+        return present.equals("Y");
+
     }
     //<------GETTERS
 

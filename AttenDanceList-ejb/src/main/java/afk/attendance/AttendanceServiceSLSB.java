@@ -25,11 +25,13 @@ public class AttendanceServiceSLSB implements AttendanceServiceIntf
     EntityManager em;
 
     @Override
-    public int createAttendance(AttendanceTO attendanceTO) {
+    public int createAttendance(List<AttendanceTO> attendanceTOs) {
 
         try {
 
-            em.persist(EJBHelper.attendanceTOConverter(attendanceTO));
+            for(AttendanceTO attendanceTO : attendanceTOs) {
+                em.persist(EJBHelper.attendanceTOConverter(attendanceTO));
+            }
 
         } catch(Exception ex) {
 
@@ -98,7 +100,7 @@ public class AttendanceServiceSLSB implements AttendanceServiceIntf
     @Override
     public List<AttendanceTO> getAttendanceByDayAndCourse(Date date, CourseTO courseTO) {
 
-        CourseEntity courseEntity = EJBHelper.courseTOConverter(courseTO);
+        CourseEntity courseEntity = EJBHelper.courseTOConverter(courseTO, true);
 
         List<AttendanceEntity> attendanceEntitys = em
                 .createQuery("SELECT a FROM AttendanceEntity AS a WHERE a.dateField = :selectedDate AND a.courses = :selectedCourse")

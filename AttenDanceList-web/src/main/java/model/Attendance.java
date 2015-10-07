@@ -3,24 +3,22 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package afk.to;
+package model;
 
-import afk.entities.CourseEntity;
-import afk.entities.StudentEntity;
 import java.util.Date;
 
 /**
  *
  * @author c0detupus
  */
-public class AttendanceTO
+public class Attendance
 {
 
     private long id;
 
-    private StudentTO students;
+    private Student students;
 
-    private CourseTO courses;
+    private Course courses;
 
     private Date dateField;
 
@@ -31,11 +29,11 @@ public class AttendanceTO
         this.id = id;
     }
 
-    public void setStudent(StudentTO studentEntity) {
+    public void setStudent(Student studentEntity) {
         this.students = studentEntity;
     }
 
-    public void setCourse(CourseTO courseEntity) {
+    public void setCourse(Course courseEntity) {
         this.courses = courseEntity;
     }
 
@@ -53,11 +51,11 @@ public class AttendanceTO
         return id;
     }
 
-    public StudentTO getStudent() {
+    public Student getStudent() {
         return students;
     }
 
-    public CourseTO getCourse() {
+    public Course getCourse() {
         return courses;
     }
 

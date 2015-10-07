@@ -5,6 +5,7 @@
  */
 package helper;
 
+import afk.to.AttendanceTO;
 import afk.to.CourseTO;
 import afk.to.StudentTO;
 import afk.to.TeacherTO;
@@ -14,6 +15,7 @@ import java.util.GregorianCalendar;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import model.Attendance;
 import model.Course;
 import model.Student;
 import model.Teacher;
@@ -22,7 +24,8 @@ import model.Teacher;
  *
  * @author valance
  */
-public class Helper {
+public class Helper
+{
 
     private Map<String, Integer> yearMap;
     private Map<String, Integer> monthMap;
@@ -62,7 +65,7 @@ public class Helper {
         int daysInMonth = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
         dayMap = new LinkedHashMap<>();
 
-        for (int i = 1; i <= daysInMonth; i++) {
+        for(int i = 1; i <= daysInMonth; i++) {
             String day = Integer.toString(i);
             dayMap.put(day, day);
         }
@@ -92,7 +95,7 @@ public class Helper {
         sto.setSex(s.getSex());
         sto.setSocialSecurityNumber(s.getSocialSecurityNumber());
         sto.setZipCode(s.getZipCode());
-        if (getCourse == true) {
+        if(getCourse == true) {
             sto.setCourses(courseListConverter(s.getCourses(), false));
         }
         return sto;
@@ -113,7 +116,7 @@ public class Helper {
         s.setSex(sto.getSex());
         s.setSocialSecurityNumber(sto.getSocialSecurityNumber());
         s.setZipCode(sto.getZipCode());
-        if (getCourse == true) {
+        if(getCourse == true) {
             s.setCourses(courseTOListConverter(sto.getCourses(), false));
         }
 
@@ -124,13 +127,13 @@ public class Helper {
 
         List<StudentTO> studentTOs = new ArrayList<>();
 
-        for (Student s : students) {
-            if(getCourse == true){
+        for(Student s : students) {
+            if(getCourse == true) {
                 studentTOs.add(studentConverter(s, true));
             } else {
                 studentTOs.add(studentConverter(s, false));
             }
-            
+
         }
 
         return studentTOs;
@@ -141,13 +144,13 @@ public class Helper {
 
         List<Student> studentList = new ArrayList<>();
 
-        for (StudentTO sto : studentTOList) {
-            if (getCourse == true) {
+        for(StudentTO sto : studentTOList) {
+            if(getCourse == true) {
                 studentList.add(studentTOConverter(sto, true));
             } else {
                 studentList.add(studentTOConverter(sto, false));
             }
-            
+
         }
 
         return studentList;
@@ -158,11 +161,11 @@ public class Helper {
     //COURSE CONVERTERS----->
     public static CourseTO courseConverter(Course c, boolean getStudent) {
         CourseTO cto = new CourseTO();
-        
-        if(getStudent == true){
+
+        if(getStudent == true) {
             cto.setStudents(studentListConverter(c.getStudents(), false));
         }
-        
+
         cto.setTeacher(teacherConverter(c.getTeacher()));
         cto.setId(c.getId());
         cto.setName(c.getName());
@@ -175,7 +178,7 @@ public class Helper {
     public static Course courseTOConverter(CourseTO cto, boolean getStudents) {
         Course c = new Course();
 
-        if (getStudents == true) {
+        if(getStudents == true) {
             c.setStudents(studentTOListConverter(cto.getStudents(), false));
         }
         c.setTeacher(teacherTOConverter(cto.getTeacher()));
@@ -191,8 +194,8 @@ public class Helper {
 
         List<Course> courseList = new ArrayList<>();
 
-        for (CourseTO cto : courseTOList) {
-            if (getStudents == true) {
+        for(CourseTO cto : courseTOList) {
+            if(getStudents == true) {
                 courseList.add(courseTOConverter(cto, true));
             }
             courseList.add(courseTOConverter(cto, false));
@@ -204,13 +207,13 @@ public class Helper {
 
         List<CourseTO> courseTOs = new ArrayList<>();
 
-        for (Course c : courses) {
-            if(getStudent == true){
+        for(Course c : courses) {
+            if(getStudent == true) {
                 courseTOs.add(courseConverter(c, true));
             } else {
                 courseTOs.add(courseConverter(c, false));
             }
-            
+
         }
         return courseTOs;
     }
@@ -257,11 +260,56 @@ public class Helper {
 
         List<Teacher> teacherList = new ArrayList<>();
 
-        for (TeacherTO tto : teacherTOList) {
+        for(TeacherTO tto : teacherTOList) {
             teacherList.add(teacherTOConverter(tto));
         }
         return teacherList;
     }
     //<-----TEACHER CONVERTERS
 
+    //ATTENDANCE----->
+    public static Attendance attendanceTOConverter(AttendanceTO attendanceTO) {
+
+        Attendance attendanceEntity = new Attendance();
+
+        attendanceEntity.setId(attendanceTO.getId());
+        attendanceEntity.setStudent(studentTOConverter(attendanceTO
+                .getStudent(), true));
+        attendanceEntity
+                .setCourse(courseTOConverter(attendanceTO.getCourse(), true));
+        attendanceEntity.setDateField(attendanceTO.getDateField());
+        attendanceEntity.setPresent(attendanceTO.getPresent());
+        return attendanceEntity;
+
+    }
+
+    public static AttendanceTO attendanceConverter(Attendance attendance) {
+
+        AttendanceTO attendanceTO = new AttendanceTO();
+
+        attendanceTO.setId(attendance.getId());
+        attendanceTO.setStudent(studentConverter(attendance
+                .getStudent(), true));
+        attendanceTO
+                .setCourse(courseConverter(attendance.getCourse(), true));
+        attendanceTO.setDateField(attendance.getDateField());
+        attendanceTO.setPresent(attendance.getPresent());
+        return attendanceTO;
+
+    }
+
+    public static List<AttendanceTO> attendanceListConverter(List<Attendance> attendances) {
+
+        List<AttendanceTO> attendanceTOs = new ArrayList<>();
+
+        for(Attendance attendanceEntity : attendances) {
+
+            attendanceTOs.add(attendanceConverter(attendanceEntity));
+
+        }
+
+        return attendanceTOs;
+
+    }
+    //<-----ATTENDANCE CONVERTERS
 }
