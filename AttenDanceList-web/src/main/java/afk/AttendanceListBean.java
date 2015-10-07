@@ -21,7 +21,7 @@ public class AttendanceListBean implements Serializable {
     @EJB
     private ServicesIntf services;
 
-    private List<Student> student;
+    private List<Student> students;
     private List<Student> selectedStudent;
     private List<Course> courseList;
 
@@ -31,22 +31,30 @@ public class AttendanceListBean implements Serializable {
     private final Map<String, Boolean> selectedSSN = new HashMap<>();
 
     //hardcoded, replace with db queries or helper class
-    public List<Student> getStudent() {
+    public List<Student> getStudents() {
+        return students;
+    }
 
-        //should fetch students depending on course
-        
-        return student;
+    public void renderList() {
+        try {
+            Course course;
+            course = Helper.courseTOConverter(services.getCourseService().getCourse(Long.valueOf(selectedCourse), true), true);
+            students = course.getStudents();
+        } catch (NullPointerException e) {
+
+        }
     }
 
     public List<Course> getCourseList() {
-        courseList = Helper.courseTOListConverter(services.getCourseService().getAll());
+
+        courseList = Helper.courseTOListConverter(services.getCourseService().getAll(), false);
         return courseList;
     }
 
     public void getSelectedItems() {
         // Get selected items.
         selectedStudent = new ArrayList<>();
-        for (Student s : student) {
+        for (Student s : students) {
             //replace firstname to id/ssn
             if (selectedSSN.get(s.getFirstName())) {
                 selectedStudent.add(s);

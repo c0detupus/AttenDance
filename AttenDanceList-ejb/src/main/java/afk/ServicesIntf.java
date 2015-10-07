@@ -1,5 +1,6 @@
 package afk;
 
+import afk.attendance.AttendanceServiceIntf;
 import afk.course.CourseServiceIntf;
 import afk.student.StudentServiceIntf;
 import afk.teacher.TeacherServiceIntf;
@@ -18,4 +19,6 @@ public interface ServicesIntf
     public CourseServiceIntf getCourseService();
     
     public TeacherServiceIntf getTeacherService();
+    
+    public AttendanceServiceIntf getAttendanceService();
 }

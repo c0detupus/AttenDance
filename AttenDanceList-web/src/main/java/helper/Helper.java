@@ -22,8 +22,7 @@ import model.Teacher;
  *
  * @author valance
  */
-public class Helper
-{
+public class Helper {
 
     private Map<String, Integer> yearMap;
     private Map<String, Integer> monthMap;
@@ -63,7 +62,7 @@ public class Helper
         int daysInMonth = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
         dayMap = new LinkedHashMap<>();
 
-        for(int i = 1; i <= daysInMonth; i++) {
+        for (int i = 1; i <= daysInMonth; i++) {
             String day = Integer.toString(i);
             dayMap.put(day, day);
         }
@@ -78,7 +77,7 @@ public class Helper
     }
 
     //STUDENT CONVERTERS ----->
-    public static StudentTO studentConverter(Student s) {
+    public static StudentTO studentConverter(Student s, boolean getCourse) {
         StudentTO sto = new StudentTO();
 
         sto.setId(s.getId());
@@ -93,12 +92,13 @@ public class Helper
         sto.setSex(s.getSex());
         sto.setSocialSecurityNumber(s.getSocialSecurityNumber());
         sto.setZipCode(s.getZipCode());
-        sto.setCourses(courseListConverter(s.getCourses()));
-
+        if (getCourse == true) {
+            sto.setCourses(courseListConverter(s.getCourses(), false));
+        }
         return sto;
     }
 
-    public static Student studentTOConverter(StudentTO sto) {
+    public static Student studentTOConverter(StudentTO sto, boolean getCourse) {
         Student s = new Student();
 
         s.setId(sto.getId());
@@ -113,31 +113,41 @@ public class Helper
         s.setSex(sto.getSex());
         s.setSocialSecurityNumber(sto.getSocialSecurityNumber());
         s.setZipCode(sto.getZipCode());
-        s.setCourses(courseTOListConverter(sto.getCourses()));
+        if (getCourse == true) {
+            s.setCourses(courseTOListConverter(sto.getCourses(), false));
+        }
 
         return s;
     }
 
-    public static List<StudentTO> studentListConverter(List<Student> students) {
+    public static List<StudentTO> studentListConverter(List<Student> students, boolean getCourse) {
 
         List<StudentTO> studentTOs = new ArrayList<>();
 
-        for(Student s : students) {
-
-            studentTOs.add(studentConverter(s));
+        for (Student s : students) {
+            if(getCourse == true){
+                studentTOs.add(studentConverter(s, true));
+            } else {
+                studentTOs.add(studentConverter(s, false));
+            }
+            
         }
 
         return studentTOs;
 
     }
 
-    public static List<Student> studentTOListConverter(List<StudentTO> studentTOList) {
+    public static List<Student> studentTOListConverter(List<StudentTO> studentTOList, boolean getCourse) {
 
         List<Student> studentList = new ArrayList<>();
 
-        for(StudentTO sto : studentTOList) {
-
-            studentList.add(studentTOConverter(sto));
+        for (StudentTO sto : studentTOList) {
+            if (getCourse == true) {
+                studentList.add(studentTOConverter(sto, true));
+            } else {
+                studentList.add(studentTOConverter(sto, false));
+            }
+            
         }
 
         return studentList;
@@ -146,9 +156,13 @@ public class Helper
     //<-----STUDENT CONVERTERS
 
     //COURSE CONVERTERS----->
-    public static CourseTO courseConverter(Course c) {
+    public static CourseTO courseConverter(Course c, boolean getStudent) {
         CourseTO cto = new CourseTO();
-
+        
+        if(getStudent == true){
+            cto.setStudents(studentListConverter(c.getStudents(), false));
+        }
+        
         cto.setTeacher(teacherConverter(c.getTeacher()));
         cto.setId(c.getId());
         cto.setName(c.getName());
@@ -158,9 +172,12 @@ public class Helper
         return cto;
     }
 
-    public static Course courseTOConverter(CourseTO cto) {
+    public static Course courseTOConverter(CourseTO cto, boolean getStudents) {
         Course c = new Course();
 
+        if (getStudents == true) {
+            c.setStudents(studentTOListConverter(cto.getStudents(), false));
+        }
         c.setTeacher(teacherTOConverter(cto.getTeacher()));
         c.setId(cto.getId());
         c.setName(cto.getName());
@@ -170,24 +187,30 @@ public class Helper
         return c;
     }
 
-    public static List<Course> courseTOListConverter(List<CourseTO> courseTOList) {
+    public static List<Course> courseTOListConverter(List<CourseTO> courseTOList, boolean getStudents) {
 
         List<Course> courseList = new ArrayList<>();
 
-        for(CourseTO cto : courseTOList) {
-
-            courseList.add(courseTOConverter(cto));
+        for (CourseTO cto : courseTOList) {
+            if (getStudents == true) {
+                courseList.add(courseTOConverter(cto, true));
+            }
+            courseList.add(courseTOConverter(cto, false));
         }
         return courseList;
     }
 
-    public static List<CourseTO> courseListConverter(List<Course> courses) {
+    public static List<CourseTO> courseListConverter(List<Course> courses, boolean getStudent) {
 
         List<CourseTO> courseTOs = new ArrayList<>();
 
-        for(Course c : courses) {
-
-            courseTOs.add(courseConverter(c));
+        for (Course c : courses) {
+            if(getStudent == true){
+                courseTOs.add(courseConverter(c, true));
+            } else {
+                courseTOs.add(courseConverter(c, false));
+            }
+            
         }
         return courseTOs;
     }
@@ -234,7 +257,7 @@ public class Helper
 
         List<Teacher> teacherList = new ArrayList<>();
 
-        for(TeacherTO tto : teacherTOList) {
+        for (TeacherTO tto : teacherTOList) {
             teacherList.add(teacherTOConverter(tto));
         }
         return teacherList;

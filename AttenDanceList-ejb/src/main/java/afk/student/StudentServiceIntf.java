@@ -18,7 +18,7 @@ public interface StudentServiceIntf {
     //Read
     public List<StudentTO> getAll();
 
-    public StudentTO getStudent(long id);
+    public StudentTO getStudent(long id, boolean getCourse);
 
     //Update
     public int updateStudent(StudentTO studentTO);

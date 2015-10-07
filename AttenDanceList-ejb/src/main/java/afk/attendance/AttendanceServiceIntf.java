@@ -9,11 +9,13 @@ import afk.to.AttendanceTO;
 import afk.to.CourseTO;
 import java.util.Date;
 import java.util.List;
+import javax.ejb.Local;
 
 /**
  *
  * @author c0detupus
  */
+@Local
 public interface AttendanceServiceIntf
 {
 

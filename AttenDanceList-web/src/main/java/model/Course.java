@@ -71,7 +71,7 @@ public class Course implements Serializable {
         if (!params.isEmpty()) {
             id = Long.valueOf(params.get("id"));
             course = Helper.courseTOConverter(services.getCourseService()
-                    .getCourse(id));
+                    .getCourse(id, false), false);
             initialize();
         }
 
@@ -94,7 +94,7 @@ public class Course implements Serializable {
         teacher = Helper.teacherTOConverter(services.getTeacherService().getTeacher(tId));
         try {
             int i = services.getCourseService().createCourse(Helper
-                    .courseConverter(this));
+                    .courseConverter(this, false));
             Messages.showMessage(i);
             clear();
         } catch (Exception e) {
@@ -107,7 +107,7 @@ public class Course implements Serializable {
         long tId = Long.valueOf(teacherId);
         teacher = Helper.teacherTOConverter(services.getTeacherService().getTeacher(tId));
         int i = services.getCourseService().updateCourse(Helper
-                .courseConverter(this));
+                .courseConverter(this, false));
         Messages.showMessage(i);
     }
 

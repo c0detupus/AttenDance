@@ -16,11 +16,15 @@
                 <p:outputLabel value="Course: " ></p:outputLabel>
                 <p:selectOneMenu id="selectCourse" value="#{attendanceListBean.selectedCourse}" >
                     <f:selectItems value="#{attendanceListBean.courseList}" var="course"
-                                   itemLabel="#{course.name}"/>
+                                   itemLabel="#{course.name} #{course.code}"
+                                   itemValue="#{course.id}"/>
+                    <f:ajax event="change" execute="@this" render="attendanceList" listener="#{attendanceListBean.renderList()}"/>
                 </p:selectOneMenu>
                 </p:panelGrid>
+                
                 <p:separator/>
-                <p:dataTable id="attendanceList" value="#{attendanceListBean.student}" var="student">
+                
+                <p:dataTable id="attendanceList" value="#{attendanceListBean.students}" var="student">
                     <f:facet name="header">
                         <h:outputText value="Attendance List"/>
                     </f:facet>
@@ -31,7 +35,7 @@
                         <h:outputText value="#{student.firstName}"/>
                     </p:column>
                     <p:column>
-                        <p:selectBooleanCheckbox value="#{attendanceListBean.selectedSSN[student.firstName]}"/>
+                        <p:selectBooleanCheckbox value="#{attendanceListBean.selectedSSN[student.id]}"/>
                     </p:column>       
                 </p:dataTable>
                 <p:commandButton value="Submit" action="#{attendanceListBean.submit}"/>

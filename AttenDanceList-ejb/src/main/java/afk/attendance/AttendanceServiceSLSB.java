@@ -7,6 +7,7 @@ import afk.to.AttendanceTO;
 import afk.to.CourseTO;
 import java.util.Date;
 import java.util.List;
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -16,6 +17,7 @@ import javax.persistence.TemporalType;
  *
  * @author c0detupus
  */
+@Stateless
 public class AttendanceServiceSLSB implements AttendanceServiceIntf
 {
 

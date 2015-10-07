@@ -72,7 +72,7 @@ public class Student implements Serializable
         if(!params.isEmpty()) {
             id = Long.valueOf(params.get("id"));
             student = Helper.studentTOConverter(services.getStudentService()
-                    .getStudent(id));
+                    .getStudent(id, true), true);
 
             courses = student.getCourses();
             selectedCourseIDs = new ArrayList<>();
@@ -86,7 +86,7 @@ public class Student implements Serializable
         }
 
         existingCourses = Helper.courseTOListConverter(services
-                .getCourseService().getAll());
+                .getCourseService().getAll(), false);
 
         if(selectedCourseIDs != null) {
             updateSelectedCoursePanel();
@@ -136,12 +136,12 @@ public class Student implements Serializable
         Course course;
         for(String s : selectedCourseIDs) {
             course = Helper.courseTOConverter(services.getCourseService()
-                    .getCourse(Long.valueOf(s)));
+                    .getCourse(Long.valueOf(s), false), false);
             courses.add(course);
         }
 
         int i = services.getStudentService().createStudent(Helper
-                .studentConverter(this));
+                .studentConverter(this, true));
         Messages.showMessage(i);
         clear();
     }
@@ -152,11 +152,11 @@ public class Student implements Serializable
         System.out.println("Student update: " + selectedCourseIDs);
         for(String s : selectedCourseIDs) {
             course = Helper.courseTOConverter(services.getCourseService()
-                    .getCourse(Long.valueOf(s)));
+                    .getCourse(Long.valueOf(s), false), false);
             courses.add(course);
         }
         int i = services.getStudentService().updateStudent(Helper
-                .studentConverter(this));
+                .studentConverter(this, true));
         Messages.showMessage(i);
     }
 

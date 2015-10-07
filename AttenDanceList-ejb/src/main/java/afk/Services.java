@@ -1,5 +1,6 @@
 package afk;
 
+import afk.attendance.AttendanceServiceIntf;
 import afk.course.CourseServiceIntf;
 import afk.student.StudentServiceIntf;
 import afk.teacher.TeacherServiceIntf;
@@ -20,7 +21,7 @@ public class Services implements ServicesIntf,Serializable
     @EJB StudentServiceIntf studentService;
     @EJB CourseServiceIntf courseService;
     @EJB TeacherServiceIntf teacherService;
-    
+    @EJB AttendanceServiceIntf attendanceService;
     @Override
     public StudentServiceIntf getStudentService() {
         return studentService;
@@ -34,6 +35,11 @@ public class Services implements ServicesIntf,Serializable
     @Override
     public TeacherServiceIntf getTeacherService() {
         return teacherService;
+    }
+
+    @Override
+    public AttendanceServiceIntf getAttendanceService() {
+        return attendanceService;
     }
     
 }

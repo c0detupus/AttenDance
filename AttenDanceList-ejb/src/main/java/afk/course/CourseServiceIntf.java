@@ -20,7 +20,7 @@ public interface CourseServiceIntf {
     public int createCourse(CourseTO courseTO);
 
     //Read
-    public CourseTO getCourse(long id);
+    public CourseTO getCourse(long id, boolean getStudents);
 
     public List<CourseTO> getAll();
 

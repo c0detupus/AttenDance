@@ -42,10 +42,10 @@ public class CourseServiceSLSB implements CourseServiceIntf
     }
 
     @Override
-    public CourseTO getCourse(long id) {
+    public CourseTO getCourse(long id, boolean getStudents) {
 
         CourseTO courseTO = EJBHelper.courseEntityConverter((CourseEntity) em
-                .find(CourseEntity.class, id));
+                .find(CourseEntity.class, id), getStudents);
 
         return courseTO;
 
@@ -57,7 +57,7 @@ public class CourseServiceSLSB implements CourseServiceIntf
         List<CourseEntity> courseEntites = em
                 .createQuery("SELECT c FROM CourseEntity AS c").getResultList();
 
-        return EJBHelper.courseEntityListConverter(courseEntites);
+        return EJBHelper.courseEntityListConverter(courseEntites, true);
 
     }
 

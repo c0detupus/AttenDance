@@ -20,14 +20,14 @@ import java.util.List;
  *
  * @author c0detupus
  */
-public class EJBHelper
-{
+public class EJBHelper {
 
     //COURSE----->
     public static CourseEntity courseTOConverter(CourseTO cto) {
 
         CourseEntity ce = new CourseEntity();
-
+        
+        ce.setStudents(studentTOListConverter(cto.getStudents()));
         ce.setTeacher(teacherTOConverter(cto.getTeacher()));
         ce.setId(cto.getId());
         ce.setName(cto.getName());
@@ -38,10 +38,13 @@ public class EJBHelper
 
     }
 
-    public static CourseTO courseEntityConverter(CourseEntity courseEntity) {
+    public static CourseTO courseEntityConverter(CourseEntity courseEntity, boolean getStudents) {
 
         CourseTO courseTO = new CourseTO();
 
+        if (getStudents == true) {
+            courseTO.setStudents(studentEntityListConverter(courseEntity.getStudents(), false));
+        }
         courseTO.setTeacher(teacherEntityConverter(courseEntity.getTeacher()));
         courseTO.setId(courseEntity.getId());
         courseTO.setName(courseEntity.getName());
@@ -56,7 +59,7 @@ public class EJBHelper
 
         List<CourseEntity> courseEntitys = new ArrayList<>();
 
-        for(CourseTO cto : courseTOs) {
+        for (CourseTO cto : courseTOs) {
 
             courseEntitys.add(courseTOConverter(cto));
 
@@ -66,12 +69,16 @@ public class EJBHelper
 
     }
 
-    public static List<CourseTO> courseEntityListConverter(List<CourseEntity> courseEntityList) {
+    public static List<CourseTO> courseEntityListConverter(List<CourseEntity> courseEntityList, boolean getStudents) {
 
         List<CourseTO> cTOList = new ArrayList<>();
-        for(CourseEntity ce : courseEntityList) {
+        for (CourseEntity ce : courseEntityList) {
+            if (getStudents == true) {
+                cTOList.add(courseEntityConverter(ce, true));
+            } else {
+                cTOList.add(courseEntityConverter(ce, false));
+            }
 
-            cTOList.add(courseEntityConverter(ce));
         }
 
         return cTOList;
@@ -98,7 +105,7 @@ public class EJBHelper
         return se;
     }
 
-    public static StudentTO studentEntityConverter(StudentEntity s) {
+    public static StudentTO studentEntityConverter(StudentEntity s, boolean getCourse) {
 
         StudentTO sto = new StudentTO();
 
@@ -114,18 +121,37 @@ public class EJBHelper
         sto.setSex(s.getSex());
         sto.setSocialSecurityNumber(s.getSocialSecurityNumber());
         sto.setZipCode(s.getZipCode());
-        sto.setCourses(courseEntityListConverter(s.getCourses()));
+        if (getCourse == true) {
+            sto.setCourses(courseEntityListConverter(s.getCourses(), false));
+        }
         return sto;
 
     }
 
-    public static List<StudentTO> studentEntityListConverter(List<StudentEntity> eList) {
+    public static List<StudentEntity> studentTOListConverter(List<StudentTO> studentTOs) {
+
+        List<StudentEntity> se = new ArrayList<>();
+
+        for (StudentTO sto : studentTOs) {
+
+            se.add(studentTOConverter(sto));
+
+        }
+
+        return se;
+    }
+
+    public static List<StudentTO> studentEntityListConverter(List<StudentEntity> eList, boolean getCourse) {
 
         List<StudentTO> toList = new ArrayList<>();
 
-        for(StudentEntity s : eList) {
+        for (StudentEntity s : eList) {
+            if (getCourse == true) {
+                toList.add(studentEntityConverter(s, true));
+            } else {
+                toList.add(studentEntityConverter(s, false));
+            }
 
-            toList.add(studentEntityConverter(s));
         }
 
         return toList;
@@ -175,7 +201,7 @@ public class EJBHelper
 
         List<TeacherTO> toList = new ArrayList<>();
 
-        for(TeacherEntity t : tList) {
+        for (TeacherEntity t : tList) {
             TeacherTO tto = new TeacherTO();
 
             tto.setId(t.getId());
@@ -227,7 +253,7 @@ public class EJBHelper
 
         List<AttendanceTO> attendanceTOs = new ArrayList<>();
 
-        for(AttendanceEntity attendanceEntity : attendanceEntitys) {
+        for (AttendanceEntity attendanceEntity : attendanceEntitys) {
 
             attendanceTOs.add(attendanceEntityConverter(attendanceEntity));
 

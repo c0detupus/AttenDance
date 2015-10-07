@@ -40,15 +40,18 @@ public class StudentServiceSLSB implements StudentServiceIntf {
         List<StudentEntity> studentList = em
                 .createQuery("SELECT s FROM StudentEntity AS s").getResultList();
 
-        return EJBHelper.studentEntityListConverter(studentList);
+        return EJBHelper.studentEntityListConverter(studentList, true);
     }
 
     @Override
-    public StudentTO getStudent(long id) {
+    public StudentTO getStudent(long id, boolean getCourse) {
+//        StudentTO sTO = EJBHelper.studentEntityConverter((StudentEntity) em
+//                .createQuery("SELECT s FROM StudentEntity AS s WHERE s.id = "
+//                        + id).getSingleResult());
+        
         StudentTO sTO = EJBHelper.studentEntityConverter((StudentEntity) em
-                .createQuery("SELECT s FROM StudentEntity AS s WHERE s.id = "
-                        + id).getSingleResult());
-
+                .find(StudentEntity.class, id), getCourse);
+        
         return sTO;
     }
 

@@ -37,16 +37,7 @@ public class CourseTO
     public CourseTO() {
         students = new ArrayList<>();
     }
-//    private TeacherTO teacher;
 
-//    public TeacherTO getTeacher() {
-//        return teacher;
-//    }
-//
-//    public void setTeacher(TeacherTO teacher) {
-//        this.teacher = teacher;
-//    }
-//
     public List<StudentTO> getStudents() {
         return students;
     }

@@ -32,7 +32,7 @@ public class CourseListBean implements Serializable {
     private int total;
 
     public List<Course> getCourses() {
-        courses = Helper.courseTOListConverter(services.getCourseService().getAll());
+        courses = Helper.courseTOListConverter(services.getCourseService().getAll(), false);
         return courses;
     }
 
