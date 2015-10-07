@@ -100,7 +100,8 @@ public class CourseServiceSLSB implements CourseServiceIntf {
         CourseEntity c = (CourseEntity) em
                 .createQuery("SELECT c FROM CourseEntity AS c WHERE c.id = :idParam")
                 .setParameter("idParam", id).getSingleResult();
-
+        
+        em.refresh(c);
         return EJBHelper.studentEntityListConverter(c.getStudents(), false);
 
     }

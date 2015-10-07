@@ -51,7 +51,7 @@ public class StudentEntity implements Serializable
     @Column(name = "avg_attendance")
     private String avgAttendance;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany
     @JoinTable(name = "course_student_JoinTable",
                joinColumns = @JoinColumn(name = "student_id"),
                inverseJoinColumns = @JoinColumn(name = "course_id")
