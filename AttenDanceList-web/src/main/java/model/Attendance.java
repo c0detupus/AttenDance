@@ -29,12 +29,12 @@ public class Attendance
         this.id = id;
     }
 
-    public void setStudent(Student studentEntity) {
-        this.students = studentEntity;
+    public void setStudent(Student student) {
+        this.students = student;
     }
 
-    public void setCourse(Course courseEntity) {
-        this.courses = courseEntity;
+    public void setCourse(Course course) {
+        this.courses = course;
     }
 
     public void setDateField(Date dateField) {

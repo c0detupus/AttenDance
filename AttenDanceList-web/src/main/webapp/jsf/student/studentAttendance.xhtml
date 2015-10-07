@@ -24,7 +24,7 @@
                 
                 <p:separator/>
                 
-                <p:dataTable id="attendanceList" var="student" value="#{attendanceListBean.students}"  rowSelectMode="checkbox" selection="#{attendanceListBean.selectedStudent}" rowKey="#{student.id}" >
+                <p:dataTable id="attendanceList" var="student" value="#{attendanceListBean.students}"  rowSelectMode="checkbox" selection="#{attendanceListBean.selectedStudents}" rowKey="#{student.id}" >
                     <f:facet name="header">
                         <h:outputText value="Attendance List"/>
                     </f:facet>
