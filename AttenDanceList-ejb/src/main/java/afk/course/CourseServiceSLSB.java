@@ -44,9 +44,6 @@ public class CourseServiceSLSB implements CourseServiceIntf
     @Override
     public CourseTO getCourse(long id) {
 
-//        EJBHelper.courseEntityConverter((CourseEntity) em
-//                .createQuery("SELECT c FROM CourseEntity AS c WHERE c.id = "
-//                        + id).getSingleResult());
         CourseTO courseTO = EJBHelper.courseEntityConverter((CourseEntity) em
                 .find(CourseEntity.class, id));
 
@@ -67,8 +64,6 @@ public class CourseServiceSLSB implements CourseServiceIntf
     @Override
     public int updateCourse(CourseTO courseTO) {
 
-        
-        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
         try {
 
             em.merge(EJBHelper.courseTOConverter(courseTO));

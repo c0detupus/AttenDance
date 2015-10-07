@@ -77,17 +77,45 @@ public class Helper
         return coursePointsMap;
     }
 
-    public static List<Student> studentTOListConverter(List<StudentTO> studentTOList) {
+    //STUDENT CONVERTERS ----->
+    public static StudentTO studentConverter(Student s) {
+        StudentTO sto = new StudentTO();
 
-        List<Student> studentList = new ArrayList<>();
+        sto.setId(s.getId());
+        sto.setAddress(s.getAddress());
+        sto.setAvgAttendance(s.getAvgAttendance());
+        sto.setCellPhone(s.getCellPhone());
+        sto.setCity(s.getCity());
+        sto.setEmail(s.getEmail());
+        sto.setFirstName(s.getFirstName());
+        sto.setLastName(s.getLastName());
+        sto.setPhoneNumber(s.getPhoneNumber());
+        sto.setSex(s.getSex());
+        sto.setSocialSecurityNumber(s.getSocialSecurityNumber());
+        sto.setZipCode(s.getZipCode());
+        sto.setCourses(courseListConverter(s.getCourses()));
 
-        for(StudentTO sto : studentTOList) {
+        return sto;
+    }
 
-            studentList.add(studentTOConverter(sto));
-        }
+    public static Student studentTOConverter(StudentTO sto) {
+        Student s = new Student();
 
-        return studentList;
+        s.setId(sto.getId());
+        s.setAddress(sto.getAddress());
+        s.setAvgAttendance(sto.getAvgAttendance());
+        s.setCellPhone(sto.getCellPhone());
+        s.setCity(sto.getCity());
+        s.setEmail(sto.getEmail());
+        s.setFirstName(sto.getFirstName());
+        s.setLastName(sto.getLastName());
+        s.setPhoneNumber(sto.getPhoneNumber());
+        s.setSex(sto.getSex());
+        s.setSocialSecurityNumber(sto.getSocialSecurityNumber());
+        s.setZipCode(sto.getZipCode());
+        s.setCourses(courseTOListConverter(sto.getCourses()));
 
+        return s;
     }
 
     public static List<StudentTO> studentListConverter(List<Student> students) {
@@ -103,38 +131,21 @@ public class Helper
 
     }
 
-    public static List<Course> courseTOListConverter(List<CourseTO> courseTOList) {
+    public static List<Student> studentTOListConverter(List<StudentTO> studentTOList) {
 
-        List<Course> courseList = new ArrayList<>();
+        List<Student> studentList = new ArrayList<>();
 
-        for(CourseTO cto : courseTOList) {
+        for(StudentTO sto : studentTOList) {
 
-            courseList.add(courseTOConverter(cto));
+            studentList.add(studentTOConverter(sto));
         }
-        return courseList;
+
+        return studentList;
+
     }
+    //<-----STUDENT CONVERTERS
 
-    public static List<CourseTO> courseListConverter(List<Course> courses) {
-
-        List<CourseTO> courseTOs = new ArrayList<>();
-
-        for(Course c : courses) {
-
-            courseTOs.add(courseConverter(c));
-        }
-        return courseTOs;
-    }
-
-    public static List<Teacher> teacherTOListConverter(List<TeacherTO> teacherTOList) {
-
-        List<Teacher> teacherList = new ArrayList<>();
-
-        for(TeacherTO tto : teacherTOList) {
-            teacherList.add(teacherTOConverter(tto));
-        }
-        return teacherList;
-    }
-
+    //COURSE CONVERTERS----->
     public static CourseTO courseConverter(Course c) {
         CourseTO cto = new CourseTO();
 
@@ -159,46 +170,30 @@ public class Helper
         return c;
     }
 
-    public static Student studentTOConverter(StudentTO sto) {
-        Student s = new Student();
+    public static List<Course> courseTOListConverter(List<CourseTO> courseTOList) {
 
-        s.setId(sto.getId());
-        s.setAddress(sto.getAddress());
-        s.setAvgAttendance(sto.getAvgAttendance());
-        s.setCellPhone(sto.getCellPhone());
-        s.setCity(sto.getCity());
-        s.setEmail(sto.getEmail());
-        s.setFirstName(sto.getFirstName());
-        s.setLastName(sto.getLastName());
-        s.setPhoneNumber(sto.getPhoneNumber());
-        s.setSex(sto.getSex());
-        s.setSocialSecurityNumber(sto.getSocialSecurityNumber());
-        s.setZipCode(sto.getZipCode());
-        s.setCourses(courseTOListConverter(sto.getCourses()));
+        List<Course> courseList = new ArrayList<>();
 
-        return s;
+        for(CourseTO cto : courseTOList) {
+
+            courseList.add(courseTOConverter(cto));
+        }
+        return courseList;
     }
 
-    public static StudentTO studentConverter(Student s) {
-        StudentTO sto = new StudentTO();
+    public static List<CourseTO> courseListConverter(List<Course> courses) {
 
-        sto.setId(s.getId());
-        sto.setAddress(s.getAddress());
-        sto.setAvgAttendance(s.getAvgAttendance());
-        sto.setCellPhone(s.getCellPhone());
-        sto.setCity(s.getCity());
-        sto.setEmail(s.getEmail());
-        sto.setFirstName(s.getFirstName());
-        sto.setLastName(s.getLastName());
-        sto.setPhoneNumber(s.getPhoneNumber());
-        sto.setSex(s.getSex());
-        sto.setSocialSecurityNumber(s.getSocialSecurityNumber());
-        sto.setZipCode(s.getZipCode());
-        sto.setCourses(courseListConverter(s.getCourses()));
+        List<CourseTO> courseTOs = new ArrayList<>();
 
-        return sto;
+        for(Course c : courses) {
+
+            courseTOs.add(courseConverter(c));
+        }
+        return courseTOs;
     }
+    //<-----COURSE CONVERTERS
 
+    //TEACHER CONVERTERS ----->
     public static TeacherTO teacherConverter(Teacher t) {
         TeacherTO tto = new TeacherTO();
 
@@ -234,4 +229,16 @@ public class Helper
 
         return t;
     }
+
+    public static List<Teacher> teacherTOListConverter(List<TeacherTO> teacherTOList) {
+
+        List<Teacher> teacherList = new ArrayList<>();
+
+        for(TeacherTO tto : teacherTOList) {
+            teacherList.add(teacherTOConverter(tto));
+        }
+        return teacherList;
+    }
+    //<-----TEACHER CONVERTERS
+
 }

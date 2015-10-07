@@ -52,10 +52,6 @@ public class CourseEntity implements Serializable
     public CourseEntity() {
         students = new ArrayList<>();
     }
-//    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-//    @JoinColumn(name = "id")
-//    private TeacherEntity teacher;
-
     //SETTERS----->
     public void setId(long id) {
         this.id = id;
@@ -80,12 +76,8 @@ public class CourseEntity implements Serializable
     public void setStudents(List<StudentEntity> students) {
         this.students = students;
     }
-//
-//    public void setTeacher(TeacherEntity teacher) {
-//        this.teacher = teacher;
-//    }
-
     //<-----SETTERS
+    
     //GETTERS----->
     public long getId() {
         return id;
@@ -110,10 +102,5 @@ public class CourseEntity implements Serializable
     public List<StudentEntity> getStudents() {
         return students;
     }
-//
-//    public TeacherEntity getTeacher() {
-//        return teacher;
-//    }
-
     //<-----GETTERS
 }

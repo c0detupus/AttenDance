@@ -31,14 +31,10 @@ public class AttendanceEntity implements Serializable
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "student_id")
-//    @OneToOne
-//    @MapsId
     private StudentEntity students;
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "course_id")
-//    @OneToOne
-//    @MapsId
     private CourseEntity courses;
 
     @Temporal(TemporalType.DATE)

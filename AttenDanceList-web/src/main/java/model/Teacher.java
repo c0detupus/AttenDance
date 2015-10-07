@@ -9,7 +9,6 @@ import afk.ServicesIntf;
 import helper.Helper;
 import helper.Messages;
 import java.io.Serializable;
-import java.util.List;
 import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -45,9 +44,6 @@ public class Teacher implements Serializable
             city,
             zipCode;
 
-//    private List<Student> students;
-//    private Course course;
-
     private Teacher teacher;
 
     @PostConstruct
@@ -57,7 +53,8 @@ public class Teacher implements Serializable
                 getExternalContext().getRequestParameterMap();
         if(!params.isEmpty()) {
             id = Long.valueOf(params.get("id"));
-            teacher = Helper.teacherTOConverter(services.getTeacherService().getTeacher(id));
+            teacher = Helper.teacherTOConverter(services.getTeacherService()
+                    .getTeacher(id));
             initialize();
         }
     }
@@ -83,7 +80,8 @@ public class Teacher implements Serializable
     }
 
     public void update() {
-        int i = services.getTeacherService().updateTeacher(Helper.teacherConverter(this));
+        int i = services.getTeacherService().updateTeacher(Helper
+                .teacherConverter(this));
         Messages.showMessage(i);
     }
 
@@ -105,7 +103,7 @@ public class Teacher implements Serializable
         zipCode = null;
     }
 
-    //******VALIDATORS--->
+    //VALIDATORS--->
     public void validateLetters(FacesContext context,
                                 UIComponent toValidate,
                                 Object value) throws ValidatorException {
@@ -180,9 +178,9 @@ public class Teacher implements Serializable
         }
 
     }
-    //<---VALIDATORS*****
+    //<---VALIDATORS
 
-    //*****PRIVATE METHODS--->
+    //PRIVATE METHODS--->
     private boolean onlyLetters(String str) {
 
         return str.matches("[a-zA-Z]+");
@@ -196,112 +194,117 @@ public class Teacher implements Serializable
 
     }
 
-    public long getId() {
-        return id;
+    private boolean onlyNumbers(String str) {
+        return str.matches("[0-9]+");
+    }
+    //<-----PRIVATE METHODS
+
+    //SETTERS----->
+    public void setServices(ServicesIntf services) {
+        this.services = services;
     }
 
     public void setId(long id) {
         this.id = id;
     }
 
-    private boolean onlyNumbers(String str) {
-        return str.matches("[0-9]+");
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
     public void setFirstName(String firstName) {
         this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
     }
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
 
-    public String getSocialSecurityNumber() {
-        return socialSecurityNumber;
-    }
-
     public void setSocialSecurityNumber(String socialSecurityNumber) {
         this.socialSecurityNumber = socialSecurityNumber;
-    }
-
-    public String getEmail() {
-        return email;
     }
 
     public void setEmail(String email) {
         this.email = email;
     }
 
-    public String getCellPhone() {
-        return cellPhone;
-    }
-
     public void setCellPhone(String cellPhone) {
         this.cellPhone = cellPhone;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
     }
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
-    public String getSex() {
-        return sex;
-    }
-
     public void setSex(String sex) {
         this.sex = sex;
-    }
-
-    public String getAddress() {
-        return address;
     }
 
     public void setAddress(String address) {
         this.address = address;
     }
 
-    public String getCity() {
-        return city;
-    }
-
     public void setCity(String city) {
         this.city = city;
-    }
-
-    public String getZipCode() {
-        return zipCode;
     }
 
     public void setZipCode(String zipCode) {
         this.zipCode = zipCode;
     }
 
-//    public List<Student> getStudents() {
-//        return students;
-//    }
-//
-//    public void setStudents(List<Student> students) {
-//        this.students = students;
-//    }
-//
-//    public Course getCourse() {
-//        return course;
-//    }
-//
-//    public void setCourse(Course course) {
-//        this.course = course;
-//    }
+    public void setTeacher(Teacher teacher) {
+        this.teacher = teacher;
+    }
+    //<-----SETTERS
+
+    //GETTERS----->
+    public ServicesIntf getServices() {
+        return services;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getSocialSecurityNumber() {
+        return socialSecurityNumber;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getCellPhone() {
+        return cellPhone;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public String getZipCode() {
+        return zipCode;
+    }
+
+    public Teacher getTeacher() {
+        return teacher;
+    }
+    //<-----GETTERS
 
 }

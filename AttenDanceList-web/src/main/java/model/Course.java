@@ -43,8 +43,7 @@ public class Course implements Serializable {
         this.teacherId = teacherId;
     }
 
-//    private List<Student> students;
-//    private Teacher teacher;
+
     private List<Teacher> selectedTeacher;
 
     public List<Teacher> getSelectedTeacher() {
@@ -88,9 +87,6 @@ public class Course implements Serializable {
 
     public void test() {
         System.out.println("Course teacher: " + teacherId);
-//        System.out.println("Course name: " + name);
-//        System.out.println("Course select pts: " + points);
-//        System.out.println("Course selected teacher: " + selectedTeacher);
     }
 
     public void add() {
@@ -125,71 +121,86 @@ public class Course implements Serializable {
         code = null;
     }
 
-    public String getPoints() {
-        return points;
-    }
-
-    public void setPoints(String points) {
-        this.points = points;
-    }
-
-    public long getId() {
-        return id;
-    }
-
+    //SETTERS----->
     public void setId(long id) {
         this.id = id;
-    }
-
-    public String getName() {
-        return name;
     }
 
     public void setName(String name) {
         this.name = name;
     }
 
-    public String getCode() {
-        return code;
-    }
-
     public void setCode(String code) {
         this.code = code;
     }
 
-    public Teacher getTeacher() {
-        return teacher;
+    public void setPoints(String points) {
+        this.points = points;
+    }
+
+    public void setStudents(List<Student> students) {
+        this.students = students;
+    }
+
+    public void setTeachersList(List<Teacher> teachersList) {
+        this.teachersList = teachersList;
     }
 
     public void setTeacher(Teacher teacher) {
         this.teacher = teacher;
     }
 
-    public Map<Integer, Integer> getCoursePointsMap() {
-        return coursePointsMap;
-    }
-
-//    public List<Student> getStudents() {
-//        return students;
-//    }
-//
-//    public void setStudents(List<Student> students) {
-//        this.students = students;
-//    }
-    public Course getCourse() {
-        return course;
+    public void setCoursePointsMap(Map<Integer, Integer> coursePointsMap) {
+        this.coursePointsMap = coursePointsMap;
     }
 
     public void setCourse(Course course) {
         this.course = course;
     }
 
-    public ServicesIntf getServices() {
-        return services;
-    }
-
     public void setServices(ServicesIntf services) {
         this.services = services;
     }
+    //<-----SETTERS
+    
+    //GETTERS----->
+    public long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public String getPoints() {
+        return points;
+    }
+
+    public List<Student> getStudents() {
+        return students;
+    }
+
+    public Teacher getTeacher() {
+        return teacher;
+    }
+
+    public Map<Integer, Integer> getCoursePointsMap() {
+        return coursePointsMap;
+    }
+
+    public Course getCourse() {
+        return course;
+    }
+
+    public ServicesIntf getServices() {
+        return services;
+    }
+    //<-----GETTERS
+    
+    
 
 }

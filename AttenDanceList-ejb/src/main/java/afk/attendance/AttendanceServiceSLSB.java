@@ -94,7 +94,7 @@ public class AttendanceServiceSLSB implements AttendanceServiceIntf
     }
 
     @Override
-    public List<AttendanceTO> getAttendanceByDay(Date date, CourseTO courseTO) {
+    public List<AttendanceTO> getAttendanceByDayAndCourse(Date date, CourseTO courseTO) {
 
         CourseEntity courseEntity = EJBHelper.courseTOConverter(courseTO);
 

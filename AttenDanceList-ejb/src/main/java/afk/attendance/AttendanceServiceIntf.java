@@ -25,7 +25,7 @@ public interface AttendanceServiceIntf
 
     public List<AttendanceTO> getAll();
     
-    public List<AttendanceTO> getAttendanceByDay(Date date, CourseTO courseTO);
+    public List<AttendanceTO> getAttendanceByDayAndCourse(Date date, CourseTO courseTO);
 
     //UPDATE
     public int updateAttendance(AttendanceTO attendanceTO);

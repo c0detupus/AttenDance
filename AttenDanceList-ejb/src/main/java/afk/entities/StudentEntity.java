@@ -10,7 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -57,8 +56,6 @@ public class StudentEntity implements Serializable
     )
     private List<CourseEntity> courses;
 
-//    @ManyToMany(targetEntity = afk.entities.TeacherEntity.class)
-//    private List<TeacherEntity> teachers;
     //SETTERS----->
     public void setId(long id) {
         this.id = id;
@@ -111,12 +108,8 @@ public class StudentEntity implements Serializable
     public void setCourses(List<CourseEntity> courses) {
         this.courses = courses;
     }
-//
-//    public void setTeachers(List<TeacherEntity> teachers) {
-//        this.teachers = teachers;
-//    }
-
     //<-----SETTERS
+    
     //GETTERS----->
     public long getId() {
         return id;
@@ -169,9 +162,5 @@ public class StudentEntity implements Serializable
     public List<CourseEntity> getCourses() {
         return courses;
     }
-
-//    public List<TeacherEntity> getTeachers() {
-//        return teachers;
-//    }
     //<-----GETTERS
 }

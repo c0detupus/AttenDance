@@ -38,6 +38,20 @@ public class EJBHelper
 
     }
 
+    public static CourseTO courseEntityConverter(CourseEntity courseEntity) {
+
+        CourseTO courseTO = new CourseTO();
+
+        courseTO.setTeacher(teacherEntityConverter(courseEntity.getTeacher()));
+        courseTO.setId(courseEntity.getId());
+        courseTO.setName(courseEntity.getName());
+        courseTO.setCode(courseEntity.getCode());
+        courseTO.setPoints(courseEntity.getPoints());
+
+        return courseTO;
+
+    }
+
     public static List<CourseEntity> courseTOListConverter(List<CourseTO> courseTOs) {
 
         List<CourseEntity> courseEntitys = new ArrayList<>();
@@ -62,23 +76,28 @@ public class EJBHelper
 
         return cTOList;
     }
-
-    public static CourseTO courseEntityConverter(CourseEntity courseEntity) {
-
-        CourseTO courseTO = new CourseTO();
-
-        courseTO.setTeacher(teacherEntityConverter(courseEntity.getTeacher()));
-        courseTO.setId(courseEntity.getId());
-        courseTO.setName(courseEntity.getName());
-        courseTO.setCode(courseEntity.getCode());
-        courseTO.setPoints(courseEntity.getPoints());
-
-        return courseTO;
-
-    }
     //<-----COURSE
 
     //STUDENT----->
+    public static StudentEntity studentTOConverter(StudentTO s) {
+        StudentEntity se = new StudentEntity();
+
+        se.setId(s.getId());
+        se.setAddress(s.getAddress());
+        se.setAvgAttendance(s.getAvgAttendance());
+        se.setCellPhone(s.getCellPhone());
+        se.setCity(s.getCity());
+        se.setEmail(s.getEmail());
+        se.setFirstName(s.getFirstName());
+        se.setLastName(s.getLastName());
+        se.setPhoneNumber(s.getPhoneNumber());
+        se.setSex(s.getSex());
+        se.setSocialSecurityNumber(s.getSocialSecurityNumber());
+        se.setZipCode(s.getZipCode());
+        se.setCourses(courseTOListConverter(s.getCourses()));
+        return se;
+    }
+
     public static StudentTO studentEntityConverter(StudentEntity s) {
 
         StudentTO sto = new StudentTO();
@@ -100,46 +119,13 @@ public class EJBHelper
 
     }
 
-    public static StudentEntity studentTOConverter(StudentTO s) {
-        StudentEntity se = new StudentEntity();
-
-        se.setId(s.getId());
-        se.setAddress(s.getAddress());
-        se.setAvgAttendance(s.getAvgAttendance());
-        se.setCellPhone(s.getCellPhone());
-        se.setCity(s.getCity());
-        se.setEmail(s.getEmail());
-        se.setFirstName(s.getFirstName());
-        se.setLastName(s.getLastName());
-        se.setPhoneNumber(s.getPhoneNumber());
-        se.setSex(s.getSex());
-        se.setSocialSecurityNumber(s.getSocialSecurityNumber());
-        se.setZipCode(s.getZipCode());
-        se.setCourses(courseTOListConverter(s.getCourses()));
-        return se;
-    }
-
     public static List<StudentTO> studentEntityListConverter(List<StudentEntity> eList) {
 
         List<StudentTO> toList = new ArrayList<>();
 
         for(StudentEntity s : eList) {
-            StudentTO sto = new StudentTO();
 
-            sto.setId(s.getId());
-            sto.setAddress(s.getAddress());
-            sto.setAvgAttendance(s.getAvgAttendance());
-            sto.setCellPhone(s.getCellPhone());
-            sto.setCity(s.getCity());
-            sto.setEmail(s.getEmail());
-            sto.setFirstName(s.getFirstName());
-            sto.setLastName(s.getLastName());
-            sto.setPhoneNumber(s.getPhoneNumber());
-            sto.setSex(s.getSex());
-            sto.setSocialSecurityNumber(s.getSocialSecurityNumber());
-            sto.setZipCode(s.getZipCode());
-            sto.setCourses(courseEntityListConverter(s.getCourses()));
-            toList.add(sto);
+            toList.add(studentEntityConverter(s));
         }
 
         return toList;
@@ -211,19 +197,6 @@ public class EJBHelper
     //<-----TEACHER
 
     //ATTENDANCE----->
-    public static AttendanceTO attendanceEntityConverter(AttendanceEntity attendanceEntity) {
-
-        AttendanceTO attendanceTO = new AttendanceTO();
-
-        attendanceTO.setId(attendanceEntity.getId());
-        attendanceTO.setStudentEntity(attendanceEntity.getStudents());
-        attendanceTO.setCourseEntity(attendanceEntity.getCourseEntity());
-        attendanceTO.setDateField(attendanceEntity.getDateField());
-
-        return attendanceTO;
-
-    }
-
     public static AttendanceEntity attendanceTOConverter(AttendanceTO attendanceTO) {
 
         AttendanceEntity attendanceEntity = new AttendanceEntity();
@@ -237,20 +210,26 @@ public class EJBHelper
 
     }
 
+    public static AttendanceTO attendanceEntityConverter(AttendanceEntity attendanceEntity) {
+
+        AttendanceTO attendanceTO = new AttendanceTO();
+
+        attendanceTO.setId(attendanceEntity.getId());
+        attendanceTO.setStudentEntity(attendanceEntity.getStudents());
+        attendanceTO.setCourseEntity(attendanceEntity.getCourseEntity());
+        attendanceTO.setDateField(attendanceEntity.getDateField());
+
+        return attendanceTO;
+
+    }
+
     public static List<AttendanceTO> attendanceEntityListConverter(List<AttendanceEntity> attendanceEntitys) {
 
         List<AttendanceTO> attendanceTOs = new ArrayList<>();
 
         for(AttendanceEntity attendanceEntity : attendanceEntitys) {
 
-            AttendanceTO attendanceTO = new AttendanceTO();
-
-            attendanceTO.setId(attendanceEntity.getId());
-            attendanceTO.setStudentEntity(attendanceEntity.getStudents());
-            attendanceTO.setCourseEntity(attendanceEntity.getCourseEntity());
-            attendanceTO.setDateField(attendanceEntity.getDateField());
-
-            attendanceTOs.add(attendanceTO);
+            attendanceTOs.add(attendanceEntityConverter(attendanceEntity));
 
         }
 

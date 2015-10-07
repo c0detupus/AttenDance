@@ -247,17 +247,14 @@ public class Student implements Serializable
     public void setCourses(List<Course> courses) {
         this.courses = courses;
     }
-//
-//    public void setTeachers(List<Teacher> teachers) {
-//        this.teachers = teachers;
-//    }
 
     public void setSelectedCourseNames(List<String> selectedCourseNames) {
         this.selectedCourseNames = selectedCourseNames;
     }
 
-    //<---SETTERS ******
-    //******GETTERS--->
+    //<---SETTERS 
+    
+    //GETTERS--->
     public String getFirstName() {
         return firstName;
     }
@@ -305,17 +302,13 @@ public class Student implements Serializable
     public List<Course> getCourses() {
         return courses;
     }
-//
-//    public List<Teacher> getTeachers() {
-//        return teachers;
-//    }
 
     public List<String> getSelectedCourseNames() {
         return selectedCourseNames;
     }
-    //<---GETTERS******
+    //<---GETTERS
 
-    //******VALIDATORS--->
+    //VALIDATORS--->
     public void validateLetters(FacesContext context,
                                 UIComponent toValidate,
                                 Object value) throws ValidatorException {
@@ -390,9 +383,9 @@ public class Student implements Serializable
         }
 
     }
-    //<---VALIDATORS*****
+    //<---VALIDATORS
 
-    //*****PRIVATE METHODS--->
+    //PRIVATE METHODS--->
     private boolean onlyLetters(String str) {
 
         return str.matches("[a-zA-Z]+");
@@ -409,6 +402,6 @@ public class Student implements Serializable
     private boolean onlyNumbers(String str) {
         return str.matches("[0-9]+");
     }
-    //<---PRIVATE METHODS*****
+    //<---PRIVATE METHODS
 
 }
