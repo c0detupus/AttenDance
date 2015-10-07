@@ -10,7 +10,7 @@ import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
 import model.Attendance;
 import model.Course;
 
@@ -19,31 +19,45 @@ import model.Course;
  * @author valance
  */
 @ManagedBean(name = "attendanceHistoryBean")
-@RequestScoped
+@ViewScoped
 public class AttendanceHistoryBean {
 
     private Date date;
     private String selectedCourse;
     private Course course;
     private List<Attendance> atten;
+    private List<Course> courseList;
 
     @EJB
     private ServicesIntf services;
 
     public void renderList() {
-
+        System.out.println("atten renderList");
+        System.out.println("date: " + date);
+        System.out.println("selectedCourse " + selectedCourse);
         if (selectedCourse == null) {
             return;
         }
+        if (date == null){
+            return;
+        }
+        System.out.println("atten do methods");
         course = Helper.courseTOConverter(services.getCourseService()
                 .getCourse(Long.valueOf(selectedCourse), false), false);
 
-        
-  atten = Helper.attendanceTOListConverter(
+        atten = Helper.attendanceTOListConverter(
                 services.getAttendanceService().getAttendanceByDayAndCourse(
                         date, Helper.courseConverter(course, false)));
+        
+        System.out.println("renderList " + atten);
+        System.out.println("renderList" + date);
 
+    }
 
+    public List<Course> getCourseList() {
+        courseList = Helper.courseTOListConverter(services.getCourseService()
+                .getAll(), false);
+        return courseList;
     }
 
     public String getSelectedCourse() {

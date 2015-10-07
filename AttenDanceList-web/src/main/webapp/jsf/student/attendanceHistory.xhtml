@@ -13,15 +13,17 @@
         <h:body>
             <h:form>
                 <p:panelGrid columns="4" >
-                    <p:outputLabel for="popup" value="Popup:" />
-                    <p:calendar id="popup" value="#{calendarView.date2}" />
+                    <p:outputLabel value="Date: " />
+                    <p:calendar id="calendar" value="#{attendanceHistoryBean.date}" >
+                                <f:ajax event="dateSelect" execute="@this" render="attendanceList" listener="#{attendanceHistoryBean.renderList()}"/> 
+                    </p:calendar>
                     <p:outputLabel value="Course: " ></p:outputLabel>
-                    <p:selectOneMenu id="selectCourse" value="#{attendanceListBean.selectedCourse}" > 
+                    <p:selectOneMenu id="selectCourse" value="#{attendanceHistoryBean.selectedCourse}" > 
                         <f:selectItem itemLabel="Select a course" itemValue="" />
-                        <f:selectItems value="#{attendanceListBean.courseList}" var="course" 
+                        <f:selectItems value="#{attendanceHistoryBean.courseList}" var="course" 
                                        itemLabel="#{course.name} - #{course.code}"
                                        itemValue="#{course.id}"/>
-                        <f:ajax event="change" execute="@this" render="attendanceList" listener="#{attendanceListBean.renderList()}"/>
+                        <f:ajax event="change" execute="@this" render="attendanceList" listener="#{attendanceHistoryBean.renderList()}"/>
                     </p:selectOneMenu>
                 </p:panelGrid>
 
@@ -31,8 +33,8 @@
                     <f:facet name="header">
                         <h:outputText value="Attendance List"/>
                     </f:facet>
-                    <p:column headerText="ID">
-                        <h:outputText value="#{atten.id}"/>
+                    <p:column headerText="Present">
+                        <h:outputText value="#{atten.present}"/>
                     </p:column>
                     <p:column headerText="Last">
                         <h:outputText value="#{atten.student.lastName}"/>
@@ -41,7 +43,6 @@
                         <h:outputText value="#{atten.student.firstName}"/>
                     </p:column>     
                 </p:dataTable>
-                <p:commandButton value="Submit" action="#{attendanceListBean.submit}"/>
             </h:form>
         </h:body>
     </ui:define>
