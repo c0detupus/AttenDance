@@ -1,9 +1,9 @@
 package afk;
 
+import afk.to.CourseTO;
 import helper.Helper;
 import helper.Messages;
 import java.io.Serializable;
-import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -43,7 +43,7 @@ public class AttendanceListBean implements Serializable
 
     @PostConstruct
     public void init() {
-//        selectedStudents = new ArrayList<>();
+        
 
     }
 
@@ -55,14 +55,24 @@ public class AttendanceListBean implements Serializable
     }
 
     public void renderList() {
-
+        
+        if(selectedCourse == null) {
+            return;
+        }
         course = Helper.courseTOConverter(services.getCourseService()
                 .getCourse(Long.valueOf(selectedCourse), true), true);
+//        System.out.println("renderList courseName: " + course.getName());
+        
+        
+        CourseTO cto = services.getCourseService().getCourse(Long.valueOf(selectedCourse), true);
+//        System.out.println("renderList CourseTO name: " + cto.getStudents().get(0).getFirstName());
         students = course.getStudents();
+//        System.out.println("renderList studentsName: " + students);
     }
 
     public List<Course> getCourseList() {
 
+        
         courseList = Helper.courseTOListConverter(services.getCourseService()
                 .getAll(), false);
         return courseList;
@@ -114,7 +124,7 @@ public class AttendanceListBean implements Serializable
                     attendance.setStudent(selected);
                     attendance.setCourse(course);
                     attendance.setDateField(d);
-                    attendance.setPresent(true);
+                    attendance.setPresent(false);
 
                     attendancelist.add(attendance);
                 } else {
@@ -122,7 +132,7 @@ public class AttendanceListBean implements Serializable
                     attendance.setStudent(s);
                     attendance.setCourse(course);
                     attendance.setDateField(d);
-                    attendance.setPresent(false);
+                    attendance.setPresent(true);
 
                     attendancelist.add(attendance);
                 }

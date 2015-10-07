@@ -12,19 +12,21 @@
     <ui:define name="menu_bar">
         <h:body>
             <h:form>
-                <p:panelGrid columns="2" >
-                <p:outputLabel value="Course: " ></p:outputLabel>
-                <p:selectOneMenu id="selectCourse" value="#{attendanceListBean.selectedCourse}" >
-                    <f:selectItem itemLabel="Select a course" itemValue="" />
-                    <f:selectItems value="#{attendanceListBean.courseList}" var="course" 
-                                   itemLabel="#{course.name} - #{course.code}"
-                                   itemValue="#{course.id}"/>
-                    <f:ajax event="change" execute="@this" render="attendanceList" listener="#{attendanceListBean.renderList()}"/>
-                </p:selectOneMenu>
+                <p:panelGrid columns="4" >
+                    <p:outputLabel for="popup" value="Popup:" />
+                    <p:calendar id="popup" value="#{calendarView.date2}" />
+                    <p:outputLabel value="Course: " ></p:outputLabel>
+                    <p:selectOneMenu id="selectCourse" value="#{attendanceListBean.selectedCourse}" > 
+                        <f:selectItem itemLabel="Select a course" itemValue="" />
+                        <f:selectItems value="#{attendanceListBean.courseList}" var="course" 
+                                       itemLabel="#{course.name} - #{course.code}"
+                                       itemValue="#{course.id}"/>
+                        <f:ajax event="change" execute="@this" render="attendanceList" listener="#{attendanceListBean.renderList()}"/>
+                    </p:selectOneMenu>
                 </p:panelGrid>
-                
+
                 <p:separator/>
-                
+
                 <p:dataTable id="attendanceList" var="student" value="#{attendanceListBean.students}"  rowSelectMode="checkbox" selection="#{attendanceListBean.selectedStudents}" rowKey="#{student.id}" >
                     <f:facet name="header">
                         <h:outputText value="Attendance List"/>

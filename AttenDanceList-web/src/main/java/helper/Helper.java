@@ -24,8 +24,7 @@ import model.Teacher;
  *
  * @author valance
  */
-public class Helper
-{
+public class Helper {
 
     private Map<String, Integer> yearMap;
     private Map<String, Integer> monthMap;
@@ -65,7 +64,7 @@ public class Helper
         int daysInMonth = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
         dayMap = new LinkedHashMap<>();
 
-        for(int i = 1; i <= daysInMonth; i++) {
+        for (int i = 1; i <= daysInMonth; i++) {
             String day = Integer.toString(i);
             dayMap.put(day, day);
         }
@@ -95,7 +94,7 @@ public class Helper
         sto.setSex(s.getSex());
         sto.setSocialSecurityNumber(s.getSocialSecurityNumber());
         sto.setZipCode(s.getZipCode());
-        if(getCourse == true) {
+        if (getCourse == true) {
             sto.setCourses(courseListConverter(s.getCourses(), false));
         }
         return sto;
@@ -116,7 +115,7 @@ public class Helper
         s.setSex(sto.getSex());
         s.setSocialSecurityNumber(sto.getSocialSecurityNumber());
         s.setZipCode(sto.getZipCode());
-        if(getCourse == true) {
+        if (getCourse == true) {
             s.setCourses(courseTOListConverter(sto.getCourses(), false));
         }
 
@@ -127,8 +126,8 @@ public class Helper
 
         List<StudentTO> studentTOs = new ArrayList<>();
 
-        for(Student s : students) {
-            if(getCourse == true) {
+        for (Student s : students) {
+            if (getCourse == true) {
                 studentTOs.add(studentConverter(s, true));
             } else {
                 studentTOs.add(studentConverter(s, false));
@@ -144,8 +143,8 @@ public class Helper
 
         List<Student> studentList = new ArrayList<>();
 
-        for(StudentTO sto : studentTOList) {
-            if(getCourse == true) {
+        for (StudentTO sto : studentTOList) {
+            if (getCourse == true) {
                 studentList.add(studentTOConverter(sto, true));
             } else {
                 studentList.add(studentTOConverter(sto, false));
@@ -162,7 +161,7 @@ public class Helper
     public static CourseTO courseConverter(Course c, boolean getStudent) {
         CourseTO cto = new CourseTO();
 
-        if(getStudent == true) {
+        if (getStudent == true) {
             cto.setStudents(studentListConverter(c.getStudents(), false));
         }
 
@@ -178,15 +177,14 @@ public class Helper
     public static Course courseTOConverter(CourseTO cto, boolean getStudents) {
         Course c = new Course();
 
-        if(getStudents == true) {
-            c.setStudents(studentTOListConverter(cto.getStudents(), false));
-        }
         c.setTeacher(teacherTOConverter(cto.getTeacher()));
         c.setId(cto.getId());
         c.setName(cto.getName());
         c.setCode(cto.getCode());
         c.setPoints(cto.getPoints());
-
+        if (getStudents == true) {
+            c.setStudents(studentTOListConverter(cto.getStudents(), false));
+        }
         return c;
     }
 
@@ -194,8 +192,8 @@ public class Helper
 
         List<Course> courseList = new ArrayList<>();
 
-        for(CourseTO cto : courseTOList) {
-            if(getStudents == true) {
+        for (CourseTO cto : courseTOList) {
+            if (getStudents == true) {
                 courseList.add(courseTOConverter(cto, true));
             }
             courseList.add(courseTOConverter(cto, false));
@@ -207,8 +205,8 @@ public class Helper
 
         List<CourseTO> courseTOs = new ArrayList<>();
 
-        for(Course c : courses) {
-            if(getStudent == true) {
+        for (Course c : courses) {
+            if (getStudent == true) {
                 courseTOs.add(courseConverter(c, true));
             } else {
                 courseTOs.add(courseConverter(c, false));
@@ -260,7 +258,7 @@ public class Helper
 
         List<Teacher> teacherList = new ArrayList<>();
 
-        for(TeacherTO tto : teacherTOList) {
+        for (TeacherTO tto : teacherTOList) {
             teacherList.add(teacherTOConverter(tto));
         }
         return teacherList;
@@ -302,7 +300,7 @@ public class Helper
 
         List<AttendanceTO> attendanceTOs = new ArrayList<>();
 
-        for(Attendance attendanceEntity : attendances) {
+        for (Attendance attendanceEntity : attendances) {
 
             attendanceTOs.add(attendanceConverter(attendanceEntity));
 
@@ -310,6 +308,13 @@ public class Helper
 
         return attendanceTOs;
 
+    }
+    
+    public static List<Attendance> attendanceTOListConverter(List<AttendanceTO> atos) {
+        
+        List<Attendance> as = new ArrayList<>();
+        
+        return as;
     }
     //<-----ATTENDANCE CONVERTERS
 }

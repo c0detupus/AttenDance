@@ -1,9 +1,11 @@
 package afk.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -49,13 +51,17 @@ public class StudentEntity implements Serializable
     @Column(name = "avg_attendance")
     private String avgAttendance;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "course_student_JoinTable",
                joinColumns = @JoinColumn(name = "student_id"),
                inverseJoinColumns = @JoinColumn(name = "course_id")
     )
     private List<CourseEntity> courses;
-
+    
+    public StudentEntity() {
+        courses = new ArrayList<>();
+    }
+    
     //SETTERS----->
     public void setId(long id) {
         this.id = id;
