@@ -14,9 +14,11 @@
             <p:outputLabel value="Login " />
             <p:panelGrid columns="2" >
                 <p:outputLabel value="Name " />
-                <p:inputText id="name"/>
+                <p:inputText id="name" value="#{loginBean.name}"/>
                 <p:outputLabel value="Password " />
-                <p:inputText id="password"/>
+                <p:inputText id="password" value="#{loginBean.password}"/>
+                <p:commandButton value="Add" update="panel" action="#{loginBean.login()}"></p:commandButton>
+                <p:commandButton id="reset" value="Clear" update="panel" process="@this" action="#{loginBean.registerUser()}" ></p:commandButton>
             </p:panelGrid>
         </h:form>
     </h:body>
