@@ -8,7 +8,8 @@ and open the template in the editor.
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:h="http://java.sun.com/jsf/html"
-                xmlns:p="http://primefaces.org/ui">
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
     </h:head>
     <h:body>
@@ -34,6 +35,9 @@ and open the template in the editor.
                     <p:menuitem value="All Teachers" url="/jsf/teacher/teacherList.xhtml" />
                     <p:menuitem value="History" />
                 </p:submenu>
+                <f:facet name="options">
+                    <p:commandButton value="Logout" action="#{loginBean.logout()}"/>
+                </f:facet>
             </p:menubar>
         </h:form>
         <ui:insert name="menu_bar" />

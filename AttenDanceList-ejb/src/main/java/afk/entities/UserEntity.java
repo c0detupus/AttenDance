@@ -24,6 +24,15 @@ public class UserEntity implements Serializable {
     private long id;
     private String username;
     private String password;
+    private String userType;
+
+    public String getUserType() {
+        return userType;
+    }
+
+    public void setUserType(String userType) {
+        this.userType = userType;
+    }
 
     public String getPassword() {
         return password;
