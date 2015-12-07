@@ -34,7 +34,7 @@
 
                 <f:facet name="footer">
                     <h:outputText value="Total: #{teacherListBean.teacherAmount}" />
-                    <p:commandButton value="Add" action="teacherCreate?faces-redirect=true" style="margin-left: 5%"
+                    <p:commandButton value="Add" action="specialaccess/teacherCreate?faces-redirect=true" style="margin-left: 5%"
                                      rendered="#{facesContext.externalContext.isUserInRole('headmaster')}"/>
                 </f:facet>
             </p:dataTable>

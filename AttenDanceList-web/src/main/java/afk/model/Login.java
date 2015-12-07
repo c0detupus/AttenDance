@@ -22,7 +22,6 @@ public class Login implements Serializable
 
     private String username;
     private String password;
-    private int errorCode = 1;
 
     private static final String loginPageUri = "/jsf/login?faces-redirect=true";
     private static final String successfullLoginUri = "/jsf/teacher/teacherList?faces-redirect=true";
@@ -38,22 +37,18 @@ public class Login implements Serializable
             return successfullLoginUri;
 
         } catch(ServletException e) {
-//            context.addMessage(null, new FacesMessage("Login failed."));
-
-            System.out.println(username + " Login failed");
-            errorCode = 0;
-            logout();
+            clear();
+            Messages.showMessage(2);
         }
-
         return null;
+    }
+    
+    public void clear(){
+        username = null;
+        password = null;
     }
 
     public String logout() {
-
-        if(errorCode == 0) {
-            Messages.showMessage(errorCode);
-        }
-
         FacesContext.getCurrentInstance().getExternalContext()
                 .invalidateSession();
         return loginPageUri;

@@ -107,7 +107,7 @@
                             style="color: red"
                             for="city" />
 
-                        <p:outputLabel  value= "Zip code" ></p:outputLabel>
+                        <p:outputLabel  value= "Zip code: " ></p:outputLabel>
                         <p:inputText id ="zipCode" 
                                      value = "#{teacherBean.zipCode}"
                                      required="true"
@@ -116,27 +116,21 @@
                             style="color: red"
                             for="zipCode" />
 
-                        <h:panelGrid columns="2" id="matchGrid" cellpadding="5">   
+                        <h:panelGrid columns="3" id="matchGrid" cellpadding="5">  
+                            
                         <p:outputLabel value="Password: "></p:outputLabel>
+
                         <p:password id ="password" 
                                     match="confirmPassword"
                                     value = "#{teacherBean.password}"
 
                                     requiredMessage="Field can't be empty"/>
-<!--                        <p:message 
-                            style="color: red"
-                            for="password" />-->
-
-                        <p:outputLabel value="Confirm password "></p:outputLabel>
-
-
+                        <br/>
+                        <p:outputLabel value="Confirm password: "></p:outputLabel>
                         <p:password id ="confirmPassword" 
                                     value = "#{teacherBean.password}"
 
                                     requiredMessage="Field can't be empty"/>
-<!--                        <p:message 
-                            style="color: red"
-                            for="confirmPassword" />-->
                         </h:panelGrid>
 
                     </p:panelGrid>  

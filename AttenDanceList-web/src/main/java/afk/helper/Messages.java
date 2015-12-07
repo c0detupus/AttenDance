@@ -25,6 +25,9 @@ public class Messages {
         } else if (i == 0) {
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Failure", "Failed. Please try again.");
             RequestContext.getCurrentInstance().showMessageInDialog(message);
+        } else if(i == 2) {
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Failed Login", "Incorrect username or password.");
+            RequestContext.getCurrentInstance().showMessageInDialog(message);
         }
 
     }
