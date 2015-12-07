@@ -18,7 +18,9 @@ public interface UserServiceIntf {
     //Read
     public List<UserEntity> getAll();
 
-    public UserEntity getUser(long id);
+    public UserEntity getUserById(long id);
+    
+    public UserEntity getUserByName(String name);
 
     //Update
     public int updateUser(UserEntity user);

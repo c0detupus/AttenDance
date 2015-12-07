@@ -24,6 +24,7 @@ public class Services implements ServicesIntf,Serializable
     @EJB TeacherServiceIntf teacherService;
     @EJB AttendanceServiceIntf attendanceService;
     @EJB UserServiceIntf userService;
+    
     @Override
     public StudentServiceIntf getStudentService() {
         return studentService;

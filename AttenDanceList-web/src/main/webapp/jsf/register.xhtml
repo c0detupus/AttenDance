@@ -19,12 +19,9 @@
                 <p:outputLabel for="password" value="Password" />
                 <p:password id="password" value="#{loginBean.password}" required="true" />
                 <p:message for="password" />
-                <p:commandButton value="Login" action="#{loginBean.login()}" />
+                <p:commandButton value="Register" action="#{loginBean.registerUser()}" />
                 <p:messages globalOnly="true" />
             </p:panelGrid>
-        </h:form>
-        <h:form>
-            <p:commandButton value="Register" action="register.xhtml" />
         </h:form>
     </h:body>
 </html>

@@ -7,13 +7,17 @@ package afk.user;
 
 import afk.entities.UserEntity;
 import java.util.List;
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 /**
  *
  * @author valance
  */
+@Stateless
 public class UserServiceSLSB implements UserServiceIntf {
 
     @PersistenceContext(unitName = "PU")
@@ -39,7 +43,7 @@ public class UserServiceSLSB implements UserServiceIntf {
     }
 
     @Override
-    public UserEntity getUser(long id) {
+    public UserEntity getUserById(long id) {
         UserEntity uTE = em.find(UserEntity.class, id);
         return uTE;
     }
@@ -63,6 +67,20 @@ public class UserServiceSLSB implements UserServiceIntf {
             return 0;
         }
         return 1;
+    }
+
+    @Override
+    public UserEntity getUserByName(String name) {
+        
+        try {
+            String qstring = "SELECT u FROM UserEntity u WHERE u.username = :name";
+            TypedQuery<UserEntity> query = (TypedQuery) em.createQuery(qstring);
+            query.setParameter("name", name);
+            return query.getSingleResult();
+        } catch (Exception e) {
+        }
+
+        return null;
     }
 
 }

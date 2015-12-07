@@ -9,6 +9,8 @@ import afk.entities.TeacherEntity;
 import afk.helper.EJBHelper;
 import afk.to.TeacherTO;
 import java.util.List;
+import javax.annotation.security.DeclareRoles;
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -18,12 +20,14 @@ import javax.persistence.Query;
  *
  * @author valance
  */
+@DeclareRoles({"headmaster", "teacher"})
 @Stateless
 public class TeacherServiceSLSB implements TeacherServiceIntf {
 
     @PersistenceContext(unitName = "PU")
     private EntityManager em;
-
+    
+    @RolesAllowed("headmaster")
     @Override
     public int createTeacher(TeacherTO teacherTo) {
         try {
@@ -37,7 +41,8 @@ public class TeacherServiceSLSB implements TeacherServiceIntf {
 
         return 1;
     }
-
+    
+    @RolesAllowed({"headmaster", "teacher"})
     @Override
     public TeacherTO getTeacher(long id) {
         TeacherTO tto = EJBHelper.teacherEntityConverter((TeacherEntity) em
@@ -46,7 +51,8 @@ public class TeacherServiceSLSB implements TeacherServiceIntf {
 
         return tto;
     }
-
+    
+    @RolesAllowed({"headmaster", "teacher"})
     @Override
     public List<TeacherTO> getAll() {
 
@@ -55,7 +61,8 @@ public class TeacherServiceSLSB implements TeacherServiceIntf {
 
         return EJBHelper.teacherEntityListConverter(teacherList);
     }
-
+    
+    @RolesAllowed("headmaster")
     @Override
     public int updateTeacher(TeacherTO teacherTO) {
         try {
@@ -70,7 +77,8 @@ public class TeacherServiceSLSB implements TeacherServiceIntf {
 
         return 1;
     }
-
+    
+    @RolesAllowed("headmaster")
     @Override
     public int deleteTeacher(long id) {
         try {

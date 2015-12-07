@@ -118,8 +118,10 @@
                 </p:panel>
                 <p:toolbar>
                     <f:facet name="left">
-                        <p:commandButton value="Save" update="panel" action="#{teacherBean.update()}" ></p:commandButton>
-                        <p:commandButton value="Delete" action="#{teacherBean.delete()}" ></p:commandButton>
+                        <p:commandButton value="Save" update="panel" action="#{teacherBean.update()}" 
+                                         rendered="#{facesContext.externalContext.isUserInRole('headmaster')}"></p:commandButton>
+                        <p:commandButton value="Delete" action="#{teacherBean.delete()}" 
+                                         rendered="#{facesContext.externalContext.isUserInRole('headmaster')}"></p:commandButton>
                     </f:facet>
                 </p:toolbar>
             </h:form>
