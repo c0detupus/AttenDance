@@ -1,12 +1,9 @@
 package afk.model;
 
+import afk.helper.Messages;
 import afk.services.ServicesIntf;
 import java.io.IOException;
 import java.io.Serializable;
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -20,45 +17,47 @@ import javax.servlet.http.HttpServletRequest;
  */
 @ManagedBean(name = "loginBean")
 @ViewScoped
-public class Login implements Serializable {
+public class Login implements Serializable
+{
 
     private String username;
     private String password;
+    private int errorCode = 1;
 
-    @EJB
-    private ServicesIntf services;
+    private static final String loginPageUri = "/jsf/login?faces-redirect=true";
+    private static final String successfullLoginUri = "/jsf/teacher/teacherList?faces-redirect=true";
 
-    public void login() throws IOException {
+    public String login() throws IOException {
         System.out.println("login() called");
         FacesContext context = FacesContext.getCurrentInstance();
-        HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
+        HttpServletRequest request = (HttpServletRequest) context
+                .getExternalContext().getRequest();
 
         try {
             request.login(this.username, this.password);
-//            UserEntity user = services.getUserService().getUserByName(username);
-            System.out.println(username + " Login success");
-            boolean test = isRoleTeacher();
-            if (test == true){
-                System.out.println("teacher logged");
-            }
-             context.getExternalContext().redirect("teacher/teacherList.xhtml");
-        } catch (ServletException e) {
-            context.addMessage(null, new FacesMessage("Login failed."));
+            return successfullLoginUri;
+
+        } catch(ServletException e) {
+//            context.addMessage(null, new FacesMessage("Login failed."));
+
             System.out.println(username + " Login failed");
+            errorCode = 0;
+            logout();
         }
-    }
 
-
-    public boolean isRoleTeacher() {
-        FacesContext context = FacesContext.getCurrentInstance();
-        return context.getExternalContext().isUserInRole("teacher");
+        return null;
     }
 
     public String logout() {
-        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-        return "/jsf/login?faces-redirect=true";
-    }
 
+        if(errorCode == 0) {
+            Messages.showMessage(errorCode);
+        }
+
+        FacesContext.getCurrentInstance().getExternalContext()
+                .invalidateSession();
+        return loginPageUri;
+    }
 
     public String getUsername() {
         return username;
