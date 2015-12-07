@@ -16,7 +16,7 @@
                         <p:outputLabel value="First name: "/>
                         <p:inputText id ="fName" 
                                      value = "#{teacherBean.firstName}"
-                                     validator ="#{teacherBean.validateLetters}"
+                                     validator ="#{validatorBean.validateLetters}"
                                      required="true"
                                      requiredMessage="Field can't be empty"/>
                         <p:message 
@@ -26,7 +26,7 @@
                         <p:outputLabel value="Last name: "></p:outputLabel>
                         <p:inputText id ="lName" 
                                      value = "#{teacherBean.lastName}"
-                                     validator ="#{teacherBean.validateLetters}"
+                                     validator ="#{validatorBean.validateLetters}"
                                      required="true"
                                      requiredMessage="Field can't be empty"/>
                         <p:message
@@ -36,7 +36,7 @@
                         <p:outputLabel value="Social security number: "></p:outputLabel>
                         <p:inputText id ="socialSecurityNumber" 
                                      value = "#{teacherBean.socialSecurityNumber}"
-                                     validator="#{teacherBean.validateSSN}"
+                                     validator="#{validatorBean.validateSSN}"
                                      required="true"
                                      requiredMessage="Field can't be empty"
                                      />
@@ -47,7 +47,7 @@
                         <p:outputLabel value="Email: "></p:outputLabel>
                         <p:inputText id ="eMail" 
                                      value = "#{teacherBean.email}"
-                                     validator="#{teacherBean.validateEmail}"
+                                     validator="#{validatorBean.validateEmail}"
                                      required="true"
                                      requiredMessage="Field can't be empty"/>
                         <p:message 
@@ -57,7 +57,7 @@
                         <p:outputLabel value="Cellphone nr: "></p:outputLabel>
                         <p:inputText id ="cellPhone" 
                                      value = "#{teacherBean.cellPhone}"
-                                     validator="#{teacherBean.validatePhoneNumbers}"
+                                     validator="#{validatorBean.validatePhoneNumbers}"
                                      required="true"
                                      requiredMessage="Field can't be empty"/>
                         <p:message 
@@ -67,7 +67,7 @@
                         <p:outputLabel value="Phone number"></p:outputLabel>
                         <p:inputText id ="phone" 
                                      value = "#{teacherBean.phoneNumber}"
-                                     validator="#{teacherBean.validatePhoneNumbers}"
+                                     validator="#{validatorBean.validatePhoneNumbers}"
                                      required="true"
                                      requiredMessage="Field can't be empty"/>
                         <p:message 
@@ -99,7 +99,7 @@
                         <p:outputLabel  value="City: "></p:outputLabel>
                         <p:inputText id ="city" 
                                      value = "#{teacherBean.city}"
-                                     validator="#{teacherBean.validateLetters}"
+                                     validator="#{validatorBean.validateLetters}"
                                      required="true"
                                      requiredMessage="Field can't be empty"/>
                         <p:message 

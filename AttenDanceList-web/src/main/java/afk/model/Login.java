@@ -1,12 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package model;
+package afk.model;
 
-import afk.ServicesIntf;
-import afk.entities.UserEntity;
+import afk.services.ServicesIntf;
 import java.io.IOException;
 import java.io.Serializable;
 import java.nio.charset.StandardCharsets;
@@ -54,13 +48,6 @@ public class Login implements Serializable {
         }
     }
 
-    public void registerUser() throws NoSuchAlgorithmException {
-        UserEntity user = new UserEntity();
-        user.setUsername(username);
-        user.setPassword(hashString(password));
-        user.setUserType("teacher");
-        services.getUserService().createUser(user);
-    }
 
     public boolean isRoleTeacher() {
         FacesContext context = FacesContext.getCurrentInstance();
@@ -72,18 +59,6 @@ public class Login implements Serializable {
         return "/jsf/login?faces-redirect=true";
     }
 
-    public String hashString(String pass) throws NoSuchAlgorithmException {
-        MessageDigest digest = MessageDigest.getInstance("SHA-256");
-        byte[] hash = digest.digest(pass.getBytes(StandardCharsets.UTF_8));
-
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < hash.length; i++) {
-            sb.append(Integer.toString((hash[i] & 0xff) + 0x100, 16).substring(1));
-        }
-        pass = sb.toString();
-        System.out.println("Hex format : " + sb.toString());
-        return pass;
-    }
 
     public String getUsername() {
         return username;

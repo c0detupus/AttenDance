@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package helper;
+package afk.helper;
 
 import afk.to.AttendanceTO;
 import afk.to.CourseTO;
@@ -15,16 +15,20 @@ import java.util.GregorianCalendar;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import model.Attendance;
-import model.Course;
-import model.Student;
-import model.Teacher;
+import afk.model.Attendance;
+import afk.model.Course;
+import afk.model.Student;
+import afk.model.Teacher;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 /**
  *
  * @author valance
  */
-public class Helper {
+public class Helper
+{
 
     private Map<String, Integer> yearMap;
     private Map<String, Integer> monthMap;
@@ -64,7 +68,7 @@ public class Helper {
         int daysInMonth = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
         dayMap = new LinkedHashMap<>();
 
-        for (int i = 1; i <= daysInMonth; i++) {
+        for(int i = 1; i <= daysInMonth; i++) {
             String day = Integer.toString(i);
             dayMap.put(day, day);
         }
@@ -94,7 +98,7 @@ public class Helper {
         sto.setSex(s.getSex());
         sto.setSocialSecurityNumber(s.getSocialSecurityNumber());
         sto.setZipCode(s.getZipCode());
-        if (getCourse == true) {
+        if(getCourse == true) {
             sto.setCourses(courseListConverter(s.getCourses(), false));
         }
         return sto;
@@ -115,7 +119,7 @@ public class Helper {
         s.setSex(sto.getSex());
         s.setSocialSecurityNumber(sto.getSocialSecurityNumber());
         s.setZipCode(sto.getZipCode());
-        if (getCourse == true) {
+        if(getCourse == true) {
             s.setCourses(courseTOListConverter(sto.getCourses(), false));
         }
 
@@ -126,8 +130,8 @@ public class Helper {
 
         List<StudentTO> studentTOs = new ArrayList<>();
 
-        for (Student s : students) {
-            if (getCourse == true) {
+        for(Student s : students) {
+            if(getCourse == true) {
                 studentTOs.add(studentConverter(s, true));
             } else {
                 studentTOs.add(studentConverter(s, false));
@@ -143,8 +147,8 @@ public class Helper {
 
         List<Student> studentList = new ArrayList<>();
 
-        for (StudentTO sto : studentTOList) {
-            if (getCourse == true) {
+        for(StudentTO sto : studentTOList) {
+            if(getCourse == true) {
                 studentList.add(studentTOConverter(sto, true));
             } else {
                 studentList.add(studentTOConverter(sto, false));
@@ -161,7 +165,7 @@ public class Helper {
     public static CourseTO courseConverter(Course c, boolean getStudent) {
         CourseTO cto = new CourseTO();
 
-        if (getStudent == true) {
+        if(getStudent == true) {
             cto.setStudents(studentListConverter(c.getStudents(), false));
         }
 
@@ -182,7 +186,7 @@ public class Helper {
         c.setName(cto.getName());
         c.setCode(cto.getCode());
         c.setPoints(cto.getPoints());
-        if (getStudents == true) {
+        if(getStudents == true) {
             c.setStudents(studentTOListConverter(cto.getStudents(), false));
         }
         return c;
@@ -192,8 +196,8 @@ public class Helper {
 
         List<Course> courseList = new ArrayList<>();
 
-        for (CourseTO cto : courseTOList) {
-            if (getStudents == true) {
+        for(CourseTO cto : courseTOList) {
+            if(getStudents == true) {
                 courseList.add(courseTOConverter(cto, true));
             }
             courseList.add(courseTOConverter(cto, false));
@@ -205,8 +209,8 @@ public class Helper {
 
         List<CourseTO> courseTOs = new ArrayList<>();
 
-        for (Course c : courses) {
-            if (getStudent == true) {
+        for(Course c : courses) {
+            if(getStudent == true) {
                 courseTOs.add(courseConverter(c, true));
             } else {
                 courseTOs.add(courseConverter(c, false));
@@ -232,6 +236,9 @@ public class Helper {
         tto.setSex(t.getSex());
         tto.setSocialSecurityNumber(t.getSocialSecurityNumber());
         tto.setZipCode(t.getZipCode());
+        tto.setUsername(t.getUsername());
+        tto.setPassword(t.getPassword());
+        tto.setUserType(t.getUserType());
 
         return tto;
     }
@@ -250,6 +257,9 @@ public class Helper {
         t.setSex(tto.getSex());
         t.setSocialSecurityNumber(tto.getSocialSecurityNumber());
         t.setZipCode(tto.getZipCode());
+        t.setUsername(tto.getUsername());
+        t.setUserType(tto.getUserType());
+        t.setPassword(tto.getPassword());
 
         return t;
     }
@@ -258,7 +268,7 @@ public class Helper {
 
         List<Teacher> teacherList = new ArrayList<>();
 
-        for (TeacherTO tto : teacherTOList) {
+        for(TeacherTO tto : teacherTOList) {
             teacherList.add(teacherTOConverter(tto));
         }
         return teacherList;
@@ -300,7 +310,7 @@ public class Helper {
 
         List<AttendanceTO> attendanceTOs = new ArrayList<>();
 
-        for (Attendance attendanceEntity : attendances) {
+        for(Attendance attendanceEntity : attendances) {
 
             attendanceTOs.add(attendanceConverter(attendanceEntity));
 
@@ -309,17 +319,32 @@ public class Helper {
         return attendanceTOs;
 
     }
-    
-    public static List<Attendance> attendanceTOListConverter(List<AttendanceTO> atos) {
-        
-        List<Attendance> as = new ArrayList<>();
-        
-        for (AttendanceTO ato : atos) {
 
-                as.add(attendanceTOConverter(ato));
-            
+    public static List<Attendance> attendanceTOListConverter(List<AttendanceTO> atos) {
+
+        List<Attendance> as = new ArrayList<>();
+
+        for(AttendanceTO ato : atos) {
+
+            as.add(attendanceTOConverter(ato));
+
         }
         return as;
     }
     //<-----ATTENDANCE CONVERTERS
+
+    //HASHER ----->
+    public static String hashString(String pass) throws NoSuchAlgorithmException {
+        MessageDigest digest = MessageDigest.getInstance("SHA-256");
+        byte[] hash = digest.digest(pass.getBytes(StandardCharsets.UTF_8));
+
+        StringBuilder sb = new StringBuilder();
+        for(int i = 0; i < hash.length; i++) {
+            sb.append(Integer.toString((hash[i] & 0xff) + 0x100, 16)
+                    .substring(1));
+        }
+        pass = sb.toString();
+        return pass;
+    }
+    //<----- HASHER
 }

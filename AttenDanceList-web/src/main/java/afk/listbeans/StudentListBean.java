@@ -3,16 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package afk;
+package afk.listbeans;
 
-import helper.Helper;
+import afk.services.ServicesIntf;
+import afk.helper.Helper;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
-import model.Student;
+import afk.model.Student;
 import org.primefaces.event.SelectEvent;
 
 /**

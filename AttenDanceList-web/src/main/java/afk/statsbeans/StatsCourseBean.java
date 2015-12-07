@@ -1,6 +1,6 @@
-package afk;
+package afk.statsbeans;
 
-import helper.Helper;
+import afk.helper.Helper;
 import java.io.Serializable;
 import java.util.Map;
 import javax.annotation.PostConstruct;

@@ -1,10 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package afk.entities;
 
+import afk.helper.DefaultUserRoles;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -22,6 +18,7 @@ import javax.persistence.Table;
 public class TeacherEntity implements Serializable
 {
 
+  
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "teacher_id")
@@ -48,7 +45,15 @@ public class TeacherEntity implements Serializable
     @Column(name = "zip_code")
     private String zipCode;
 
-//SETTERS----->
+    //Credentials part
+    @Column(name = "username")
+    private String username;
+    @Column(name = "password")
+    private String password;
+    @Column(name = "userType")
+    private String userType;
+
+    //SETTERS----->
     public void setId(long id) {
         this.id = id;
     }
@@ -92,10 +97,21 @@ public class TeacherEntity implements Serializable
     public void setZipCode(String zipCode) {
         this.zipCode = zipCode;
     }
-    //<-----SETTERS
-    
-    //GETTERS----->
 
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setUserType(String userType) {
+        this.userType = userType;
+    }
+    //<-----SETTERS
+
+    //GETTERS----->
     public long getId() {
         return id;
     }
@@ -138,6 +154,18 @@ public class TeacherEntity implements Serializable
 
     public String getZipCode() {
         return zipCode;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getUserType() {
+        return userType;
     }
     //<-----GETTERS
 

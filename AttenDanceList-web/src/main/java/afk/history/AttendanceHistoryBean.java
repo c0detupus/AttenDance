@@ -3,17 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package afk;
+package afk.history;
 
-import helper.Helper;
+import afk.services.ServicesIntf;
+import afk.helper.Helper;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import model.Attendance;
-import model.Course;
+import afk.model.Attendance;
+import afk.model.Course;
 
 /**
  *

@@ -1,8 +1,9 @@
-package afk;
+package afk.listbeans;
 
+import afk.services.ServicesIntf;
 import afk.to.StudentTO;
-import helper.Helper;
-import helper.Messages;
+import afk.helper.Helper;
+import afk.helper.Messages;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -10,9 +11,9 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import model.Attendance;
-import model.Course;
-import model.Student;
+import afk.model.Attendance;
+import afk.model.Course;
+import afk.model.Student;
 
 /**
  *

@@ -1,8 +1,8 @@
-package model;
+package afk.model;
 
-import afk.ServicesIntf;
-import helper.Helper;
-import helper.Messages;
+import afk.services.ServicesIntf;
+import afk.helper.Helper;
+import afk.helper.Messages;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;

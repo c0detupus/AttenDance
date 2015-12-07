@@ -1,23 +1,21 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package model;
+package afk.model;
 
-import afk.ServicesIntf;
-import helper.Helper;
-import helper.Messages;
+import afk.helper.DefaultUserRoles;
+import afk.services.ServicesIntf;
+import afk.helper.Helper;
+import afk.helper.Messages;
 import java.io.Serializable;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
-import javax.faces.validator.ValidatorException;
 
 /**
  *
@@ -42,7 +40,10 @@ public class Teacher implements Serializable
             sex,
             address,
             city,
-            zipCode;
+            zipCode,
+            username,
+            password,
+            userType;
 
     private Teacher teacher;
 
@@ -59,6 +60,7 @@ public class Teacher implements Serializable
         }
     }
 
+  
     private void initialize() {
         firstName = teacher.getFirstName();
         lastName = teacher.getLastName();
@@ -102,102 +104,6 @@ public class Teacher implements Serializable
         city = null;
         zipCode = null;
     }
-
-    //VALIDATORS--->
-    public void validateLetters(FacesContext context,
-                                UIComponent toValidate,
-                                Object value) throws ValidatorException {
-
-        String str = (String) value;
-
-        if(!onlyLettersSC(str)) {
-            throw new ValidatorException(new FacesMessage("Can only have letters"));
-        }
-    }
-
-    public void validateEmail(FacesContext context,
-                              UIComponent toValidate,
-                              Object value) throws ValidatorException {
-        String str = (String) value;
-        if(-1 == value.toString().indexOf("@")) {
-            FacesMessage message = new FacesMessage("Invalid email address");
-            throw new ValidatorException(message);
-        }
-    }
-
-    public void validateSSN(FacesContext context,
-                            UIComponent toValidate,
-                            Object value) throws ValidatorException {
-        String str = (String) value;
-
-        //Replaces first ocurrence of '-' not all occurences cause 
-        //ssn can be erroneously bli written with more than one '-'
-        String cleaned = str.replaceFirst("[-]", "");
-
-        if(!onlyNumbers(cleaned)) {
-            throw new ValidatorException(
-                    new FacesMessage("Only numbers preffered format YYMMDDXXXX or YYMMDD-XXXX"));
-        }
-
-        if(cleaned.length() != 10) {
-
-            throw new ValidatorException(new FacesMessage("Use format YYMMDDXXXX or YYMMDD-XXXX"));
-        }
-
-    }
-
-    public void validatePhoneNumbers(FacesContext context,
-                                     UIComponent toValidate,
-                                     Object value) throws ValidatorException {
-
-        String str = (String) value;
-
-        String cleaned = str.replaceFirst("\\s", "");
-
-        if(!onlyNumbers(str)) {
-            throw new ValidatorException(
-                    new FacesMessage("Only numbers"));
-        }
-
-    }
-
-    public void validateZipCode(FacesContext context,
-                                UIComponent toValidate,
-                                Object value) throws ValidatorException {
-
-        String str = (String) value;
-        if(!onlyNumbers(str)) {
-            throw new ValidatorException(
-                    new FacesMessage("Only numbers"));
-        }
-
-        if(str.length() != 10) {
-            throw new ValidatorException(
-                    new FacesMessage("Invalid postal code"));
-
-        }
-
-    }
-    //<---VALIDATORS
-
-    //PRIVATE METHODS--->
-    private boolean onlyLetters(String str) {
-
-        return str.matches("[a-zA-Z]+");
-
-    }
-
-    //Handles regex for letters only but with special characters included
-    private boolean onlyLettersSC(String str) {
-
-        return str.matches("[a-zA-ZåäöÅÄÖ]+");
-
-    }
-
-    private boolean onlyNumbers(String str) {
-        return str.matches("[0-9]+");
-    }
-    //<-----PRIVATE METHODS
 
     //SETTERS----->
     public void setServices(ServicesIntf services) {
@@ -251,8 +157,26 @@ public class Teacher implements Serializable
     public void setTeacher(Teacher teacher) {
         this.teacher = teacher;
     }
-    //<-----SETTERS
 
+    public void setPassword(String password) {
+        try {
+            this.password = Helper.hashString(password);
+        } catch(NoSuchAlgorithmException ex) {
+            Logger.getLogger(Teacher.class.getName())
+                    .log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setUserType(String userType) {
+        this.userType = userType;
+    }
+    //<-----SETTERS
+    
+    
     //GETTERS----->
     public ServicesIntf getServices() {
         return services;
@@ -305,6 +229,31 @@ public class Teacher implements Serializable
     public Teacher getTeacher() {
         return teacher;
     }
-    //<-----GETTERS
 
+    public String getPassword() {
+        return password;
+    }
+
+    public String getUserType() {
+        return DefaultUserRoles.TEACHER.getRole();
+    }
+    
+    public String getUsername() {
+
+        
+        String newLast;
+
+        if(lastName.length() <= 3) {
+            newLast = lastName;
+        } else {
+            newLast = lastName.substring(0, 3);
+        }
+
+        this.username = firstName + "." + newLast;
+
+        
+        return username.toLowerCase();
+    }
+
+    //<-----GETTERS
 }

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package afk.helper;
 
 import afk.entities.AttendanceEntity;
@@ -171,39 +166,45 @@ public class EJBHelper
     //<-----STUDENT
 
     //TEACHER----->
-    public static TeacherEntity teacherTOConverter(TeacherTO t) {
+    public static TeacherEntity teacherTOConverter(TeacherTO tto) {
         TeacherEntity te = new TeacherEntity();
 
-        te.setId(t.getId());
-        te.setAddress(t.getAddress());
-        te.setCellPhone(t.getCellPhone());
-        te.setCity(t.getCity());
-        te.setEmail(t.getEmail());
-        te.setFirstName(t.getFirstName());
-        te.setLastName(t.getLastName());
-        te.setPhoneNumber(t.getPhoneNumber());
-        te.setSex(t.getSex());
-        te.setSocialSecurityNumber(t.getSocialSecurityNumber());
-        te.setZipCode(t.getZipCode());
+        te.setId(tto.getId());
+        te.setAddress(tto.getAddress());
+        te.setCellPhone(tto.getCellPhone());
+        te.setCity(tto.getCity());
+        te.setEmail(tto.getEmail());
+        te.setFirstName(tto.getFirstName());
+        te.setLastName(tto.getLastName());
+        te.setPhoneNumber(tto.getPhoneNumber());
+        te.setSex(tto.getSex());
+        te.setSocialSecurityNumber(tto.getSocialSecurityNumber());
+        te.setZipCode(tto.getZipCode());
+        te.setUsername(tto.getUsername());
+        te.setPassword(tto.getPassword());
+        te.setUserType(tto.getUserType());
 
         return te;
     }
 
-    public static TeacherTO teacherEntityConverter(TeacherEntity t) {
+    public static TeacherTO teacherEntityConverter(TeacherEntity te) {
 
         TeacherTO tto = new TeacherTO();
 
-        tto.setId(t.getId());
-        tto.setAddress(t.getAddress());
-        tto.setCellPhone(t.getCellPhone());
-        tto.setCity(t.getCity());
-        tto.setEmail(t.getEmail());
-        tto.setFirstName(t.getFirstName());
-        tto.setLastName(t.getLastName());
-        tto.setPhoneNumber(t.getPhoneNumber());
-        tto.setSex(t.getSex());
-        tto.setSocialSecurityNumber(t.getSocialSecurityNumber());
-        tto.setZipCode(t.getZipCode());
+        tto.setId(te.getId());
+        tto.setAddress(te.getAddress());
+        tto.setCellPhone(te.getCellPhone());
+        tto.setCity(te.getCity());
+        tto.setEmail(te.getEmail());
+        tto.setFirstName(te.getFirstName());
+        tto.setLastName(te.getLastName());
+        tto.setPhoneNumber(te.getPhoneNumber());
+        tto.setSex(te.getSex());
+        tto.setSocialSecurityNumber(te.getSocialSecurityNumber());
+        tto.setZipCode(te.getZipCode());
+        tto.setUsername(te.getUsername());
+        tto.setPassword(te.getPassword());
+        tto.setUserType(te.getUserType());
 
         return tto;
 
@@ -214,21 +215,8 @@ public class EJBHelper
         List<TeacherTO> toList = new ArrayList<>();
 
         for(TeacherEntity t : tList) {
-            TeacherTO tto = new TeacherTO();
-
-            tto.setId(t.getId());
-            tto.setAddress(t.getAddress());
-            tto.setCellPhone(t.getCellPhone());
-            tto.setCity(t.getCity());
-            tto.setEmail(t.getEmail());
-            tto.setFirstName(t.getFirstName());
-            tto.setLastName(t.getLastName());
-            tto.setPhoneNumber(t.getPhoneNumber());
-            tto.setSex(t.getSex());
-            tto.setSocialSecurityNumber(t.getSocialSecurityNumber());
-            tto.setZipCode(t.getZipCode());
-
-            toList.add(tto);
+            
+            toList.add(teacherEntityConverter(t));
         }
         return toList;
     }
