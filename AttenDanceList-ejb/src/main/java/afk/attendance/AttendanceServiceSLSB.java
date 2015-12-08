@@ -7,6 +7,8 @@ import afk.to.AttendanceTO;
 import afk.to.CourseTO;
 import java.util.Date;
 import java.util.List;
+import javax.annotation.security.DeclareRoles;
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -17,6 +19,7 @@ import javax.persistence.TemporalType;
  *
  * @author c0detupus
  */
+@DeclareRoles({"headmaster", "teacher"})
 @Stateless
 public class AttendanceServiceSLSB implements AttendanceServiceIntf
 {
@@ -24,6 +27,7 @@ public class AttendanceServiceSLSB implements AttendanceServiceIntf
     @PersistenceContext(unitName = "PU")
     EntityManager em;
 
+    @RolesAllowed("teacher")
     @Override
     public int createAttendance(List<AttendanceTO> attendanceTOs) {
 
@@ -42,6 +46,7 @@ public class AttendanceServiceSLSB implements AttendanceServiceIntf
 
     }
 
+    @RolesAllowed("teacher")
     @Override
     public AttendanceTO getAttendance(long id) {
 
@@ -54,6 +59,7 @@ public class AttendanceServiceSLSB implements AttendanceServiceIntf
 
     }
 
+    @RolesAllowed("teacher")
     @Override
     public List<AttendanceTO> getAll() {
 
@@ -65,6 +71,7 @@ public class AttendanceServiceSLSB implements AttendanceServiceIntf
 
     }
 
+    @RolesAllowed("teacher")
     @Override
     public int updateAttendance(AttendanceTO attendanceTO) {
 
@@ -78,6 +85,7 @@ public class AttendanceServiceSLSB implements AttendanceServiceIntf
         return 1;
     }
 
+    @RolesAllowed("teacher")
     @Override
     public int deleteAttendance(long id) {
 
@@ -90,12 +98,13 @@ public class AttendanceServiceSLSB implements AttendanceServiceIntf
             q.executeUpdate();
 
         } catch(Exception e) {
-            
+
             return 0;
         }
         return 1;
     }
 
+    @RolesAllowed("teacher")
     @Override
     public List<AttendanceTO> getAttendanceByDayAndCourse(Date date, CourseTO courseTO) {
 

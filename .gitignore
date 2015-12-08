@@ -16,8 +16,9 @@ hs_err_pid*
 /AttenDanceList-web/target/
 
 #Maven build directory
-#target/*
+target/*
 AttenDanceList-ejb/src/main/resources/META-INF/persistence.xml
 AttenDanceList-ejb/src/main/resources/META-INF/persistence.xml
 AttenDanceList-ejb/src/main/resources/META-INF/persistence.xml
 AttenDanceList-ejb/src/main/resources/META-INF/persistence.xml
+

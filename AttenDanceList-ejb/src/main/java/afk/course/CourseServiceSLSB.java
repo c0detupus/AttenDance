@@ -10,6 +10,8 @@ import afk.helper.EJBHelper;
 import afk.to.CourseTO;
 import afk.to.StudentTO;
 import java.util.List;
+import javax.annotation.security.DeclareRoles;
+import javax.annotation.security.PermitAll;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -19,19 +21,22 @@ import javax.persistence.Query;
  *
  * @author c0detupus
  */
+@DeclareRoles({"headmaster", "teacher"})
 @Stateless
-public class CourseServiceSLSB implements CourseServiceIntf {
+public class CourseServiceSLSB implements CourseServiceIntf
+{
 
     @PersistenceContext(unitName = "PU")
     EntityManager em;
 
+    @PermitAll
     @Override
     public int createCourse(CourseTO courseTO) {
 
         try {
             em.persist(EJBHelper.courseTOConverter(courseTO, false));
 
-        } catch (Exception ex) {
+        } catch(Exception ex) {
 
             return 0;
 
@@ -40,6 +45,7 @@ public class CourseServiceSLSB implements CourseServiceIntf {
         return 1;
     }
 
+    @PermitAll
     @Override
     public CourseTO getCourse(long id, boolean getStudents) {
 
@@ -50,6 +56,7 @@ public class CourseServiceSLSB implements CourseServiceIntf {
 
     }
 
+    @PermitAll
     @Override
     public List<CourseTO> getAll() {
 
@@ -60,6 +67,7 @@ public class CourseServiceSLSB implements CourseServiceIntf {
 
     }
 
+    @PermitAll
     @Override
     public int updateCourse(CourseTO courseTO) {
 
@@ -67,7 +75,7 @@ public class CourseServiceSLSB implements CourseServiceIntf {
 
             em.merge(EJBHelper.courseTOConverter(courseTO, false));
 
-        } catch (Exception e) {
+        } catch(Exception e) {
 
             return 0;
 
@@ -76,6 +84,7 @@ public class CourseServiceSLSB implements CourseServiceIntf {
         return 1;
     }
 
+    @PermitAll
     @Override
     public int deleteCourse(long courseId) {
 
@@ -87,20 +96,21 @@ public class CourseServiceSLSB implements CourseServiceIntf {
 
             q.executeUpdate();
 
-        } catch (Exception e) {
-            
+        } catch(Exception e) {
+
             return 0;
         }
         return 1;
     }
 
+    @PermitAll
     @Override
     public List<StudentTO> getAllStudentsInCourse(long id) {
 
         CourseEntity c = (CourseEntity) em
                 .createQuery("SELECT c FROM CourseEntity AS c WHERE c.id = :idParam")
                 .setParameter("idParam", id).getSingleResult();
-        
+
         em.refresh(c);
         return EJBHelper.studentEntityListConverter(c.getStudents(), false);
 

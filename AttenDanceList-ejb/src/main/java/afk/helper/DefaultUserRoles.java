@@ -12,7 +12,7 @@ package afk.helper;
 public enum DefaultUserRoles
 {
     
-    TEACHER("teacher");
+    TEACHER("teacher"), HEADMASTER("headmaster");
     
     private final String role;
 
