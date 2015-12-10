@@ -34,6 +34,9 @@
             <role-name>headmaster</role-name>
             <role-name>teacher</role-name>
         </auth-constraint>
+        <user-data-constraint>
+            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+        </user-data-constraint>
     </security-constraint>
     <security-constraint>
         <display-name>Constraint2</display-name>
@@ -46,7 +49,24 @@
             <description/>
             <role-name>headmaster</role-name>
         </auth-constraint>
+        <user-data-constraint>
+            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+        </user-data-constraint>
     </security-constraint>
+    
+    <security-constraint>
+        <display-name>Constraint3</display-name>
+        <web-resource-collection>
+            <web-resource-name>httpsOnAll</web-resource-name>
+            <description/>
+            <url-pattern>/*</url-pattern>
+        </web-resource-collection>
+        <user-data-constraint>
+            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+        </user-data-constraint>
+    </security-constraint>
+    
+
     <login-config>
         <auth-method>FORM</auth-method>
         <realm-name>attendance</realm-name>
